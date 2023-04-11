@@ -24,9 +24,9 @@ export default function Footer() {
                 <path
                   fill="#000"
                   stroke="#000"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M9.103 2.126a1 1 0 0 0-1.754-.773l-6.111 7.2A1 1 0 0 0 2 10.2h4.365l-.468 3.674a1 1 0 0 0 1.754.773l6.111-7.2A1 1 0 0 0 13 5.8H8.635l.468-3.674Z"
                 />
                 <path

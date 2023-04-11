@@ -3,6 +3,8 @@ import Link from 'next/link'
 import Logo from './logo'
 import TwitterIconLink from './twitter-icon-link'
 
+import Button from './button'
+
 export default function Navigation() {
   return (
     <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
@@ -16,17 +18,14 @@ export default function Navigation() {
           </Link>
         </li>
         <li>
-          <Link href="#" className="text-lg/none font-semibold">
+          <Link href="#" className="text-lg/none font-semibold ">
             About
           </Link>
         </li>
         <li>
-          <Link
-            href="#"
-            className="rounded-xl bg-black p-3 text-lg/none font-semibold text-yellow-300 transition-colors duration-100 hover:bg-yellow-300 hover:text-black"
-          >
+          <Button emphasis="high" href="#">
             Join mailing list
-          </Link>
+          </Button>
         </li>
         <li>
           <TwitterIconLink />

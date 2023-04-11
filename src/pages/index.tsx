@@ -1,12 +1,81 @@
 import Link from 'next/link'
 import { Inter } from 'next/font/google'
 import FeaturedEvent from '@/components/featured-event'
+import PastEvent from '@/components/past-event'
+
+import { PlayIcon, ArrowTopRightOnSquareIcon } from '@heroicons/react/20/solid'
+
+import Button from '@/components/button'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (
     <main>
+      <div className="max-w-6xlpx-6 mx-auto py-48 lg:px-8">
+        <div className="space-y-4">
+          <div className="flex items-center gap-4">
+            <Button icon={PlayIcon} iconPosition="before" emphasis="high">
+              Play now
+            </Button>
+            <Button
+              icon={ArrowTopRightOnSquareIcon}
+              iconPosition="after"
+              emphasis="high"
+              tone="accent"
+            >
+              Play now
+            </Button>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button icon={PlayIcon} iconPosition="before">
+              Play now
+            </Button>
+            <Button icon={ArrowTopRightOnSquareIcon} iconPosition="after" tone="accent">
+              Play now
+            </Button>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button emphasis="high">High</Button>
+            <Button emphasis="default">Default</Button>
+            <Button emphasis="low">Low</Button>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button tone="accent" emphasis="high">
+              High
+            </Button>
+            <Button tone="accent" emphasis="default">
+              Default
+            </Button>
+            <Button tone="accent" emphasis="low">
+              Low
+            </Button>
+          </div>
+          {/* Large */}
+          <div className="flex items-center gap-4">
+            <Button size="large" emphasis="high">
+              Large High
+            </Button>
+            <Button size="large" emphasis="default">
+              Large Default
+            </Button>
+            <Button size="large" emphasis="low">
+              Large Low
+            </Button>
+          </div>
+          <div className="flex items-center gap-4">
+            <Button size="large" tone="accent" emphasis="high">
+              Large High
+            </Button>
+            <Button size="large" tone="accent" emphasis="default">
+              Large Default
+            </Button>
+            <Button size="large" tone="accent" emphasis="low">
+              Large Low
+            </Button>
+          </div>
+        </div>
+      </div>
       {/* Hero section */}
       <div className="mx-auto grid max-w-6xl px-6 md:grid-cols-2 lg:px-8">
         <div className="py-40">
@@ -24,6 +93,20 @@ export default function Home() {
       </div>
 
       <FeaturedEvent />
+      <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
+        <h2 className="text-3xl font-bold">Past events</h2>
+        <ul className="mt-10 grid gap-20 md:grid-cols-3">
+          <li>
+            <PastEvent />
+          </li>
+          <li>
+            <PastEvent />
+          </li>
+          <li>
+            <PastEvent />
+          </li>
+        </ul>
+      </div>
     </main>
   )
 }
