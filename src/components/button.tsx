@@ -1,5 +1,6 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
+import { PlayIcon } from '@heroicons/react/24/outline'
 
 function cx(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -9,12 +10,7 @@ type ButtonProps = {
   size?: 'default' | 'large'
   tone?: 'highlight' | 'accent'
   emphasis?: 'high' | 'default' | 'low'
-  icon?: React.ForwardRefExoticComponent<
-    Omit<React.SVGProps<SVGSVGElement>, 'ref'> & {
-      title?: string | undefined
-      titleId?: string | undefined
-    } & React.RefAttributes<SVGSVGElement>
-  >
+  icon?: typeof PlayIcon
   iconPosition?: 'before' | 'after'
   href?: string
   children: ReactNode
