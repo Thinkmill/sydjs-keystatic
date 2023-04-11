@@ -14,7 +14,7 @@ export default function Footer() {
         <div className="mt-12 flex items-end">
           <div>
             <p className="flex items-center gap-1">
-              <span className="text-sm">Powered by</span>
+              <span className="text-sm font-medium">Powered by</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -35,13 +35,7 @@ export default function Footer() {
                 />
               </svg>
             </p>
-            <p className="text-sm">
-              This website was built using the free{' '}
-              <Link href="#" className="font-medium">
-                Keystatic Meet-up Template
-              </Link>
-              .
-            </p>
+            <p className="mt-2 text-sm">A sentence describing the value prop.</p>
           </div>
           <p className="flex-1 text-right text-sm">© 2023 SydJS. All rights reserved.</p>
         </div>

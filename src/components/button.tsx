@@ -17,11 +17,11 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 //  Tailwind classes lookup
-const baseClasses = 'rounded-xl font-semibold text-lg/none border-2'
+const baseClasses = 'font-semibold text-lg/none border-2'
 
 const sizeClasses: Record<NonNullable<ButtonProps['size']>, string> = {
-  default: 'px-4 py-2.5',
-  large: 'px-6 py-5',
+  default: 'px-4 py-2.5 rounded-xl',
+  large: 'px-6 py-5 rounded-2xl',
 }
 
 const toneClasses: Record<NonNullable<ButtonProps['tone']>, string> = {
@@ -35,13 +35,13 @@ const emphasisClasses: Record<
 > = {
   highlight: {
     high: 'bg-black border-transparent hover:bg-gray-900 active:bg-gray-800 text-yellow-300',
-    default: 'bg-transparent border-black hover:bg-gray-100 active:bg-gray-200 text-black',
-    low: 'bg-transparent border-transparent hover:bg-gray-100 active:bg-gray-200 text-black',
+    default: 'bg-transparent border-black hover:bg-black/10 active:bg-black/20 text-black',
+    low: 'bg-transparent border-transparent hover:bg-black/10 active:bg-black/20 text-black',
   },
   accent: {
     high: 'bg-black border-transparent hover:bg-gray-900 active:bg-gray-800 text-indigo-300',
-    default: 'bg-transparent border-black hover:bg-gray-100 active:bg-gray-200 text-black',
-    low: 'bg-transparent border-transparent hover:bg-gray-100 active:bg-gray-200 text-black',
+    default: 'bg-transparent border-black hover:bg-black/10 active:bg-black/20 text-black',
+    low: 'bg-transparent border-transparent hover:bg-black/10 active:bg-black/20 text-black',
   },
 }
 

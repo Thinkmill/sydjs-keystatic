@@ -13,7 +13,7 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className={`${poppins.variable} font-sans`}>
+    <div className={`${poppins.variable} font-sans antialiased`}>
       <Navigation />
       <Component {...pageProps} />
       <Footer />
