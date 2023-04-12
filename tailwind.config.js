@@ -8,7 +8,24 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    colors: {
+      inherit: 'inherit',
+      current: 'currentColor',
+      transparent: 'transparent',
+      white: '#ffffff',
+      black: '#000000',
+      highlight: '#FFE221',
+      accent: '#B5C2FF',
+    },
     extend: {
+      textColor: {
+        default: '#000000',
+        subtle: '#313131',
+        placeholder: '#616161',
+      },
+      spacing: {
+        18: '4.5rem',
+      },
       fontFamily: {
         sans: ['var(--font-poppins)', ...fontFamily.sans],
       },

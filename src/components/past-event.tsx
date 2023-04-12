@@ -9,7 +9,7 @@ import {
 
 export default function PastEvent() {
   return (
-    <div className="rounded-[40px] bg-indigo-300 p-10">
+    <div className="rounded-[40px] bg-accent p-10">
       <h2 className="text-2xl font-bold">Thinkmill takes over SydJS</h2>
       <ul className="mt-6 space-y-4">
         {[

@@ -1,5 +1,5 @@
-import Link from 'next/link'
-import Button from './button'
+import { DocumentRenderer } from '@keystatic/core/renderer'
+import keystaticConfig from '../../keystatic.config'
 
 import {
   CalendarIcon,
@@ -9,7 +9,30 @@ import {
   ArrowTopRightOnSquareIcon,
 } from '@heroicons/react/24/outline'
 
-export default function FeaturedEvent() {
+import Button from './button'
+
+// Props
+export type EventProps = {
+  event: typeof keystaticConfig.collections.events.schema
+}
+// export type EventProps = {
+//   name: string
+//   description: string
+//   talks: {
+//     name: string
+//     description: string
+//     video: string
+//     slug: string
+//   }[]
+//   speakers: string[]
+//   sponsors: string[]
+//   date: string
+//   time: string
+//   image: string
+// }
+
+export default function Event(props: EventProps) {
+  const { event } = props
   return (
     <div className="rounded-[40px] bg-highlight p-16">
       <span className="rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
@@ -17,12 +40,10 @@ export default function FeaturedEvent() {
       </span>
       <div className="grid gap-28 md:grid-cols-3">
         <div className="md:col-span-2">
-          <h2 className="mt-8 text-4xl/none font-bold">Thinkmill takes over SydJS</h2>
-          <p className="mt-4 text-lg">
-            We know that Open Source Software is a great way to ensure that the best minds get to
-            work on the best solutions to make the best outcomes for all Developers. But what does
-            it take to make a successful Open Source solution?
-          </p>
+          <h2 className="mt-8 text-4xl/none font-bold">{event.name}</h2>
+          <div className="mt-4 space-y-4 text-lg">
+            <DocumentRenderer document={event.description} />
+          </div>
           <div className="mt-6 flex items-center gap-4">
             <Button href="#" size="large">
               View events details
