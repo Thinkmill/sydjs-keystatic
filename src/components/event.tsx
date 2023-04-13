@@ -44,9 +44,14 @@ const eventStatusClasses: Record<EventProps['status'], string> = {
 
 export default function Event({ event }: Props) {
   return (
+    // We're using container queries here!
+    // The wrapped is flagged as a `@container`
+    // and then the `@3xl` will trigger accordingly!
     <div className="@container">
+      {/* ---------------------------- */}
+      {/* Wide layout (@3xl and wider) */}
+      {/* ---------------------------- */}
       <div className="hidden @3xl:block">
-        {/* Wide layout */}
         <div
           className={clsx(
             'rounded-[40px] p-16',
@@ -58,7 +63,7 @@ export default function Event({ event }: Props) {
             {event.status === 'past' ? 'past' : 'upcoming'} event
           </span>
 
-          <div className="grid gap-28 md:grid-cols-3">
+          <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
             <div className="md:col-span-2">
               <h2 className="mt-8 text-4xl font-bold">{event?.name}</h2>
               <div className="mt-4 space-y-4 text-lg">
@@ -104,7 +109,9 @@ export default function Event({ event }: Props) {
         </div>
       </div>
 
-      {/* Narrow layout */}
+      {/* ---------------------------- */}
+      {/* Narrow layout (up to @3xl) */}
+      {/* ---------------------------- */}
       <div className="block @3xl:hidden">
         <div
           className={clsx(
