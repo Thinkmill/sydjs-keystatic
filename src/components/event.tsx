@@ -13,7 +13,8 @@ import Button from './button'
 
 // Props
 export type EventProps = {
-  event: typeof keystaticConfig.collections.events.schema
+  // event: typeof keystaticConfig.collections.events.schema
+  event: any
 }
 // export type EventProps = {
 //   name: string
@@ -31,7 +32,7 @@ export type EventProps = {
 //   image: string
 // }
 
-export default function Event(props: EventProps) {
+export default function Event(props: any) {
   const { event } = props
   return (
     <div className="rounded-[40px] bg-highlight p-16">

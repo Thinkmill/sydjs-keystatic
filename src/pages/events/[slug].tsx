@@ -24,6 +24,8 @@ export async function getStaticProps(context: GetStaticPropsContext) {
     event.talks.map(async (talkSlug) => {
       // Get talk data
       const talk = await reader.collections.talks.read(talkSlug)
+      if (!talk) throw new Error('Talk not found')
+
       // Get Speakers for each talk
       const speakers = await Promise.all(
         talk.speakers.map(async (speakerSlug) => ({

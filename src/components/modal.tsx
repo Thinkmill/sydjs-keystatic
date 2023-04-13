@@ -13,7 +13,7 @@ const poppins = Poppins({
 type ModalProps = {
   open: boolean
   onClose: () => void
-  title: strig
+  title: string
 }
 
 export default function Modal({ open, onClose, title }: ModalProps) {
@@ -50,8 +50,8 @@ export default function Modal({ open, onClose, title }: ModalProps) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="my-8 inline-block w-full max-w-2xl transform overflow-hidden rounded-2xl bg-indigo-300 p-16 text-left align-middle shadow-xl transition-all">
-              <Dialog.Title as="h3" className="text-4xl font-bold leading-6 text-gray-900">
+            <div className="bg-indigo-300 my-8 inline-block w-full max-w-2xl transform overflow-hidden rounded-2xl p-16 text-left align-middle shadow-xl transition-all">
+              <Dialog.Title as="h3" className="text-gray-900 text-4xl font-bold leading-6">
                 {title}
               </Dialog.Title>
               <div className="mt-6">
