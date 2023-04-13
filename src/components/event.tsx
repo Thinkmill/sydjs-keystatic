@@ -1,46 +1,35 @@
-import { DocumentRenderer } from '@keystatic/core/renderer'
 import clsx from 'clsx'
 import { format } from 'date-fns'
 
-import {
-  CalendarIcon,
-  ClockIcon,
-  ComputerDesktopIcon,
-  MapPinIcon,
-  ArrowTopRightOnSquareIcon,
-} from '@heroicons/react/24/outline'
+import { DocumentRenderer } from '@keystatic/core/renderer'
+import { EntryWithResolvedLinkedFiles } from '@keystatic/core/reader'
+import keystaticConfig from '../../keystatic.config'
 
 import Button from './button'
+import {
+  CalendarClearOutlineIcon,
+  DesktopIcon,
+  ClockIcon,
+  LocationOutlineIcon,
+  OpenOutlineIcon,
+} from './svg-icons'
 
 // Props
-export type EventProps = {
-  // event: typeof keystaticConfig.collections.events.schema
-  event: any
+type EventProps = {
+  event: {
+    slug: string
+    status: 'upcoming' | 'today' | 'past'
+    entry: EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['events']>
+  }
 }
-// export type EventProps = {
-//   name: string
-//   description: string
-//   talks: {
-//     name: string
-//     description: string
-//     video: string
-//     slug: string
-//   }[]
-//   speakers: string[]
-//   sponsors: string[]
-//   date: string
-//   time: string
-//   image: string
-// }
 
-const eventStatusClasses = {
+const eventStatusClasses: Record<EventProps['event']['status'], string> = {
   upcoming: 'bg-highlight',
   today: 'bg-highlight',
   past: 'bg-accent',
 }
 
-export default function Event(props: any) {
-  const { event } = props
+export default function Event({ event }: EventProps) {
   return (
     <div className={clsx('rounded-[40px] p-16', eventStatusClasses[event.status])}>
       <span className="rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
@@ -62,7 +51,7 @@ export default function Event(props: any) {
               size="large"
               emphasis="low"
               iconPosition="after"
-              icon={ArrowTopRightOnSquareIcon}
+              icon={OpenOutlineIcon}
             >
               RSVP on Lu.ma
             </Button>
@@ -70,16 +59,19 @@ export default function Event(props: any) {
         </div>
         <ul className="space-y-4">
           {[
-            { icon: CalendarIcon, text: format(new Date(event.entry.date), 'EEEE, d MMMM yyy') },
+            {
+              icon: CalendarClearOutlineIcon,
+              text: format(new Date(event.entry.date), 'EEEE, d MMMM yyy'),
+            },
             { icon: ClockIcon, text: '6:30 - 9:30 pm' },
-            { icon: MapPinIcon, text: event.entry.location },
-            { icon: ComputerDesktopIcon, text: 'Online event' },
+            { icon: LocationOutlineIcon, text: event.entry.location },
+            { icon: DesktopIcon, text: 'Online event' },
           ].map((event) => {
             const Icon = event.icon
             return (
               <li key={event.text} className="flex items-center gap-3">
                 <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
-                  <Icon className="h-5 w-5 stroke-black" />
+                  <Icon className="h-5 w-5 fill-black" />
                 </div>
                 <span className="text-lg font-medium">{event.text}</span>
               </li>
