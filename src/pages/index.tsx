@@ -2,7 +2,7 @@ import { InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ChevronRightIcon } from '@heroicons/react/24/outline'
+import { ChevronRightIcon } from '@/components/svg-icons'
 import { createReader } from '@keystatic/core/reader'
 import keystaticConfig from '../../keystatic.config'
 
@@ -79,7 +79,7 @@ export default function Home(props: InferGetStaticPropsType<typeof getStaticProp
       <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
         <div className="-mr-6 flex items-center justify-between">
           <h2 className="text-3xl font-bold">Past events</h2>
-          <Button href="#" emphasis="low" icon={ChevronRightIcon} iconPosition="after">
+          <Button href="/events" emphasis="low" icon={ChevronRightIcon} iconPosition="after">
             View all events
           </Button>
         </div>

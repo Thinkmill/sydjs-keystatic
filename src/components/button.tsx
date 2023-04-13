@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
-import { PlayIcon } from '@heroicons/react/24/outline'
+import { TwitterIcon } from './svg-icons'
 
 function cx(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -10,14 +10,14 @@ export type ButtonProps = {
   size?: 'default' | 'large'
   tone?: 'highlight' | 'accent'
   emphasis?: 'high' | 'default' | 'low'
-  icon?: typeof PlayIcon
+  icon?: typeof TwitterIcon
   iconPosition?: 'before' | 'after'
   href?: string
   children: ReactNode
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 //  Tailwind classes lookup
-const baseClasses = 'font-semibold text-lg/none border-2'
+const baseClasses = 'inline-block font-semibold text-lg/none border-2'
 
 const sizeClasses: Record<NonNullable<ButtonProps['size']>, string> = {
   default: 'px-4 py-2 rounded-xl',

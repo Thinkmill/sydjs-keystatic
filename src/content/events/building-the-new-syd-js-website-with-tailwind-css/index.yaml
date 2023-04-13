@@ -1,4 +1,4 @@
-name: Building the new SydJS website with Keystatic
+name: Building the new SydJS website with Tailwind CSS
 speakers:
   - simon-swiss
 talks:
@@ -6,8 +6,9 @@ talks:
   - dasdasdasdasd
   - xaxasds
 sponsors: []
-date: '2023-04-28'
+date: '2023-04-24'
 location: Straya, mate.
 video: https://google.com
-time: '17:00'
+startTime: 6:30 PM
+endTime: 9:00 PM
 image: image.png
