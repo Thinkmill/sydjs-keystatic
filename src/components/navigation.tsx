@@ -1,11 +1,11 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Modal from './modal'
+import { TwitterIcon } from './svg-icons'
 
 import Logo from './logo'
-import TwitterIconLink from './twitter-icon-link'
-
 import Button from './button'
+import IconButton from './icon-button'
 
 export default function Navigation() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -31,8 +31,8 @@ export default function Navigation() {
               Join mailing list
             </Button>
           </li>
-          <li>
-            <TwitterIconLink />
+          <li className="-ml-4">
+            <IconButton emphasis="low" href="https://twitter.com/sydjs" icon={TwitterIcon} />
           </li>
         </ul>
       </nav>

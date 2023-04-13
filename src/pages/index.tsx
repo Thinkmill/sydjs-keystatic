@@ -1,20 +1,17 @@
+import { InferGetStaticPropsType } from 'next'
+import Image from 'next/image'
 import Link from 'next/link'
-import { Inter } from 'next/font/google'
+
 import { ChevronRightIcon } from '@heroicons/react/24/outline'
 import { createReader } from '@keystatic/core/reader'
 import keystaticConfig from '../../keystatic.config'
 
 import FeaturedEvent from '@/components/featured-event'
 import PastEvent from '@/components/past-event'
-
 import Button from '@/components/button'
-import Image from 'next/image'
 import AtlassianLogo from '@/components/svg-logos/atlassian'
 import ThinkmillLogo from '@/components/svg-logos/thinkmill'
 import LookaheadLogo from '@/components/svg-logos/lookahead'
-import { InferGetStaticPropsType } from 'next'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export async function getStaticProps() {
   const reader = createReader('', keystaticConfig)

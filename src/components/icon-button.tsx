@@ -1,32 +1,32 @@
-import React, { ReactNode } from 'react'
+import React from 'react'
 import Link from 'next/link'
-import { PlayIcon } from '@heroicons/react/24/outline'
+
+import { TwitterIcon } from './svg-icons'
 
 function cx(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-export type ButtonProps = {
+export type IconButtonProps = {
+  icon: typeof TwitterIcon
   size?: 'default' | 'large'
   tone?: 'highlight' | 'accent'
   emphasis?: 'high' | 'default' | 'low'
-  icon?: typeof PlayIcon
-  iconPosition?: 'before' | 'after'
   href?: string
-  children: ReactNode
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 //  Tailwind classes lookup
-const baseClasses = 'font-semibold text-lg/none border-2'
+const baseClasses =
+  'font-semibold flex justify-center items-center text-lg/none border-2 aspect-square'
 
-const sizeClasses: Record<NonNullable<ButtonProps['size']>, string> = {
-  default: 'px-4 py-2 rounded-xl',
-  large: 'px-6 py-5 rounded-2xl',
+const sizeClasses: Record<NonNullable<IconButtonProps['size']>, string> = {
+  default: 'w-10 rounded-xl',
+  large: 'w-14 rounded-2xl',
 }
 
 const emphasisClasses: Record<
-  NonNullable<ButtonProps['tone']>,
-  Record<NonNullable<ButtonProps['emphasis']>, string>
+  NonNullable<IconButtonProps['tone']>,
+  Record<NonNullable<IconButtonProps['emphasis']>, string>
 > = {
   highlight: {
     high: 'bg-black border-transparent hover:bg-gray-900 active:bg-gray-800 text-highlight',
@@ -41,34 +41,24 @@ const emphasisClasses: Record<
 }
 
 // The component
-const Button: React.FC<ButtonProps> = ({
+const Button: React.FC<IconButtonProps> = ({
   size = 'default',
   tone = 'highlight',
   emphasis = 'default',
   icon: Icon,
-  iconPosition = 'before',
   href,
-  children,
   ...restProps
 }) => {
   const allClasses = cx(baseClasses, sizeClasses[size], emphasisClasses[tone][emphasis])
-  const contents = Icon ? (
-    <span className="flex items-center gap-2">
-      {iconPosition === 'before' && <Icon className="-my-1 h-6 w-6" />}
-      {children}
-      {iconPosition === 'after' && <Icon className="-my-1 h-6 w-6" />}
-    </span>
-  ) : (
-    children
-  )
+  const iconRender = <Icon className="-my-1 h-6 w-6" />
 
   return href ? (
     <Link className={allClasses} href={href}>
-      {contents}
+      {iconRender}
     </Link>
   ) : (
     <button className={allClasses} {...restProps}>
-      {contents}
+      {iconRender}
     </button>
   )
 }
