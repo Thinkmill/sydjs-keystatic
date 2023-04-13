@@ -48,7 +48,7 @@ export default function AllEvents(props: InferGetStaticPropsType<typeof getStati
         <h2 className="mt-20 text-4xl font-bold">Past</h2>
       </div>
       <div className="mx-auto mt-8 max-w-7xl px-6">
-        <div className="grid grid-cols-3 gap-x-6 gap-y-12">
+        <div className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {pastEvents.map((event) => (
             <Event key={event.slug} event={event} />
           ))}

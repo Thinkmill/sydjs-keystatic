@@ -1,7 +1,8 @@
-const { fontFamily } = require('tailwindcss/defaultTheme')
+import { Config } from 'tailwindcss'
+import { fontFamily } from 'tailwindcss/defaultTheme'
+import containerQueriesPlugin from '@tailwindcss/container-queries'
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
@@ -35,5 +36,7 @@ module.exports = {
       },
     },
   },
-  plugins: [],
-}
+  plugins: [containerQueriesPlugin],
+} satisfies Config
+
+export default config
