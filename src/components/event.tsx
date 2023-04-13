@@ -51,7 +51,6 @@ export default function Event({ event }: Props) {
         eventStatusClasses[event?.status] ?? eventStatusClasses.upcoming
       )}
     >
-      <pre>{JSON.stringify(event, null, 2)}</pre>
       <span className="rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
         upcoming event
       </span>
