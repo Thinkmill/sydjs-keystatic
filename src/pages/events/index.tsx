@@ -1,64 +1,16 @@
-import Link from 'next/link'
-import Image from 'next/image'
 import { InferGetStaticPropsType } from 'next'
 
-import { createReader } from '@keystatic/core/reader'
-import { DocumentRenderer } from '@keystatic/core/renderer'
-import { ChevronRightIcon } from '@/components/svg-icons'
-
-import { isFuture } from 'date-fns'
-
-import keystaticConfig from '../../../keystatic.config'
-import Event from '@/components/event'
 import Button from '@/components/button'
-import FeaturedEvent from '@/components/featured-event'
-import PastEvent from '@/components/past-event'
+import Event from '@/components/event'
+
+import { getAllEvents } from '@/lib/keystatic-reads'
 
 export async function getStaticProps() {
-  const reader = createReader('', keystaticConfig)
-  const allEvents = await reader.collections.events.all({ resolveLinkedFiles: true })
-
-  const allEventsWithSpeakers = await Promise.all(
-    allEvents.map(async (event) => {
-      // Get the speakers content
-      const speakersData = await Promise.all(
-        event.entry.speakers.map(async (speakerSlug) => {
-          return {
-            slug: speakerSlug,
-            ...(await reader.collections.persons.read(speakerSlug)),
-          }
-        })
-      )
-
-      // Determine if the event is in the future, today or in the past
-      const today = new Date()
-      const eventDate = new Date(event.entry.date)
-
-      const getStatus = () => {
-        if (isFuture(eventDate)) return 'upcoming'
-        if (eventDate.toDateString() === today.toDateString()) return 'today'
-        return 'past'
-      }
-
-      return {
-        ...event,
-        status: getStatus(),
-        entry: {
-          ...event.entry,
-          speakers: speakersData,
-        },
-      }
-    })
-  )
-
-  const sortedEvents = allEventsWithSpeakers.sort(
-    // @ts-ignore
-    (a, b) => new Date(a.entry.date) - new Date(b.entry.date)
-  )
+  const allEvents = await getAllEvents()
 
   return {
     props: {
-      allEvents: sortedEvents,
+      allEvents,
     },
   }
 }
@@ -80,7 +32,7 @@ export default function AllEvents(props: InferGetStaticPropsType<typeof getStati
         <h2 className="mt-20 text-4xl font-bold">Upcoming</h2>
       </div>
       <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
-        {upcomingEvents.map((event) => (
+        {upcomingEvents.slice(0, 3).map((event) => (
           <Event key={event.slug} event={event} />
         ))}
         {extraUpcomingEventsCount > 0 && (

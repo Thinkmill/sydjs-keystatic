@@ -15,21 +15,34 @@ import {
 } from './svg-icons'
 
 // Props
-type EventProps = {
-  event: {
-    slug: string
-    status: 'upcoming' | 'today' | 'past'
-    entry: EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['events']>
+export type Status = 'upcoming' | 'today' | 'past'
+export type EventProps = {
+  slug: string
+  status: Status
+} & Omit<
+  EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['events']>,
+  'talks' | 'speakers'
+> & {
+    talks: any
+    // | readonly string[]
+    // | EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['talks']>[]
+  } & {
+    speakers: any
+    // | readonly string[]
+    // | EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['persons']>[]
   }
+
+type Props = {
+  event: EventProps
 }
 
-const eventStatusClasses: Record<EventProps['event']['status'], string> = {
+const eventStatusClasses: Record<EventProps['status'], string> = {
   upcoming: 'bg-highlight',
   today: 'bg-highlight',
   past: 'bg-accent',
 }
 
-export default function Event({ event }: EventProps) {
+export default function Event({ event }: Props) {
   return (
     <div className={clsx('rounded-[40px] p-16', eventStatusClasses[event.status])}>
       <span className="rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
@@ -38,9 +51,9 @@ export default function Event({ event }: EventProps) {
 
       <div className="grid gap-28 md:grid-cols-3">
         <div className="md:col-span-2">
-          <h2 className="mt-8 text-4xl font-bold">{event.entry.name}</h2>
+          <h2 className="mt-8 text-4xl font-bold">{event.name}</h2>
           <div className="mt-4 space-y-4 text-lg">
-            <DocumentRenderer document={event.entry.description} />
+            <DocumentRenderer document={event.description} />
           </div>
           <div className="mt-6 flex items-center gap-4">
             <Button href={`/events/${event.slug}`} size="large">
@@ -61,10 +74,10 @@ export default function Event({ event }: EventProps) {
           {[
             {
               icon: CalendarClearOutlineIcon,
-              text: format(new Date(event.entry.date), 'EEEE, d MMMM yyy'),
+              text: format(new Date(event.date), 'EEEE, d MMMM yyy'),
             },
             { icon: ClockIcon, text: '6:30 - 9:30 pm' },
-            { icon: LocationOutlineIcon, text: event.entry.location },
+            { icon: LocationOutlineIcon, text: event.location },
             { icon: DesktopIcon, text: 'Online event' },
           ].map((event) => {
             const Icon = event.icon

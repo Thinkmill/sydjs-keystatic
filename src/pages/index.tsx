@@ -2,36 +2,42 @@ import { InferGetStaticPropsType } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { ChevronRightIcon } from '@/components/svg-icons'
-import { createReader } from '@keystatic/core/reader'
-import keystaticConfig from '../../keystatic.config'
-
-import FeaturedEvent from '@/components/featured-event'
-import PastEvent from '@/components/past-event'
 import Button from '@/components/button'
+import Event from '@/components/event'
+
 import AtlassianLogo from '@/components/svg-logos/atlassian'
 import ThinkmillLogo from '@/components/svg-logos/thinkmill'
 import LookaheadLogo from '@/components/svg-logos/lookahead'
+import { ChevronRightIcon } from '@/components/svg-icons'
+
+import { getAdminPage, getFutureEvents, getPastEvents } from '@/lib/keystatic-reads'
 
 export async function getStaticProps() {
-  const reader = createReader('', keystaticConfig)
-  const adminPage = await reader.singletons.admin.read()
+  const adminPage = await getAdminPage()
+  const futureEvents = await getFutureEvents()
+  const pastEvents = await getPastEvents()
+
   return {
     props: {
-      homepageTitle: adminPage?.homepageTitle,
-      homepageDescription: adminPage?.homepageDescription,
+      adminPage,
+      nextEvent: futureEvents[0],
+      pastEvents: pastEvents.slice(0, 3),
     },
   }
 }
 
-export default function Home(props: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Home({
+  adminPage,
+  nextEvent,
+  pastEvents,
+}: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
     <main>
       {/* Hero section */}
       <div className="relative mx-auto grid max-w-6xl px-6 md:grid-cols-2 lg:px-8">
         <div className="py-40">
-          <h1 className="text-6xl font-bold">{props.homepageTitle}</h1>
-          <p className="mt-6 text-2xl font-medium">{props.homepageDescription}</p>
+          <h1 className="text-6xl font-bold">{adminPage.homepageTitle}</h1>
+          <p className="mt-6 text-2xl font-medium">{adminPage.homepageDescription}</p>
           <p className="mt-10 text-lg">Thanks to our long standing sponsors:</p>
           <nav>
             <ul className="mt-6 flex items-center justify-between gap-4">
@@ -74,7 +80,7 @@ export default function Home(props: InferGetStaticPropsType<typeof getStaticProp
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
-        <FeaturedEvent />
+        <Event event={nextEvent} />
       </div>
       <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
         <div className="-mr-6 flex items-center justify-between">
@@ -84,15 +90,11 @@ export default function Home(props: InferGetStaticPropsType<typeof getStaticProp
           </Button>
         </div>
         <ul className="mt-12 grid gap-8 md:grid-cols-3">
-          <li>
-            <PastEvent />
-          </li>
-          <li>
-            <PastEvent />
-          </li>
-          <li>
-            <PastEvent />
-          </li>
+          {pastEvents.map((event) => (
+            <li key={event.slug}>
+              <Event event={event} />
+            </li>
+          ))}
         </ul>
       </div>
     </main>
