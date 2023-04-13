@@ -17,6 +17,7 @@ import {
 
 // Props
 export type Status = 'upcoming' | 'today' | 'past'
+// TODO: Make these types work so we can get rid of the `any` everywhere
 export type EventProps = {
   slug: string
   status: Status
@@ -114,10 +115,10 @@ export default function Event({ event }: Props) {
       {/* ---------------------------- */}
       {/* Narrow layout (up to @4xl) */}
       {/* ---------------------------- */}
-      <div className="block @4xl:hidden">
+      <div className="block h-full @4xl:hidden">
         <div
           className={clsx(
-            'rounded-[40px] p-10',
+            'h-full rounded-[40px] p-10',
             // Adding the fallback until I fix the breaking build 😅
             eventStatusClasses[event?.status] ?? eventStatusClasses.upcoming
           )}
