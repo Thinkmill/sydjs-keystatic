@@ -41,9 +41,9 @@ export default function Event(props: any) {
       </span>
       <div className="grid gap-28 md:grid-cols-3">
         <div className="md:col-span-2">
-          <h2 className="mt-8 text-4xl/none font-bold">{event.name}</h2>
+          <h2 className="mt-8 text-4xl/none font-bold">{event?.name}</h2>
           <div className="mt-4 space-y-4 text-lg">
-            <DocumentRenderer document={event.description} />
+            <DocumentRenderer document={event?.description || []} />
           </div>
           <div className="mt-6 flex items-center gap-4">
             <Button href="#" size="large">

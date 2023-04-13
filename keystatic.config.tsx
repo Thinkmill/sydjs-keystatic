@@ -54,7 +54,11 @@ export default config({
             label: 'Sponsor',
             collection: 'sponsors',
             validation: { isRequired: true },
-          })
+          }),
+          {
+            label: 'Sponsors',
+            itemLabel: (props) => props.value ?? 'Please select a sponsor',
+          }
         ),
         date: fields.date({ label: 'Date', validation: { isRequired: true } }),
         location: fields.text({ label: 'Location' }),
