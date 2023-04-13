@@ -46,12 +46,12 @@ export default function Event({ event }: Props) {
   return (
     // We're using container queries here!
     // The wrapped is flagged as a `@container`
-    // and then the `@3xl` will trigger accordingly!
+    // and then the `@4xl` will trigger accordingly!
     <div className="@container">
       {/* ---------------------------- */}
-      {/* Wide layout (@3xl and wider) */}
+      {/* Wide layout (@4xl and wider) */}
       {/* ---------------------------- */}
-      <div className="hidden @3xl:block">
+      <div className="hidden @4xl:block">
         <div
           className={clsx(
             'rounded-[40px] p-16',
@@ -110,9 +110,9 @@ export default function Event({ event }: Props) {
       </div>
 
       {/* ---------------------------- */}
-      {/* Narrow layout (up to @3xl) */}
+      {/* Narrow layout (up to @4xl) */}
       {/* ---------------------------- */}
-      <div className="block @3xl:hidden">
+      <div className="block @4xl:hidden">
         <div
           className={clsx(
             'rounded-[40px] p-10',
@@ -149,15 +149,15 @@ export default function Event({ event }: Props) {
           </p>
 
           {event.status !== 'past' && (
-            <div className="mt-6 flex flex-wrap items-center gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <Button href={`/events/${event?.slug}`} size="large">
                 View events details
               </Button>
               <Button
                 href="#"
-                size="large"
                 emphasis="low"
                 iconPosition="after"
+                size="large"
                 icon={OpenOutlineIcon}
               >
                 RSVP on Lu.ma
