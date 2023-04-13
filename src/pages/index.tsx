@@ -32,7 +32,7 @@ export default function Home({
   pastEvents,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   return (
-    <main>
+    <main className="w-full overflow-x-hidden">
       {/* Hero section */}
       <div className="relative mx-auto grid max-w-6xl px-6 md:grid-cols-2 lg:px-8">
         <div className="py-40">
