@@ -1,27 +1,15 @@
-import { InferGetStaticPropsType } from 'next'
+'use client'
 
 import Button from '@/components/button'
 import EventCard from '@/components/event-card'
 
-import { getAllEvents } from '@/lib/keystatic-reads'
-
-export async function getStaticProps() {
-  const allEvents = await getAllEvents()
-
-  return {
-    props: {
-      allEvents,
-    },
-  }
-}
-
-export default function AllEvents(props: InferGetStaticPropsType<typeof getStaticProps>) {
-  const upcomingEvents = props.allEvents.filter(
+export default function AllEvents({ allEvents }: any) {
+  const upcomingEvents = allEvents.filter(
     (event) => event.status === 'upcoming' || event.status === 'today'
   )
   const extraUpcomingEventsCount = upcomingEvents.length - 3
   console.log
-  const pastEvents = props.allEvents.filter((event) => event.status === 'past')
+  const pastEvents = allEvents.filter((event) => event.status === 'past')
   return (
     <>
       <div className="mx-auto mt-24 max-w-6xl px-6">

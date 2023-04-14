@@ -1,33 +1,10 @@
+'use client'
+
 import Image from 'next/image'
-import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
 import EventCard from '@/components/event-card'
 
-import { getAllEventSlugs, getEventBySlug, getAllEvents } from '@/lib/keystatic-reads'
-
-export async function getStaticProps(context: GetStaticPropsContext) {
-  const slug = context.params?.slug
-  if (!slug) throw new Error('Slug not found')
-
-  const event = await getEventBySlug(slug as string)
-
-  return {
-    props: { event },
-  }
-}
-
-export async function getStaticPaths() {
-  const eventSlugs = await getAllEventSlugs()
-
-  return {
-    paths: eventSlugs.map((slug) => ({
-      params: { slug },
-    })),
-    fallback: true,
-  }
-}
-
-export default function EventDetailsPage(props: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function EventDetailsPage(props) {
   return (
     <>
       <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
