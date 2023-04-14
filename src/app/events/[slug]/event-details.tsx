@@ -3,18 +3,19 @@
 import Image from 'next/image'
 
 import EventCard from '@/components/event-card'
+import { EventWithStatusAndSlug } from '@/lib/types'
 
-export default function EventDetailsPage(props) {
+export default function EventDetailsPage({ event }: any) {
   return (
     <>
       <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
-        <EventCard displayContext="details" event={props.event} />
+        <EventCard displayContext="details" event={event} />
       </div>
-      {props.event?.talks.length > 0 && (
+      {event.talks.length > 0 && (
         <div className="mx-auto mt-8 max-w-5xl px-6">
           <h2 className="mt-20 text-4xl font-bold">Talks</h2>
           <ul className="mt-12 grid gap-18">
-            {props.event?.talks.map((talk: any) => (
+            {event?.talks.map((talk: any) => (
               <li key={talk.slug} className="max-w-xl">
                 <h2 className="text-3xl font-bold">{talk?.name}</h2>
                 <ul className="mt-3 flex flex-wrap gap-x-10 gap-y-4">

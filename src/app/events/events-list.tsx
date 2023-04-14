@@ -3,13 +3,16 @@
 import Button from '@/components/button'
 import EventCard from '@/components/event-card'
 
-export default function AllEvents({ allEvents }: any) {
-  const upcomingEvents = allEvents.filter(
-    (event) => event.status === 'upcoming' || event.status === 'today'
-  )
-  const extraUpcomingEventsCount = upcomingEvents.length - 3
-  console.log
-  const pastEvents = allEvents.filter((event) => event.status === 'past')
+import type { EventWithStatusAndSlug } from '@/lib/types'
+
+export default function AllEvents({
+  futureEvents,
+  pastEvents,
+}: {
+  futureEvents: EventWithStatusAndSlug[]
+  pastEvents: EventWithStatusAndSlug[]
+}) {
+  const extraUpcomingEventsCount = futureEvents.length - 3
   return (
     <>
       <div className="mx-auto mt-24 max-w-6xl px-6">
@@ -20,7 +23,7 @@ export default function AllEvents({ allEvents }: any) {
         <h2 className="mt-20 text-4xl font-bold">Upcoming</h2>
       </div>
       <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
-        {upcomingEvents.slice(0, 3).map((event) => (
+        {futureEvents.slice(0, 3).map((event) => (
           <EventCard key={event.slug} event={event} />
         ))}
         {extraUpcomingEventsCount > 0 && (

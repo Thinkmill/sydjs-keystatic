@@ -3,8 +3,8 @@ import clsx from 'clsx'
 import { format } from 'date-fns'
 
 import { DocumentRenderer } from '@keystatic/core/renderer'
-import { EntryWithResolvedLinkedFiles } from '@keystatic/core/reader'
-import keystaticConfig from '../../keystatic.config'
+
+import type { EventWithStatusAndSlug } from '@/lib/types'
 
 import Button from './button'
 import {
@@ -16,33 +16,17 @@ import {
 } from './svg-icons'
 
 type DisplayContext = 'listing' | 'details'
-export type Status = 'upcoming' | 'today' | 'past'
-type EventMeta = {
-  status: Status
-  slug: string
-}
-
-export type EventEntryWithTalksAndSpeakers = EventMeta &
-  Omit<
-    EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['events']>,
-    'talks' | 'speakers'
-  > & {
-    talks: EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['talks']> &
-      { slug: string }[]
-    speakers: EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['collections']['persons']> &
-      { slug: string }[]
-  }
 
 export type EventCardProps = {
   displayContext?: DisplayContext
 } & {
-  event: EventEntryWithTalksAndSpeakers
+  event: EventWithStatusAndSlug
 }
 
 const eventStatusClasses: Record<EventCardProps['event']['status'], string> = {
-  upcoming: 'bg-highlight',
-  today: 'bg-highlight',
-  past: 'bg-accent',
+  UPCOMING: 'bg-highlight',
+  TODAY: 'bg-highlight',
+  PAST: 'bg-accent',
 }
 
 export default function EventCard({ displayContext = 'listing', event }: EventCardProps) {
@@ -64,15 +48,9 @@ export default function EventCard({ displayContext = 'listing', event }: EventCa
       {/* Wide layout (@4xl and wider) */}
       {/* ---------------------------- */}
       <div className="hidden @4xl:block">
-        <div
-          className={clsx(
-            'rounded-[40px] p-16',
-            // Adding the fallback until I fix the breaking build 😅
-            eventStatusClasses[event.status] ?? eventStatusClasses.upcoming
-          )}
-        >
+        <div className={clsx('rounded-[40px] p-16', eventStatusClasses[event.status])}>
           <span className="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
-            {event.status === 'past' ? 'past' : 'upcoming'} event
+            {event.status === 'PAST' ? 'past' : 'upcoming'} event
           </span>
 
           <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
@@ -86,7 +64,7 @@ export default function EventCard({ displayContext = 'listing', event }: EventCa
                   <Button href={`/events/${event.slug}`} size="large">
                     View events details
                   </Button>
-                  {event?.status !== 'past' && (
+                  {event?.status !== 'PAST' && (
                     <Button
                       href="#"
                       size="large"
@@ -122,12 +100,12 @@ export default function EventCard({ displayContext = 'listing', event }: EventCa
       {/* ---------------------------- */}
       <div className="block h-full @4xl:hidden">
         <div className={clsx('h-full rounded-[40px] p-10', eventStatusClasses[event.status])}>
-          {event?.status !== 'past' && (
+          {event?.status !== 'PAST' && (
             <span className="mb-4 inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
               upcoming event
             </span>
           )}
-          <Link href={`/events/${event?.slug}`} className="hover:underline">
+          <Link href={`/events/${event.slug}`} className="hover:underline">
             <h2 className="text-2xl font-bold">{event.name}</h2>
           </Link>
           <ul className="mt-6 space-y-4">
@@ -149,7 +127,7 @@ export default function EventCard({ displayContext = 'listing', event }: EventCa
             <DocumentRenderer document={event.description} />
           </div>
 
-          {event.status !== 'past' && (
+          {event.status !== 'PAST' && (
             <div className="mt-8 flex flex-wrap items-center gap-4">
               {displayContext === 'listing' && (
                 <Button href={`/events/${event.slug}`} size="large">
