@@ -2,7 +2,11 @@ import { isFuture } from 'date-fns'
 import { createReader, EntryWithResolvedLinkedFiles } from '@keystatic/core/reader'
 import keystaticConfig from '../../keystatic.config'
 
-import type { Status, EventProps } from '@/components/event'
+import type { Status, EventEntryWithTalksAndSpeakers } from '@/components/event-card'
+
+type EventsWithStatusAndSlug = EntryWithResolvedLinkedFiles<
+  (typeof keystaticConfig)['collections']['events']
+> & { status: Status; slug: string }
 
 const reader = createReader('', keystaticConfig)
 
@@ -17,37 +21,36 @@ function getStatus(date: string): Status {
 }
 
 // Get all events sorted by chronological order
-export async function getAllEvents(): Promise<EventProps[]> {
+export async function getAllEvents(): Promise<EventsWithStatusAndSlug[]> {
   const allEvents = await reader.collections.events.all({ resolveLinkedFiles: true })
-  return allEvents
-    .sort(
-      // @ts-ignore
-      (a, b) => new Date(a.entry.date) - new Date(b.entry.date)
-    )
-    .map((event) => {
-      // Determine if the event is in the future, today or in the past
-
-      return { slug: event.slug, ...event.entry, status: getStatus(event.entry.date) }
+  const sortedEvents = allEvents
+    .sort((a, b) => {
+      return new Date(a.entry.date).getDate() - new Date(b.entry.date).getDate()
     })
+    // Add status and slug to event flat object
+    .map((event) => ({ slug: event.slug, status: getStatus(event.entry.date), ...event.entry }))
+  return sortedEvents
 }
 
 export async function getAllEventSlugs(): Promise<string[]> {
   return await reader.collections.events.list()
 }
 
-export async function getFutureEvents(): Promise<EventProps[]> {
+export async function getFutureEvents(): Promise<EventsWithStatusAndSlug[]> {
   const events = await getAllEvents()
   if (!events) throw new Error('Events not found')
   return events.filter((event) => event.status !== 'past')
 }
 
-export async function getPastEvents(): Promise<EventProps[]> {
+export async function getPastEvents(): Promise<EventsWithStatusAndSlug[]> {
   const events = await getAllEvents()
   if (!events) throw new Error('Events not found')
   return events.filter((event) => event.status === 'past')
 }
 
-export async function getEventBySlug(slug: string): Promise<EventProps> {
+// The type should be Promise<EventEntryWithTalksAndSpeakers> instead of Promise<any>, but
+// I cannot get it to work 😅
+export async function getEventBySlug(slug: string): Promise<any> {
   const event = await reader.collections.events.read(slug, { resolveLinkedFiles: true })
   if (!event) throw new Error('Keystatic read helper: Event not found')
 
@@ -73,10 +76,10 @@ export async function getEventBySlug(slug: string): Promise<EventProps> {
   )
 
   return {
-    slug,
     ...event,
-    talks: eventTalks,
+    slug,
     status: getStatus(event.date),
+    talks: eventTalks,
   }
 }
 

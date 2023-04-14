@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { GetStaticPropsContext, InferGetStaticPropsType } from 'next'
 
-import Event from '@/components/event'
+import EventCard from '@/components/event-card'
 
 import { getAllEventSlugs, getEventBySlug, getAllEvents } from '@/lib/keystatic-reads'
 
@@ -31,7 +31,7 @@ export default function EventDetailsPage(props: InferGetStaticPropsType<typeof g
   return (
     <>
       <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
-        <Event event={props.event} />
+        <EventCard displayContext="details" event={props.event} />
       </div>
       {props.event?.talks.length > 0 && (
         <div className="mx-auto mt-8 max-w-5xl px-6">

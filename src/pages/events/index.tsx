@@ -1,7 +1,7 @@
 import { InferGetStaticPropsType } from 'next'
 
 import Button from '@/components/button'
-import Event from '@/components/event'
+import EventCard from '@/components/event-card'
 
 import { getAllEvents } from '@/lib/keystatic-reads'
 
@@ -33,7 +33,7 @@ export default function AllEvents(props: InferGetStaticPropsType<typeof getStati
       </div>
       <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
         {upcomingEvents.slice(0, 3).map((event) => (
-          <Event key={event.slug} event={event} />
+          <EventCard key={event.slug} event={event} />
         ))}
         {extraUpcomingEventsCount > 0 && (
           <div className="flex justify-center">
@@ -50,7 +50,7 @@ export default function AllEvents(props: InferGetStaticPropsType<typeof getStati
       <div className="mx-auto mt-8 max-w-7xl px-6">
         <div className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {pastEvents.map((event) => (
-            <Event key={event.slug} event={event} />
+            <EventCard key={event.slug} event={event} />
           ))}
         </div>
       </div>
