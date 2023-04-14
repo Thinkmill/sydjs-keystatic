@@ -1,4 +1,5 @@
-import { InferGetStaticPropsType } from 'next'
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -9,28 +10,20 @@ import AtlassianLogo from '@/components/svg-logos/atlassian'
 import ThinkmillLogo from '@/components/svg-logos/thinkmill'
 import LookaheadLogo from '@/components/svg-logos/lookahead'
 import { ChevronRightIcon } from '@/components/svg-icons'
+import { EntryWithResolvedLinkedFiles } from '@keystatic/core/reader'
+import keystaticConfig from '../../keystatic.config'
 
-import { getAdminPage, getFutureEvents, getPastEvents } from '@/lib/keystatic-reads'
-
-export async function getStaticProps() {
-  const adminPage = await getAdminPage()
-  const futureEvents = await getFutureEvents()
-  const pastEvents = await getPastEvents()
-
-  return {
-    props: {
-      adminPage,
-      nextEvent: futureEvents[0],
-      pastEvents: pastEvents.slice(0, 3),
-    },
-  }
-}
+import type { EventWithStatusAndSlug } from '@/lib/types'
 
 export default function Home({
   adminPage,
   nextEvent,
   pastEvents,
-}: InferGetStaticPropsType<typeof getStaticProps>) {
+}: {
+  adminPage: EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['singletons']['admin']>
+  nextEvent: EventWithStatusAndSlug
+  pastEvents: EventWithStatusAndSlug[]
+}) {
   return (
     <main className="w-full overflow-x-hidden">
       {/* Hero section */}
