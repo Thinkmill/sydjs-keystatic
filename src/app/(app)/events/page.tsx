@@ -1,7 +1,7 @@
 import EventsList from './events-list'
 
 import { createReader } from '@keystatic/core/reader'
-import keystaticConfig from '../../../keystatic.config'
+import keystaticConfig from '../../../../keystatic.config'
 
 import { getStatus } from '@/lib/get-status'
 
