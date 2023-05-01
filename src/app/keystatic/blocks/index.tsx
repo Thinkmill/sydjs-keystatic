@@ -1,0 +1,1 @@
+export { organiserListBlock } from './OrganiserList'

@@ -1,11 +1,6 @@
-import {
-  config,
-  component,
-  collection,
-  fields,
-  singleton,
-} from '@keystatic/core'
+import { config, collection, fields, singleton } from '@keystatic/core'
 import type { LocalConfig, GitHubConfig } from '@keystatic/core'
+import { organiserListBlock } from '@/app/keystatic/blocks'
 
 const storage: LocalConfig['storage'] | GitHubConfig['storage'] =
   process.env.NODE_ENV === 'development'
@@ -175,6 +170,9 @@ export default config({
         }),
         aboutPage: fields.document({
           label: 'About Page',
+          componentBlocks: {
+            organiserList: organiserListBlock,
+          },
           formatting: {
             headingLevels: {
               levels: [1, 2, 3, 4],
