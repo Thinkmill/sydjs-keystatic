@@ -12,7 +12,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const reader = createReader('', keystaticConfig)
   const admin = await reader.singletons.admin.read()
   return {
-    title: admin?.siteTitle,
+    title: {
+      template: `%s | ${admin?.siteTitle}`,
+      default: admin?.siteTitle || '',
+    },
     description: admin?.siteDescription,
   }
 }

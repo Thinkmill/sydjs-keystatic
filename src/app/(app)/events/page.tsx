@@ -5,6 +5,10 @@ import keystaticConfig from '../../../../keystatic.config'
 
 import { getStatus } from '@/lib/get-status'
 
+export const metadata = {
+  title: 'Events',
+}
+
 async function getData() {
   const reader = createReader('', keystaticConfig)
   const allEvents = await reader.collections.events.all({

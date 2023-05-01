@@ -1,4 +1,10 @@
-import { config, component, collection, fields, singleton } from '@keystatic/core'
+import {
+  config,
+  component,
+  collection,
+  fields,
+  singleton,
+} from '@keystatic/core'
 import type { LocalConfig, GitHubConfig } from '@keystatic/core'
 
 const storage: LocalConfig['storage'] | GitHubConfig['storage'] =
@@ -26,7 +32,10 @@ export default config({
             label: 'Name',
           },
         }),
-        description: fields.document({ label: 'Description', formatting: true }),
+        description: fields.document({
+          label: 'Description',
+          formatting: true,
+        }),
         speakers: fields.array(
           fields.relationship({
             label: 'Speaker',
@@ -114,11 +123,15 @@ export default config({
         socialLinks: fields.array(
           fields.object({
             label: fields.text({ label: 'Label' }),
-            link: fields.url({ label: 'URL', validation: { isRequired: true } }),
+            link: fields.url({
+              label: 'URL',
+              validation: { isRequired: true },
+            }),
           }),
           {
             label: 'Social Links',
-            itemLabel: (props) => props.fields.label.value ?? 'Please enter a label',
+            itemLabel: (props) =>
+              props.fields.label.value ?? 'Please enter a label',
           }
         ),
       },
@@ -148,9 +161,33 @@ export default config({
       path: 'src/content/admin/',
       schema: {
         siteTitle: fields.text({ label: 'Site Title' }),
-        siteDescription: fields.text({ label: 'Site Description', multiline: true }),
-        homepageTitle: fields.text({ label: 'Homepage Title', multiline: true }),
-        homepageDescription: fields.text({ label: 'Homepage Description', multiline: true }),
+        siteDescription: fields.text({
+          label: 'Site Description',
+          multiline: true,
+        }),
+        homepageTitle: fields.text({
+          label: 'Homepage Title',
+          multiline: true,
+        }),
+        homepageDescription: fields.text({
+          label: 'Homepage Description',
+          multiline: true,
+        }),
+        aboutPage: fields.document({
+          label: 'About Page',
+          formatting: {
+            headingLevels: {
+              levels: [1, 2, 3, 4],
+            },
+            inlineMarks: {
+              bold: true,
+              italic: true,
+            },
+            listTypes: true,
+            softBreaks: true,
+          },
+          links: true,
+        }),
       },
     }),
   },

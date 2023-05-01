@@ -4,6 +4,17 @@ import { createReader } from '@keystatic/core/reader'
 import keystaticConfig from '../../../../../keystatic.config'
 import { getStatus } from '@/lib/get-status'
 
+export async function generateMetadata({
+  params: { slug },
+}: {
+  params: { slug: string }
+}) {
+  const reader = createReader('', keystaticConfig)
+  const event = await reader.collections.events.read(slug, {})
+  // TODO: add meta description, og image etc
+  return { title: event?.name }
+}
+
 async function getData(slug: string) {
   const reader = createReader('', keystaticConfig)
   const event = await reader.collections.events.read(slug, {
