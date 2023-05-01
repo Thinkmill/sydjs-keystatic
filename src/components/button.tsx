@@ -30,12 +30,14 @@ const emphasisClasses: Record<
 > = {
   highlight: {
     high: 'bg-black border-transparent hover:bg-gray-900 active:bg-gray-800 text-highlight',
-    default: 'bg-transparent border-black hover:bg-black/[8%] active:bg-black/[16%] text-black',
+    default:
+      'bg-transparent border-black hover:bg-black/[8%] active:bg-black/[16%] text-black',
     low: 'bg-transparent border-transparent hover:bg-black/[8%] active:bg-black/[16%] text-black',
   },
   accent: {
     high: 'bg-black border-transparent hover:bg-gray-900 active:bg-gray-800 text-accent',
-    default: 'bg-transparent border-black hover:bg-black/[8%] active:bg-black/[16%] text-black',
+    default:
+      'bg-transparent border-black hover:bg-black/[8%] active:bg-black/[16%] text-black',
     low: 'bg-transparent border-transparent hover:bg-black/[8%] active:bg-black/[16%] text-black',
   },
 }
@@ -51,7 +53,11 @@ const Button: React.FC<ButtonProps> = ({
   children,
   ...restProps
 }) => {
-  const allClasses = cx(baseClasses, sizeClasses[size], emphasisClasses[tone][emphasis])
+  const allClasses = cx(
+    baseClasses,
+    sizeClasses[size],
+    emphasisClasses[tone][emphasis]
+  )
   const contents = Icon ? (
     <span className="flex items-center gap-2">
       {iconPosition === 'before' && <Icon className="-my-1 h-6 w-6" />}

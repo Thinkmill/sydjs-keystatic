@@ -30,13 +30,19 @@ export default function EventDetailsPage({ event }: any) {
                           className="h-8 w-8 rounded-xl object-cover"
                         />
                         <div>
-                          <p className="text-sm/none font-medium">By {speaker.name}</p>
-                          <p className="mt-1 text-sm/none font-semibold">@yoloooo</p>
+                          <p className="text-sm/none font-medium">
+                            By {speaker.name}
+                          </p>
+                          <p className="mt-1 text-sm/none font-semibold">
+                            @yoloooo
+                          </p>
                         </div>
                       </li>
                     ))}
                 </ul>
-                <p className="mt-6 line-clamp-3 text-lg/6">{talk.description}</p>
+                <p className="mt-6 line-clamp-3 text-lg/6">
+                  {talk.description}
+                </p>
               </li>
             ))}
           </ul>

@@ -7,7 +7,9 @@ import { getStatus } from '@/lib/get-status'
 
 async function getData() {
   const reader = createReader('', keystaticConfig)
-  const allEvents = await reader.collections.events.all({ resolveLinkedFiles: true })
+  const allEvents = await reader.collections.events.all({
+    resolveLinkedFiles: true,
+  })
   const formattedEvents = allEvents
     .map((event) => ({
       slug: event.slug,

@@ -29,11 +29,16 @@ const eventStatusClasses: Record<EventCardProps['event']['status'], string> = {
   PAST: 'bg-accent',
 }
 
-export default function EventCard({ displayContext = 'listing', event }: EventCardProps) {
+export default function EventCard({
+  displayContext = 'listing',
+  event,
+}: EventCardProps) {
   const eventMeta = [
     {
       icon: CalendarClearOutlineIcon,
-      text: event.date ? format(new Date(event.date), 'EEEE, d MMMM yyy') : 'no  date',
+      text: event.date
+        ? format(new Date(event.date), 'EEEE, d MMMM yyy')
+        : 'no  date',
     },
     { icon: ClockIcon, text: '6:30 - 9:30 pm', secondary: true },
     { icon: LocationOutlineIcon, text: event.location },
@@ -48,7 +53,12 @@ export default function EventCard({ displayContext = 'listing', event }: EventCa
       {/* Wide layout (@4xl and wider) */}
       {/* ---------------------------- */}
       <div className="hidden @4xl:block">
-        <div className={clsx('rounded-[40px] p-16', eventStatusClasses[event.status])}>
+        <div
+          className={clsx(
+            'rounded-[40px] p-16',
+            eventStatusClasses[event.status]
+          )}
+        >
           <span className="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
             {event.status === 'PAST' ? 'past' : 'upcoming'} event
           </span>
@@ -99,7 +109,12 @@ export default function EventCard({ displayContext = 'listing', event }: EventCa
       {/* Narrow layout (up to @4xl) */}
       {/* ---------------------------- */}
       <div className="block h-full @4xl:hidden">
-        <div className={clsx('h-full rounded-[40px] p-10', eventStatusClasses[event.status])}>
+        <div
+          className={clsx(
+            'h-full rounded-[40px] p-10',
+            eventStatusClasses[event.status]
+          )}
+        >
           {event?.status !== 'PAST' && (
             <span className="mb-4 inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
               upcoming event

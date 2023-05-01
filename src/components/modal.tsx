@@ -38,7 +38,10 @@ export default function Modal({ open, onClose, title }: ModalProps) {
           </Transition.Child>
 
           {/* This element is to trick the browser into centering the modal contents. */}
-          <span className="inline-block h-screen align-middle" aria-hidden="true">
+          <span
+            className="inline-block h-screen align-middle"
+            aria-hidden="true"
+          >
             &#8203;
           </span>
           <Transition.Child
@@ -51,18 +54,33 @@ export default function Modal({ open, onClose, title }: ModalProps) {
             leaveTo="opacity-0 scale-95"
           >
             <div className="my-8 inline-block w-full max-w-2xl transform overflow-hidden rounded-2xl bg-accent p-16 text-left align-middle shadow-xl transition-all">
-              <Dialog.Title as="h3" className="text-gray-900 text-4xl font-bold leading-6">
+              <Dialog.Title
+                as="h3"
+                className="text-gray-900 text-4xl font-bold leading-6"
+              >
                 {title}
               </Dialog.Title>
               <div className="mt-6">
-                <p className="text-lg">Stay in the loop so you don’t miss an event!</p>
+                <p className="text-lg">
+                  Stay in the loop so you don’t miss an event!
+                </p>
               </div>
 
               <div className="mt-4 flex items-center gap-4">
-                <Button size="large" onClick={onClose} emphasis="high" tone="accent">
+                <Button
+                  size="large"
+                  onClick={onClose}
+                  emphasis="high"
+                  tone="accent"
+                >
                   Join mailing list
                 </Button>
-                <Button size="large" onClick={onClose} emphasis="low" tone="accent">
+                <Button
+                  size="large"
+                  onClick={onClose}
+                  emphasis="low"
+                  tone="accent"
+                >
                   Cancel
                 </Button>
               </div>

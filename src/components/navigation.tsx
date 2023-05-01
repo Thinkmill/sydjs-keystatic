@@ -34,7 +34,11 @@ export default function Navigation() {
             </Button>
           </li>
           <li className="-ml-4">
-            <IconButton emphasis="low" href="https://twitter.com/sydjs" icon={TwitterIcon} />
+            <IconButton
+              emphasis="low"
+              href="https://twitter.com/sydjs"
+              icon={TwitterIcon}
+            />
           </li>
         </ul>
       </nav>

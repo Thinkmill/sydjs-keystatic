@@ -6,7 +6,9 @@ import { getStatus } from '@/lib/get-status'
 
 async function getData(slug: string) {
   const reader = createReader('', keystaticConfig)
-  const event = await reader.collections.events.read(slug, { resolveLinkedFiles: true })
+  const event = await reader.collections.events.read(slug, {
+    resolveLinkedFiles: true,
+  })
   if (!event) throw new Error('Keystatic read helper: Event not found')
 
   const eventTalks = await Promise.all(

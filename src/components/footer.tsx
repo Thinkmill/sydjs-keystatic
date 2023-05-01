@@ -10,7 +10,11 @@ export default function Footer() {
       <div className="mx-auto max-w-6xl px-6 py-8 pt-16 lg:px-8">
         <nav className="flex items-center justify-between">
           <Logo />
-          <IconButton emphasis="low" href="https://twitter.com/sydjs" icon={TwitterIcon} />
+          <IconButton
+            emphasis="low"
+            href="https://twitter.com/sydjs"
+            icon={TwitterIcon}
+          />
         </nav>
         <div className="mt-12 flex items-end">
           <div>
@@ -36,9 +40,13 @@ export default function Footer() {
                 />
               </svg>
             </p>
-            <p className="mt-2 text-sm">A sentence describing the value prop.</p>
+            <p className="mt-2 text-sm">
+              A sentence describing the value prop.
+            </p>
           </div>
-          <p className="flex-1 text-right text-sm">© 2023 SydJS. All rights reserved.</p>
+          <p className="flex-1 text-right text-sm">
+            © 2023 SydJS. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

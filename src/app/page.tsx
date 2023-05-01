@@ -6,10 +6,14 @@ import HomePage from './home-page'
 
 async function getData() {
   const reader = createReader('', keystaticConfig)
-  const adminPage = await reader.singletons.admin.read({ resolveLinkedFiles: true })
+  const adminPage = await reader.singletons.admin.read({
+    resolveLinkedFiles: true,
+  })
   if (!adminPage) throw new Error('Admin page not found')
 
-  const allEvents = await reader.collections.events.all({ resolveLinkedFiles: true })
+  const allEvents = await reader.collections.events.all({
+    resolveLinkedFiles: true,
+  })
   const formattedEvents = allEvents
     .map((event) => ({
       slug: event.slug,

@@ -20,7 +20,9 @@ export default function Home({
   nextEvent,
   pastEvents,
 }: {
-  adminPage: EntryWithResolvedLinkedFiles<(typeof keystaticConfig)['singletons']['admin']>
+  adminPage: EntryWithResolvedLinkedFiles<
+    (typeof keystaticConfig)['singletons']['admin']
+  >
   nextEvent: EventWithStatusAndSlug
   pastEvents: EventWithStatusAndSlug[]
 }) {
@@ -30,7 +32,9 @@ export default function Home({
       <div className="relative mx-auto grid max-w-6xl px-6 md:grid-cols-2 lg:px-8">
         <div className="py-40">
           <h1 className="text-6xl font-bold">{adminPage.homepageTitle}</h1>
-          <p className="mt-6 text-2xl font-medium">{adminPage.homepageDescription}</p>
+          <p className="mt-6 text-2xl font-medium">
+            {adminPage.homepageDescription}
+          </p>
           <p className="mt-10 text-lg">Thanks to our long standing sponsors:</p>
           <nav>
             <ul className="mt-6 flex items-center justify-between gap-4">
@@ -78,7 +82,12 @@ export default function Home({
       <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
         <div className="-mr-6 flex items-center justify-between">
           <h2 className="text-3xl font-bold">Past events</h2>
-          <Button href="/events" emphasis="low" icon={ChevronRightIcon} iconPosition="after">
+          <Button
+            href="/events"
+            emphasis="low"
+            icon={ChevronRightIcon}
+            iconPosition="after"
+          >
             View all events
           </Button>
         </div>

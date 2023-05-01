@@ -1,6 +1,11 @@
 export function RadioOutlineIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" {...props}>
+    <svg
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      {...props}
+    >
       <path
         fill="currentcolor"
         d="M4.169 5a.75.75 0 1 0-1.12-1 12.016 12.016 0 0 0 0 16 .75.75 0 1 0 1.12-1 10.516 10.516 0 0 1 0-14ZM20.95 4a.75.75 0 0 0-1.119 1 10.516 10.516 0 0 1 0 14 .75.75 0 1 0 1.12 1 12.016 12.016 0 0 0 0-16Z"
