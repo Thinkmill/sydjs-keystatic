@@ -1,19 +1,20 @@
 import '@/styles/globals.css'
 import { Poppins } from 'next/font/google'
+import { Metadata } from 'next'
+import { createReader } from '@keystatic/core/reader'
+import keystaticConfig from '../../../keystatic.config'
 
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
 
-import { Metadata } from 'next'
-
 // https://beta.nextjs.org/docs/api-reference/metadata#metadata-object
-export const metadata: Metadata = {
-  title: {
-    default: 'SydJS',
-    template: '%s | SydJS',
-  },
-  description:
-    'Join the vibrant and inclusive community of web developers discussing the latest in Javascript from Sydney, Australia.',
+export async function generateMetadata(): Promise<Metadata> {
+  const reader = createReader('', keystaticConfig)
+  const admin = await reader.singletons.admin.read()
+  return {
+    title: admin?.siteTitle,
+    description: admin?.siteDescription,
+  }
 }
 
 const poppins = Poppins({
