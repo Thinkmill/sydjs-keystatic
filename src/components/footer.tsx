@@ -6,10 +6,12 @@ import { TwitterIcon } from './svg-icons'
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-100 mt-20">
+    <footer className="mt-20 bg-gray-100">
       <div className="mx-auto max-w-6xl px-6 py-8 pt-16 lg:px-8">
         <nav className="flex items-center justify-between">
-          <Logo />
+          <Link href="/">
+            <Logo />
+          </Link>
           <IconButton
             emphasis="low"
             href="https://twitter.com/sydjs"

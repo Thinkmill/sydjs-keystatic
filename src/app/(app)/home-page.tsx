@@ -29,46 +29,56 @@ export default function Home({
   return (
     <main className="w-full overflow-x-hidden">
       {/* Hero section */}
-      <div className="relative mx-auto grid max-w-6xl px-6 md:grid-cols-2 lg:px-8">
-        <div className="py-40">
+      <div className="relative mx-auto grid max-w-6xl px-6 lg:grid-cols-2 lg:px-8">
+        <div className="order-2 pb-24 lg:order-1 lg:py-40">
           <h1 className="text-6xl font-bold">{adminPage.homepageTitle}</h1>
           <p className="mt-6 text-2xl font-medium">
             {adminPage.homepageDescription}
           </p>
           <p className="mt-10 text-lg">Thanks to our long standing sponsors:</p>
-          <nav>
-            <ul className="mt-6 flex items-center justify-between gap-4">
-              <li>
-                <Link href="#">
-                  <AtlassianLogo />
-                </Link>
-              </li>
-              <li className="bg-gray-200 h-6 w-px"></li>
-              <li>
-                <Link href="#">
-                  <ThinkmillLogo />
-                </Link>
-              </li>
-              <li className="bg-gray-200 h-6 w-px"></li>
-              <li>
-                <Link href="#">
-                  <LookaheadLogo />
-                </Link>
-              </li>
-            </ul>
-          </nav>
+          <ul className="mt-6 flex flex-wrap items-center gap-4 lg:justify-between">
+            <li>
+              <Link
+                href="https://www.atlassian.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <AtlassianLogo />
+              </Link>
+            </li>
+            <li className="h-6 w-px bg-gray-200"></li>
+            <li>
+              <Link
+                href="https://www.thinkmill.com.au/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ThinkmillLogo />
+              </Link>
+            </li>
+            <li className="h-6 w-px bg-gray-200"></li>
+            <li>
+              <Link
+                href="https://lookahead.com.au/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LookaheadLogo />
+              </Link>
+            </li>
+          </ul>
         </div>
-        <div>
+        <div className="order-1 flex flex-col items-center lg:block">
           <Image
             alt=""
-            className="absolute -right-24 -top-12 z-10 w-[60%]"
+            className="z-10 lg:absolute lg:-right-24 lg:-top-12 lg:w-[60%]"
             src="/images/hero-image-1.png"
             width={800}
             height={800}
           />
           <Image
             alt=""
-            className="absolute -bottom-12 right-12 w-[30%] -translate-y-12"
+            className="-mt-24 lg:absolute lg:-bottom-12 lg:right-12 lg:w-[30%] lg:-translate-y-12"
             src="/images/hero-image-2.png"
             width={400}
             height={400}
