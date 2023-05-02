@@ -7,7 +7,7 @@ export const TextLink: React.FC<{
   return (
     <Link
       href={href}
-      className="text-lg/none font-semibold decoration-2 underline-offset-2 hover:underline"
+      className="decoration-2 underline-offset-2 hover:underline"
     >
       {children}
     </Link>

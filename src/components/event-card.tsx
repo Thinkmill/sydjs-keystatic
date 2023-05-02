@@ -14,6 +14,7 @@ import {
   LocationOutlineIcon,
   OpenOutlineIcon,
 } from './svg-icons'
+import { TextLink } from './text-link'
 
 type DisplayContext = 'listing' | 'details'
 
@@ -120,9 +121,9 @@ export default function EventCard({
               upcoming event
             </span>
           )}
-          <Link href={`/events/${event.slug}`} className="hover:underline">
+          <TextLink href={`/events/${event.slug}`}>
             <h2 className="text-2xl font-bold">{event.name}</h2>
-          </Link>
+          </TextLink>
           <ul className="mt-6 space-y-4">
             {eventMeta
               .filter((event) => !event.secondary)

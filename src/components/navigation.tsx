@@ -19,10 +19,10 @@ export default function Navigation() {
           <Logo />
         </Link>
         <ul className="flex items-center gap-8">
-          <li>
+          <li className="text-lg/none font-semibold">
             <TextLink href="/events">Events</TextLink>
           </li>
-          <li>
+          <li className="text-lg/none font-semibold ">
             <TextLink href="/about">About</TextLink>
           </li>
           <li>
