@@ -29,7 +29,7 @@ const emphasisClasses: Record<
   Record<NonNullable<ButtonProps['emphasis']>, string>
 > = {
   highlight: {
-    high: 'bg-black border-transparent hover:bg-gray-900 active:bg-gray-800 text-highlight',
+    high: 'bg-black border-transparent hover:bg-gray-800 active:bg-gray-800 text-highlight',
     default:
       'bg-transparent border-black hover:bg-black/[8%] active:bg-black/[16%] text-black',
     low: 'bg-transparent border-transparent hover:bg-black/[8%] active:bg-black/[16%] text-black',

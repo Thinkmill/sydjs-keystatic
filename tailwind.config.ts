@@ -9,16 +9,11 @@ const config = {
     './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
-    colors: {
-      inherit: 'inherit',
-      current: 'currentColor',
-      transparent: 'transparent',
-      white: '#ffffff',
-      black: '#000000',
-      highlight: '#FFE221',
-      accent: '#B5C2FF',
-    },
     extend: {
+      colors: {
+        highlight: '#FFE221',
+        accent: '#B5C2FF',
+      },
       textColor: {
         default: '#000000',
         subtle: '#313131',
