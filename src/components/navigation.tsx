@@ -8,6 +8,7 @@ import { TwitterIcon } from './svg-icons'
 import Logo from './logo'
 import Button from './button'
 import IconButton from './icon-button'
+import { TextLink } from './text-link'
 
 export default function Navigation() {
   const [isModalOpen, setIsModalOpen] = useState(false)
@@ -19,14 +20,10 @@ export default function Navigation() {
         </Link>
         <ul className="flex items-center gap-8">
           <li>
-            <Link href="/events" className="text-lg/none font-semibold ">
-              Events
-            </Link>
+            <TextLink href="/events">Events</TextLink>
           </li>
           <li>
-            <Link href="/about" className="text-lg/none font-semibold ">
-              About
-            </Link>
+            <TextLink href="/about">About</TextLink>
           </li>
           <li>
             <Button emphasis="high" onClick={() => setIsModalOpen(true)}>
