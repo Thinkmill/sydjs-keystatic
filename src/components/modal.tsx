@@ -53,10 +53,10 @@ export default function Modal({ open, onClose, title }: ModalProps) {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="my-8 inline-block w-full max-w-2xl transform overflow-hidden rounded-2xl bg-accent p-16 text-left align-middle shadow-xl transition-all">
+            <div className="my-8 inline-block w-full max-w-2xl transform overflow-hidden rounded-2xl bg-accent p-8 text-left align-middle shadow-xl transition-all md:p-12 lg:p-16">
               <Dialog.Title
                 as="h3"
-                className="text-gray-900 text-4xl font-bold leading-6"
+                className="text-3xl font-bold text-gray-900 md:text-4xl"
               >
                 {title}
               </Dialog.Title>
@@ -66,24 +66,39 @@ export default function Modal({ open, onClose, title }: ModalProps) {
                 </p>
               </div>
 
-              <div className="mt-4 flex items-center gap-4">
-                <Button
-                  size="large"
-                  onClick={onClose}
-                  emphasis="high"
-                  tone="accent"
-                >
-                  Join mailing list
-                </Button>
-                <Button
-                  size="large"
-                  onClick={onClose}
-                  emphasis="low"
-                  tone="accent"
-                >
-                  Cancel
-                </Button>
-              </div>
+              <form className="mt-5 grid gap-5">
+                <div className="grid gap-2">
+                  <label htmlFor="email" className="text-sm/none font-medium">
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="text"
+                    placeholder="Enter email address"
+                    className="max-w-sm rounded border-2 border-slate-800 p-3 text-lg/none leading-none placeholder:text-slate-600 sm:p-4"
+                  />
+                </div>
+                <div className="flex flex-wrap items-center gap-4">
+                  <Button
+                    size="large"
+                    type="submit"
+                    onClick={onClose}
+                    emphasis="high"
+                    tone="accent"
+                  >
+                    Join mailing list
+                  </Button>
+                  <Button
+                    size="large"
+                    onClick={onClose}
+                    emphasis="low"
+                    tone="accent"
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </form>
             </div>
           </Transition.Child>
         </div>

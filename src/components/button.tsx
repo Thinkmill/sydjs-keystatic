@@ -17,11 +17,12 @@ export type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 //  Tailwind classes lookup
-const baseClasses = 'inline-block font-semibold text-lg/none border-2'
+const baseClasses =
+  'inline-block font-semibold text-base/none border-2 sm:text-lg/none'
 
 const sizeClasses: Record<NonNullable<ButtonProps['size']>, string> = {
   default: 'px-4 py-2 rounded-xl',
-  large: 'px-6 py-5 rounded-2xl',
+  large: 'px-6 py-4 sm:py-5 rounded-2xl',
 }
 
 const emphasisClasses: Record<
