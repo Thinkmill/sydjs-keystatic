@@ -68,22 +68,22 @@ export default function Home({
             </li>
           </ul>
         </div>
-        <div className="order-1 flex justify-center md:mb-12 lg:mb-0 lg:block">
+        <div className="order-1 flex items-center justify-center md:mb-12 lg:mb-0">
           <div className="grid max-w-2xl grid-rows-[2fr,_4fr,_3fr] justify-items-center lg:max-w-3xl">
             <div className="px-home-hero col-start-1 row-start-2 row-end-4 self-end px-[min(22vw,180px)] lg:px-[8.5rem]">
               <Image
                 alt=""
                 src="/images/hero-image-2.png"
-                width={400}
-                height={400}
+                width={378}
+                height={369}
               />
             </div>
             <Image
               alt=""
               className="col-start-1 row-start-1 row-end-3"
               src="/images/hero-image-1.png"
-              width={800}
-              height={800}
+              width={1049}
+              height={738}
             />
           </div>
         </div>
