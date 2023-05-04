@@ -68,21 +68,24 @@ export default function Home({
             </li>
           </ul>
         </div>
-        <div className="order-1 flex flex-col items-center lg:block">
-          <Image
-            alt=""
-            className="z-10 lg:absolute lg:-right-24 lg:-top-12 lg:w-[60%]"
-            src="/images/hero-image-1.png"
-            width={800}
-            height={800}
-          />
-          <Image
-            alt=""
-            className="-mt-24 lg:absolute lg:-bottom-12 lg:right-12 lg:w-[30%] lg:-translate-y-12"
-            src="/images/hero-image-2.png"
-            width={400}
-            height={400}
-          />
+        <div className="order-1 flex justify-center md:mb-12 lg:mb-0 lg:block">
+          <div className="grid max-w-2xl grid-rows-[2fr,_4fr,_3fr] justify-items-center lg:max-w-3xl">
+            <div className="px-home-hero col-start-1 row-start-2 row-end-4 self-end px-[min(22vw,180px)] lg:px-[8.5rem]">
+              <Image
+                alt=""
+                src="/images/hero-image-2.png"
+                width={400}
+                height={400}
+              />
+            </div>
+            <Image
+              alt=""
+              className="col-start-1 row-start-1 row-end-3"
+              src="/images/hero-image-1.png"
+              width={800}
+              height={800}
+            />
+          </div>
         </div>
       </div>
 
