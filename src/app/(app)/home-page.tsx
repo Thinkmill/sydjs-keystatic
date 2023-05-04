@@ -87,7 +87,7 @@ export default function Home({
       </div>
 
       <div className="mx-auto max-w-7xl px-6">
-        <EventCard event={nextEvent} />
+        {nextEvent && <EventCard event={nextEvent} />}
       </div>
       <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
         <div className="-mr-6 flex items-center justify-between">

@@ -122,7 +122,7 @@ export default function EventCard({
             </span>
           )}
           <TextLink href={`/events/${event.slug}`}>
-            <h2 className="text-2xl font-bold">{event.name}</h2>
+            <h2 className="line-clamp-2 text-2xl font-bold">{event.name}</h2>
           </TextLink>
           <ul className="mt-6 space-y-4">
             {eventMeta

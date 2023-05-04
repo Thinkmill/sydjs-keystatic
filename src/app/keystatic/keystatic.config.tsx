@@ -31,17 +31,6 @@ export default config({
           label: 'Description',
           formatting: true,
         }),
-        speakers: fields.array(
-          fields.relationship({
-            label: 'Speaker',
-            collection: 'persons',
-            validation: { isRequired: true },
-          }),
-          {
-            label: 'Speakers',
-            itemLabel: (props) => props.value ?? 'Please select a speaker',
-          }
-        ),
         talks: fields.array(
           fields.relationship({
             label: 'Talk',
@@ -66,6 +55,7 @@ export default config({
         ),
         date: fields.date({ label: 'Date', validation: { isRequired: true } }),
         location: fields.text({ label: 'Location' }),
+        address: fields.text({ label: 'Address' }),
         video: fields.text({ label: 'Video URL' }),
         startTime: fields.text({ label: 'Start time' }),
         endTime: fields.text({ label: 'End time' }),
@@ -84,7 +74,10 @@ export default config({
             label: 'Name',
           },
         }),
-        description: fields.text({ label: 'Description', multiline: true }),
+        description: fields.document({
+          label: 'Description',
+          formatting: true,
+        }),
         speakers: fields.array(
           fields.relationship({
             label: 'Speaker',

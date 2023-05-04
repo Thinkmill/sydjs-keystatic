@@ -1,13 +1,10 @@
 name: Keystatic SydJS Takeover By Thinkmill
-speakers:
-  - jordan-overbye
-  - lauren-argenta
 talks:
-  - this-is-a-test-talk
+  - a-node-powered-arcade-machine
+  - keystone-js-a-head-start-on-the-features-you-need
 sponsors: []
-date: '2023-04-27'
-location: Beach Hotel, Byron Bay
-video: ''
-startTime: 5:45 PM
-endTime: 9:00 PM
-image: null
+date: '2023-05-17'
+location: Atlassian HQ
+address: Level 6, 341 George St (Atlassian)
+startTime: 5:30 PM
+endTime: 8:30 PM

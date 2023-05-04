@@ -1,7 +1,5 @@
 import EventDetails from './event-details'
-
-import { createReader } from '@keystatic/core/reader'
-import keystaticConfig from '@/app/keystatic/keystatic.config'
+import { reader } from '@/app/keystatic/reader'
 import { getStatus } from '@/lib/get-status'
 
 export async function generateMetadata({
@@ -9,30 +7,30 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }) {
-  const reader = createReader('', keystaticConfig)
-  const event = await reader.collections.events.read(slug, {})
+  const event = await reader.collections.events.readOrThrow(slug, {
+    resolveLinkedFiles: true,
+  })
   // TODO: add meta description, og image etc
   return { title: event?.name }
 }
 
 async function getData(slug: string) {
-  const reader = createReader('', keystaticConfig)
-  const event = await reader.collections.events.read(slug, {
+  const event = await reader.collections.events.readOrThrow(slug, {
     resolveLinkedFiles: true,
   })
-  if (!event) throw new Error('Keystatic read helper: Event not found')
 
   const eventTalks = await Promise.all(
     event?.talks.map(async (talkSlug) => {
       // Get talk data
-      const talk = await reader.collections.talks.read(talkSlug)
-      if (!talk) throw new Error('Talk not found')
+      const talk = await reader.collections.talks.readOrThrow(talkSlug, {
+        resolveLinkedFiles: true,
+      })
 
       // Get Speakers for each talk
       const speakers = await Promise.all(
         talk.speakers.map(async (speakerSlug) => ({
           slug: speakerSlug,
-          ...(await reader.collections.persons.read(speakerSlug)),
+          ...(await reader.collections.persons.readOrThrow(speakerSlug)),
         }))
       )
       return {
@@ -61,7 +59,6 @@ export default async function Page(context: any) {
 export const dynamicParams = true
 
 export async function generateStaticParams() {
-  const reader = createReader('', keystaticConfig)
   const eventSlugs = await reader.collections.events.list()
   return eventSlugs.map((slug) => ({ slug }))
 }

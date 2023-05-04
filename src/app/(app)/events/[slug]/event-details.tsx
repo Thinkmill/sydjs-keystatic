@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
+import { DocumentRenderer } from '@keystatic/core/renderer'
 
 import EventCard from '@/components/event-card'
 import { EventWithStatusAndSlug } from '@/lib/types'
@@ -49,9 +50,12 @@ export default function EventDetailsPage({ event }: any) {
                       </li>
                     ))}
                 </ul>
-                <p className="mt-6 line-clamp-3 text-lg/6">
+                <div className="prose mt-6">
+                  <DocumentRenderer document={talk.description} />
+                </div>
+                {/* <p className="mt-6 line-clamp-3 text-lg/6">
                   {talk.description}
-                </p>
+                </p> */}
               </li>
             ))}
           </ul>
