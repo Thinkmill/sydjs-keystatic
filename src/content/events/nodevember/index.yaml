@@ -1,0 +1,14 @@
+name: Nodevember
+speakers:
+  - lauren-argenta
+talks:
+  - keystone-js-a-head-start-on-the-features-you-need
+  - berzerk-interactive-charting-via-backbone
+  - a-node-powered-arcade-machine
+sponsors: []
+date: '2013-11-20'
+location: Atlassian HQ
+video: ''
+startTime: 5:00 PM
+endTime: 8:00 PM
+image: image.jpg

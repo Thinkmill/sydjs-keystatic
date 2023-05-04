@@ -1,5 +1,5 @@
 import { EntryWithResolvedLinkedFiles } from '@keystatic/core/reader'
-import keystaticConfig from '../../keystatic.config'
+import keystaticConfig from '@/app/keystatic/keystatic.config'
 
 export type Status = 'UPCOMING' | 'TODAY' | 'PAST'
 

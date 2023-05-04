@@ -1,9 +1,8 @@
-import { createReader } from '@keystatic/core/reader'
+import { InferRenderersForComponentBlocks } from '@keystatic/core'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
+import { reader } from '@/app/keystatic/reader'
 import { componentBlocks } from '@/app/keystatic/blocks'
-import keystaticConfig from '../../../../keystatic.config'
-import { InferRenderersForComponentBlocks } from '@keystatic/core'
 import { Organiser } from '@/components/organiser'
 
 export const metadata = {
@@ -11,8 +10,7 @@ export const metadata = {
 }
 
 async function getData() {
-  const reader = createReader('', keystaticConfig)
-  const admin = await reader.singletons.admin.read()
+  const admin = await reader.singletons.admin.readOrThrow()
 
   return {
     admin,

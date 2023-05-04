@@ -1,0 +1,8 @@
+name: A node-powered arcade machine
+description: >-
+  We built an arcade machine from scratch using nodeJS. Come and find out what
+  it took to get this thing up and running.
+speakers:
+  - alex-dickson
+  - ben-wong
+video: ''

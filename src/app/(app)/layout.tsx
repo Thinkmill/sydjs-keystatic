@@ -2,7 +2,7 @@ import '@/styles/globals.css'
 import { Poppins } from 'next/font/google'
 import { Metadata } from 'next'
 import { createReader } from '@keystatic/core/reader'
-import keystaticConfig from '../../../keystatic.config'
+import keystaticConfig from '@/app/keystatic/keystatic.config'
 
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'

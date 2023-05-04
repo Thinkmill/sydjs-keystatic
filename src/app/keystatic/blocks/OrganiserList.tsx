@@ -13,7 +13,7 @@ export const organiserListBlock = component({
         }),
       }),
       {
-        itemLabel: (props) => props.fields.organiser.value,
+        itemLabel: (props) => props.fields.organiser.value ?? 'Please select',
       }
     ),
   },

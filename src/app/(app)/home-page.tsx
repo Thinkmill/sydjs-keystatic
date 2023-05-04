@@ -11,7 +11,7 @@ import ThinkmillLogo from '@/components/svg-logos/thinkmill'
 import LookaheadLogo from '@/components/svg-logos/lookahead'
 import { ChevronRightIcon } from '@/components/svg-icons'
 import { EntryWithResolvedLinkedFiles } from '@keystatic/core/reader'
-import keystaticConfig from '../../../keystatic.config'
+import keystaticConfig from '@/app/keystatic/keystatic.config'
 
 import type { EventWithStatusAndSlug } from '@/lib/types'
 

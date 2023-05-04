@@ -1,4 +1,4 @@
-import keystaticConfig from '../../keystatic.config'
+import keystaticConfig from '@/app/keystatic/keystatic.config'
 import { createReader } from '@keystatic/core/reader'
 
 async function getData(slug: string) {
