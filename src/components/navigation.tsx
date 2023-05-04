@@ -14,7 +14,7 @@ export default function Navigation() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <>
-      <nav className="relative z-20 mx-auto flex max-w-6xl items-center justify-between overflow-x-scroll px-6 py-4 lg:px-8">
+      <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between overflow-x-scroll px-6 py-4 lg:px-8">
         <Link className="pr-8" href="/">
           <Logo />
         </Link>

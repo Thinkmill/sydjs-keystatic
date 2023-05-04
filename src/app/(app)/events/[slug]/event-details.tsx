@@ -39,7 +39,7 @@ export default function EventDetailsPage({ event }: any) {
                           </p>
                           {speaker.twitterHandle && (
                             <Link
-                              className="mt-1 text-sm/none font-semibold"
+                              className="text-sm/none font-semibold"
                               href={`https://twitter.com/${speaker.twitterHandle}`}
                             >
                               @{speaker.twitterHandle}

@@ -1,9 +1,9 @@
-import '@/styles/globals.css'
-import { Poppins } from 'next/font/google'
 import { Metadata } from 'next'
+import { Poppins } from 'next/font/google'
 import { createReader } from '@keystatic/core/reader'
-import keystaticConfig from '@/app/keystatic/keystatic.config'
 
+import '@/styles/globals.css'
+import keystaticConfig from '@/app/keystatic/keystatic.config'
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
 
@@ -33,9 +33,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${poppins.variable} font-sans antialiased`}>
+      <body
+        className={`${poppins.variable} grid min-h-screen grid-rows-[auto,1fr,auto] font-sans antialiased`}
+      >
         <Navigation />
-        {children}
+        <div>{children}</div>
         <Footer />
       </body>
     </html>
