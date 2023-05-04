@@ -29,7 +29,7 @@ export default function Home({
     <main className="w-full overflow-x-hidden">
       {/* Hero section */}
       <div className="relative mx-auto grid max-w-6xl px-6 lg:grid-cols-2 lg:pl-8 lg:pr-0">
-        <div className="order-2 pb-24 lg:order-1 lg:py-40">
+        <div className="py-8 lg:py-40">
           <h1 className="text-6xl font-bold">{adminPage.homepageTitle}</h1>
           <p className="mt-6 text-2xl font-medium">
             {adminPage.homepageDescription}
@@ -67,7 +67,7 @@ export default function Home({
             </li>
           </ul>
         </div>
-        <div className="order-1 flex items-center justify-center md:mb-12 lg:mb-0">
+        <div className="mb-8 flex items-center justify-center md:mb-12 lg:mb-0">
           <div className="grid w-full max-w-2xl grid-rows-[2fr,_4fr,_3fr] justify-items-center lg:max-w-3xl">
             <div className="col-start-1 row-start-2 row-end-4 w-full self-end px-[min(22vw,180px)] lg:px-[8.5rem]">
               <SkewImage

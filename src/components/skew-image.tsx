@@ -13,7 +13,6 @@ export const SkewImage: React.FC<{
   const ref = useRef(null)
   const mouse = useMouse(ref.current)
   const prefersReducedMotion = usePrefersReducedMotion()
-  console.log(prefersReducedMotion)
   return (
     <>
       <svg viewBox={viewBox} ref={ref}>
