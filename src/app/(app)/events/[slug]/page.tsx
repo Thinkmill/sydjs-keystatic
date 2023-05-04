@@ -1,7 +1,7 @@
 import EventDetails from './event-details'
 
 import { createReader } from '@keystatic/core/reader'
-import keystaticConfig from '../../../../../keystatic.config'
+import keystaticConfig from '@/app/keystatic/keystatic.config'
 import { getStatus } from '@/lib/get-status'
 
 export async function generateMetadata({

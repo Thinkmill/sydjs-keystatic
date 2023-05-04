@@ -115,6 +115,7 @@ export default config({
           label: 'Avatar',
           directory: 'public/images/avatars',
         }),
+        twitterHandle: fields.text({ label: 'Twitter Handle' }),
         socialLinks: fields.array(
           fields.object({
             label: fields.text({ label: 'Label' }),

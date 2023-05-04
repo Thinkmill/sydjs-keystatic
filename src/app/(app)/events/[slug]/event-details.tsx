@@ -1,5 +1,6 @@
 'use client'
 
+import Link from 'next/link'
 import Image from 'next/image'
 
 import EventCard from '@/components/event-card'
@@ -21,21 +22,29 @@ export default function EventDetailsPage({ event }: any) {
                 <ul className="mt-3 flex flex-wrap gap-x-10 gap-y-4">
                   {talk.speakers &&
                     talk.speakers.slice(0, 2).map((speaker: any) => (
-                      <li key={speaker.slug} className="flex gap-3">
+                      <li
+                        key={speaker.slug}
+                        className="flex items-center gap-3"
+                      >
                         <Image
                           src={`/images/avatars/${speaker.slug}/${speaker.avatar}`}
                           alt={`Avatar for ${speaker.name}`}
                           width={40}
                           height={40}
-                          className="h-8 w-8 rounded-xl object-cover"
+                          className="h-10 w-10 rounded-xl object-cover"
                         />
                         <div>
                           <p className="text-sm/none font-medium">
                             By {speaker.name}
                           </p>
-                          <p className="mt-1 text-sm/none font-semibold">
-                            @yoloooo
-                          </p>
+                          {speaker.twitterHandle && (
+                            <Link
+                              className="text-sm/none font-semibold"
+                              href={`https://twitter.com/${speaker.twitterHandle}`}
+                            >
+                              @{speaker.twitterHandle}
+                            </Link>
+                          )}
                         </div>
                       </li>
                     ))}
