@@ -59,7 +59,10 @@ export default config({
         video: fields.text({ label: 'Video URL' }),
         startTime: fields.text({ label: 'Start time' }),
         endTime: fields.text({ label: 'End time' }),
-        image: fields.image({ label: 'Image' }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/events',
+        }),
       },
     }),
 
@@ -90,6 +93,11 @@ export default config({
           }
         ),
         video: fields.text({ label: 'Video URL' }),
+        image: fields.image({
+          label: 'Image',
+          directory: 'public/images/talks',
+          publicPath: '/images/talks/',
+        }),
       },
     }),
 

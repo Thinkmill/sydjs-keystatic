@@ -41,8 +41,12 @@ export default function EventCard({
         ? format(new Date(event.date), 'EEEE, d MMMM yyy')
         : 'no  date',
     },
-    { icon: ClockIcon, text: '6:30 - 9:30 pm', secondary: true },
-    { icon: LocationOutlineIcon, text: event.location },
+    {
+      icon: ClockIcon,
+      text: `${event.startTime} — ${event.endTime}`,
+      secondary: true,
+    },
+    { icon: LocationOutlineIcon, text: event.location, details: event.address },
     { icon: DesktopIcon, text: 'Online event', secondary: true },
   ]
   return (
@@ -70,6 +74,7 @@ export default function EventCard({
               <div className="mt-4 space-y-4 text-lg">
                 <DocumentRenderer document={event.description} />
               </div>
+              {/* Listing */}
               {displayContext === 'listing' && (
                 <div className="mt-6 flex items-center gap-4">
                   <Button href={`/events/${event.slug}`} size="large">
@@ -88,16 +93,51 @@ export default function EventCard({
                   )}
                 </div>
               )}
+
+              {/* Event details */}
+              {displayContext === 'details' && (
+                <div className="mt-6 flex items-center gap-4">
+                  {event?.status !== 'PAST' && (
+                    <Button
+                      href="#"
+                      size="large"
+                      emphasis="high"
+                      iconPosition="after"
+                      icon={OpenOutlineIcon}
+                    >
+                      RSVP on Lu.ma
+                    </Button>
+                  )}
+                </div>
+              )}
             </div>
             <ul className="space-y-4">
               {eventMeta.map((event) => {
                 const Icon = event.icon
                 return (
-                  <li key={event.text} className="flex items-center gap-3">
+                  <li
+                    key={event.text}
+                    className={clsx(
+                      'flex gap-3',
+                      event.details ? 'items-start' : 'items-center'
+                    )}
+                  >
                     <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
                       <Icon className="h-5 w-5 fill-black" />
                     </div>
-                    <span className="text-lg font-medium">{event.text}</span>
+                    <div>
+                      <p
+                        className={clsx(
+                          'text-lg font-medium',
+                          event.details && 'mt-1.5'
+                        )}
+                      >
+                        {event.text}
+                      </p>
+                      {event.details && (
+                        <p className="text-sm">{event.details}</p>
+                      )}
+                    </div>
                   </li>
                 )
               })}
