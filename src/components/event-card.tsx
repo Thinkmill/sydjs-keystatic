@@ -3,6 +3,8 @@ import clsx from 'clsx'
 import { format } from 'date-fns'
 import Image from 'next/image'
 
+import YouTubeEmbed from './youtube-embed'
+
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
 import type { EventWithStatusAndSlug } from '@/lib/types'
@@ -35,6 +37,10 @@ export default function EventCard({
   displayContext = 'listing',
   event,
 }: EventCardProps) {
+  let featuredMedia = undefined
+  if (event.image) featuredMedia = 'image'
+  if (event.video) featuredMedia = 'video'
+
   const eventMeta = [
     {
       icon: CalendarClearOutlineIcon,
@@ -151,20 +157,35 @@ export default function EventCard({
               </ul>
             </div>
           </div>
-          {event.image && <div className="h-80"></div>}
+          {displayContext === 'details' && featuredMedia && (
+            <div className="h-80"></div>
+          )}
         </div>
 
         {/* Featured media */}
-        {event.image && (
-          <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
-            <Image
-              className="object-fit aspect-video rounded-2xl"
-              src={event.image}
-              alt=""
-              width={1200}
-              height={675}
-            />
-          </div>
+        {displayContext === 'details' && (
+          <>
+            {featuredMedia === 'image' && (
+              <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
+                <Image
+                  className="aspect-video rounded-2xl object-cover"
+                  src={event.image}
+                  alt=""
+                  width={1200}
+                  height={675}
+                />
+              </div>
+            )}
+
+            {featuredMedia === 'video' && (
+              <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
+                <YouTubeEmbed
+                  className="aspect-video rounded-2xl object-cover"
+                  videoUrl={event.video}
+                />
+              </div>
+            )}
+          </>
         )}
       </div>
 

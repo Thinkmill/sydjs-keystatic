@@ -56,13 +56,17 @@ export default config({
         date: fields.date({ label: 'Date', validation: { isRequired: true } }),
         location: fields.text({ label: 'Location' }),
         address: fields.text({ label: 'Address' }),
-        video: fields.text({ label: 'Video URL' }),
         startTime: fields.text({ label: 'Start time' }),
         endTime: fields.text({ label: 'End time' }),
         image: fields.image({
-          label: 'Image',
+          label: 'Featured Image',
           directory: 'public/images/events',
           publicPath: '/images/events/',
+        }),
+        video: fields.text({
+          label: 'Featured Video',
+          description:
+            'A YouTube video URL. If specified, the video will take precedence over the image.',
         }),
       },
     }),
