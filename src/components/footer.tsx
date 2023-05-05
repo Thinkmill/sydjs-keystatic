@@ -18,7 +18,7 @@ export default function Footer() {
             icon={TwitterIcon}
           />
         </nav>
-        <div className="mt-12 flex items-end">
+        <div className="mt-12 items-end md:flex">
           <div>
             <p className="flex items-center gap-1">
               <span className="text-sm font-medium">Powered by</span>
@@ -46,7 +46,7 @@ export default function Footer() {
               A sentence describing the value prop.
             </p>
           </div>
-          <p className="flex-1 text-right text-sm">
+          <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
             © 2023 SydJS. All rights reserved.
           </p>
         </div>

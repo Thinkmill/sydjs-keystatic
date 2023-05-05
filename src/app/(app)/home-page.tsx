@@ -40,6 +40,7 @@ export default function Home({
               <Link
                 href="https://www.atlassian.com/"
                 target="_blank"
+                className="transition-opacity hover:opacity-50"
                 rel="noopener noreferrer"
               >
                 <AtlassianLogo />
@@ -50,6 +51,7 @@ export default function Home({
               <Link
                 href="https://www.thinkmill.com.au/"
                 target="_blank"
+                className="transition-opacity hover:opacity-50"
                 rel="noopener noreferrer"
               >
                 <ThinkmillLogo />
@@ -60,6 +62,7 @@ export default function Home({
               <Link
                 href="https://lookahead.com.au/"
                 target="_blank"
+                className="transition-opacity hover:opacity-50"
                 rel="noopener noreferrer"
               >
                 <LookaheadLogo />
