@@ -1,6 +1,6 @@
 'use client'
+import { isFuture } from 'date-fns'
 
-import Button from '@/components/button'
 import EventCard from '@/components/event-card'
 
 import type { EventWithStatusAndSlug } from '@/lib/types'
@@ -12,7 +12,9 @@ export default function AllEvents({
   futureEvents: EventWithStatusAndSlug[]
   pastEvents: EventWithStatusAndSlug[]
 }) {
-  const extraUpcomingEventsCount = futureEvents.length - 3
+  const isLastEventInTheFuture = isFuture(
+    new Date(futureEvents[futureEvents.length - 1].date)
+  )
   return (
     <>
       <div className="mx-auto mt-24 max-w-6xl px-6">
@@ -20,23 +22,15 @@ export default function AllEvents({
         <p className="mt-8 text-2xl font-medium">
           Here’s the full list of upcoming and past SydJS events.
         </p>
-        {futureEvents.length > 0 && (
-          <h2 className="mt-20 text-4xl font-bold">Upcoming</h2>
-        )}
+        <h2 className="mt-20 text-4xl font-bold">
+          {isLastEventInTheFuture ? 'Upcoming' : 'Most recent event'}
+        </h2>
       </div>
       {futureEvents.length > 0 && (
         <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
-          {futureEvents.slice(0, 3).map((event) => (
+          {futureEvents.map((event) => (
             <EventCard key={event.slug} event={event} />
           ))}
-          {extraUpcomingEventsCount > 0 && (
-            <div className="flex justify-center">
-              <Button emphasis="low" href="/events">
-                Show {extraUpcomingEventsCount} more upcoming event
-                {extraUpcomingEventsCount > 1 && 's'}
-              </Button>
-            </div>
-          )}
         </div>
       )}
       <div className="mx-auto mt-8 max-w-6xl px-6">

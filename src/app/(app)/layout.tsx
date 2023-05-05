@@ -35,6 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${poppins.variable} grid min-h-screen grid-rows-[auto,1fr,auto] font-sans antialiased`}
+        suppressHydrationWarning={true}
       >
         <Navigation />
         <div>{children}</div>

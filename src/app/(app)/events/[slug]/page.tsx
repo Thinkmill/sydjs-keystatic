@@ -49,8 +49,8 @@ async function getData(slug: string) {
   }
 }
 
-export default async function Page(context: any) {
-  const { slug } = context.params
+export default async function Page({ params }: any) {
+  const { slug } = params
   if (!slug) throw new Error('Slug not found')
   const event = await getData(slug)
   return <EventDetails event={event} />

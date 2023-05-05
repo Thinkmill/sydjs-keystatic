@@ -23,6 +23,12 @@ export async function getEvents() {
     .filter((event) => event.status === 'PAST')
     .reverse()
 
+  // If no events in the future, move the most recent past event to the future list
+  if (futureEvents.length === 0) {
+    const mostRecentEvent = pastEvents.shift()
+    futureEvents.push(mostRecentEvent as any)
+  }
+
   return {
     futureEvents,
     nextEvent: futureEvents[0],

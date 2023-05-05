@@ -33,7 +33,7 @@ const componentBlocksRenderer: InferRenderersForComponentBlocks<
   ),
 }
 
-export default async function Page(context: any) {
+export default async function Page() {
   const data = await getData()
   return (
     <div className="prose mx-auto mt-20 max-w-5xl px-6">
