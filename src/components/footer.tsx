@@ -43,7 +43,8 @@ export default function Footer() {
               </svg>
             </p>
             <p className="mt-2 text-sm">
-              A new static cms by the fine folks at Thinkmill
+              A new static content management system by the fine folks at
+              Thinkmill
             </p>
           </div>
           <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
