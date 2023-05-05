@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import clsx from 'clsx'
 import { format } from 'date-fns'
+import Image from 'next/image'
 
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
@@ -64,86 +65,107 @@ export default function EventCard({
             eventStatusClasses[event.status]
           )}
         >
-          <span className="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
-            {event.status === 'PAST' ? 'past' : 'upcoming'} event
-          </span>
+          {' '}
+          <div
+            className={clsx(
+              displayContext === 'details' && 'mx-auto max-w-6xl px-6 lg:px-8'
+            )}
+          >
+            <span className="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
+              {event.status === 'PAST' ? 'past' : 'upcoming'} event
+            </span>
 
-          <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
-            <div className="md:col-span-2">
-              <h2 className="mt-8 text-4xl font-bold">{event.name}</h2>
-              <div className="mt-4 space-y-4 text-lg">
-                <DocumentRenderer document={event.description} />
-              </div>
-              {/* Listing */}
-              {displayContext === 'listing' && (
-                <div className="mt-6 flex items-center gap-4">
-                  <Button href={`/events/${event.slug}`} size="large">
-                    View events details
-                  </Button>
-                  {event?.status !== 'PAST' && (
-                    <Button
-                      href="#"
-                      size="large"
-                      emphasis="low"
-                      iconPosition="after"
-                      icon={OpenOutlineIcon}
-                    >
-                      RSVP on Lu.ma
-                    </Button>
-                  )}
+            <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
+              <div className="md:col-span-2">
+                <h2 className="mt-8 text-4xl font-bold">{event.name}</h2>
+                <div className="mt-4 space-y-4 text-lg">
+                  <DocumentRenderer document={event.description} />
                 </div>
-              )}
-
-              {/* Event details */}
-              {displayContext === 'details' && (
-                <div className="mt-6 flex items-center gap-4">
-                  {event?.status !== 'PAST' && (
-                    <Button
-                      href="#"
-                      size="large"
-                      emphasis="high"
-                      iconPosition="after"
-                      icon={OpenOutlineIcon}
-                    >
-                      RSVP on Lu.ma
+                {/* Listing */}
+                {displayContext === 'listing' && (
+                  <div className="mt-6 flex items-center gap-4">
+                    <Button href={`/events/${event.slug}`} size="large">
+                      View events details
                     </Button>
-                  )}
-                </div>
-              )}
-            </div>
-            <ul className="space-y-4">
-              {eventMeta.map((event) => {
-                const Icon = event.icon
-                return (
-                  <li
-                    key={event.text}
-                    className={clsx(
-                      'flex gap-3',
-                      event.details ? 'items-start' : 'items-center'
-                    )}
-                  >
-                    <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
-                      <Icon className="h-5 w-5 fill-black" />
-                    </div>
-                    <div>
-                      <p
-                        className={clsx(
-                          'text-lg font-medium',
-                          event.details && 'mt-1.5'
-                        )}
+                    {event?.status !== 'PAST' && (
+                      <Button
+                        href="#"
+                        size="large"
+                        emphasis="low"
+                        iconPosition="after"
+                        icon={OpenOutlineIcon}
                       >
-                        {event.text}
-                      </p>
-                      {event.details && (
-                        <p className="text-sm">{event.details}</p>
+                        RSVP on Lu.ma
+                      </Button>
+                    )}
+                  </div>
+                )}
+
+                {/* Event details */}
+                {displayContext === 'details' && (
+                  <div className="mt-8 flex items-center gap-4">
+                    {event?.status !== 'PAST' && (
+                      <Button
+                        href="#"
+                        size="large"
+                        emphasis="high"
+                        iconPosition="after"
+                        icon={OpenOutlineIcon}
+                      >
+                        RSVP on Lu.ma
+                      </Button>
+                    )}
+                  </div>
+                )}
+              </div>
+              <ul className="space-y-4">
+                {eventMeta.map((event) => {
+                  const Icon = event.icon
+                  return (
+                    <li
+                      key={event.text}
+                      className={clsx(
+                        'flex gap-3',
+                        event.details ? 'items-start' : 'items-center'
                       )}
-                    </div>
-                  </li>
-                )
-              })}
-            </ul>
+                    >
+                      <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+                        <Icon className="h-5 w-5 fill-black" />
+                      </div>
+                      <div>
+                        <p
+                          className={clsx(
+                            'text-lg font-medium',
+                            event.details && 'mt-1.5'
+                          )}
+                        >
+                          {event.text}
+                        </p>
+                        {event.details && (
+                          <p className="text-sm">{event.details}</p>
+                        )}
+                      </div>
+                    </li>
+                  )
+                })}
+              </ul>
+            </div>
           </div>
+          {event.image && <div className="h-80"></div>}
         </div>
+
+        {/* Featured media */}
+        {event.image && (
+          <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
+            <Image
+              className="object-fit aspect-video rounded-2xl"
+              src={event.image}
+              alt=""
+              width={1200}
+              height={675}
+            />
+          </div>
+        )}
       </div>
 
       {/* ---------------------------- */}

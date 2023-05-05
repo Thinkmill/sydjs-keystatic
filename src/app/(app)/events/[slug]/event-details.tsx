@@ -10,7 +10,7 @@ import { EventWithStatusAndSlug } from '@/lib/types'
 export default function EventDetailsPage({ event }: any) {
   return (
     <>
-      <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
+      <div className="mx-auto mt-8 max-w-[96rem] space-y-6 px-6">
         <EventCard displayContext="details" event={event} />
       </div>
       {event.talks.length > 0 && (

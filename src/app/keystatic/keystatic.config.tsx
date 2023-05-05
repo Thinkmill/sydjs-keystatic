@@ -62,6 +62,7 @@ export default config({
         image: fields.image({
           label: 'Image',
           directory: 'public/images/events',
+          publicPath: '/images/events/',
         }),
       },
     }),
