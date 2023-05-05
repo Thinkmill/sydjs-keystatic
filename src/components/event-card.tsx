@@ -169,7 +169,7 @@ export default function EventCard({
               <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
                 <Image
                   className="aspect-video rounded-2xl object-cover"
-                  src={event.image}
+                  src={event.image as string}
                   alt=""
                   width={1200}
                   height={675}
