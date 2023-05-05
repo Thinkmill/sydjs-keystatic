@@ -71,7 +71,7 @@ export default function Home({
           <div className="grid w-full max-w-2xl grid-rows-[2fr,_4fr,_3fr] justify-items-center lg:max-w-3xl">
             <div className="col-start-1 row-start-2 row-end-4 w-full self-end px-[min(22vw,180px)] lg:px-[8.5rem]">
               <SkewImage
-                src="/images/speaker.jpg"
+                src="/images/speaker.png"
                 maskId="bottom"
                 alt="A speaker presenting at a conference"
                 viewBox="0 0 304 306"
