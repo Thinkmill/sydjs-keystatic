@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
 import EventCard from '@/components/event-card'
-import { EventWithStatusAndSlug } from '@/lib/types'
+import YouTubeEmbed from '@/components/youtube-embed'
 
 export default function EventDetailsPage({ event }: any) {
   return (
@@ -18,8 +18,8 @@ export default function EventDetailsPage({ event }: any) {
           <h2 className="mt-20 text-4xl font-bold">Talks</h2>
           <ul className="mt-12 grid gap-18">
             {event?.talks.map((talk: any) => (
-              <li key={talk.slug} className="grid grid-cols-3 gap-8">
-                <div className="col-span-2">
+              <li key={talk.slug} className="grid gap-8 lg:grid-cols-3">
+                <div className="lg:col-span-2">
                   <h2 className="text-3xl font-bold">{talk?.name}</h2>
                   <ul className="mt-3 flex flex-wrap gap-x-10 gap-y-4">
                     {talk.speakers &&
@@ -55,13 +55,23 @@ export default function EventDetailsPage({ event }: any) {
                     <DocumentRenderer document={talk.description} />
                   </div>
                 </div>
-                <Image
-                  className="aspect-[3/2] w-80 justify-self-end rounded-2xl object-cover"
-                  src={talk.image}
-                  alt=""
-                  height={480}
-                  width={320}
-                />
+                <div>
+                  {talk.image && !talk.video && (
+                    <Image
+                      className="aspect-video rounded-2xl object-cover"
+                      src={talk.image}
+                      alt=""
+                      height={720}
+                      width={480}
+                    />
+                  )}
+                  {talk.video && (
+                    <YouTubeEmbed
+                      videoUrl={talk.video}
+                      className="rounded-2xl"
+                    />
+                  )}
+                </div>
               </li>
             ))}
           </ul>

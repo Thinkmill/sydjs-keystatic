@@ -97,11 +97,15 @@ export default config({
             itemLabel: (props) => props.value ?? 'Please select a speaker',
           }
         ),
-        video: fields.text({ label: 'Video URL' }),
         image: fields.image({
-          label: 'Image',
+          label: 'Featured Image',
           directory: 'public/images/talks',
           publicPath: '/images/talks/',
+        }),
+        video: fields.text({
+          label: 'Featured Video',
+          description:
+            'A YouTube video URL. Can include a timestamp! If specified, the video will take precedence over the image.',
         }),
       },
     }),
