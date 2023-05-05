@@ -43,7 +43,7 @@ export default function Footer() {
               </svg>
             </p>
             <p className="mt-2 text-sm">
-              A sentence describing the value prop.
+              A new static cms by the fine folks at Thinkmill
             </p>
           </div>
           <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
