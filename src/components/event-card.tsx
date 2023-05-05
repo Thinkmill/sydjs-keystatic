@@ -1,14 +1,16 @@
-import Link from 'next/link'
-import clsx from 'clsx'
-import { format } from 'date-fns'
+// TODO: Refactor this, there is too much complexity between the
+// displayContext, the event status, featured media and
+// container queries.
+
+// It's a good prototype, but it needs to be simplified!
+
 import Image from 'next/image'
-
-import YouTubeEmbed from './youtube-embed'
-
+import { format } from 'date-fns'
+import clsx from 'clsx'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
 import type { EventWithStatusAndSlug } from '@/lib/types'
-
+import YouTubeEmbed from './youtube-embed'
 import Button from './button'
 import {
   CalendarClearOutlineIcon,
