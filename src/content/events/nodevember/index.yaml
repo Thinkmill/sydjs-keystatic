@@ -8,4 +8,7 @@ date: '2013-11-20'
 location: Atlassian HQ
 startTime: 5:00 PM
 endTime: 8:00 PM
-image: /images/events/nodevember/image.jpg
+feature:
+  - discriminant: image
+    value:
+      asset: /images/events/nodevember/feature/0/value/asset.jpg

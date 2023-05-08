@@ -7,4 +7,8 @@ date: '2020-07-15'
 location: Online
 startTime: 7:30 PM
 endTime: 9:30 PM
-image: /images/events/java-script-open-source-how-i-wonder-what-you-are/image.jpg
+feature:
+  - discriminant: image
+    value:
+      asset: >-
+        /images/events/java-script-open-source-how-i-wonder-what-you-are/feature/0/value/asset.jpg

@@ -39,9 +39,7 @@ export default function EventCard({
   displayContext = 'listing',
   event,
 }: EventCardProps) {
-  let featuredMedia = undefined
-  if (event.image) featuredMedia = 'image'
-  if (event.video) featuredMedia = 'video'
+  let featuredMedia = !!event.feature.length
 
   const eventMeta = [
     {
@@ -163,27 +161,25 @@ export default function EventCard({
             <div className="h-80"></div>
           )}
         </div>
-
         {/* Featured media */}
-        {displayContext === 'details' && (
+        {displayContext === 'details' && !!event.feature.length && (
           <>
-            {featuredMedia === 'image' && (
+            {event.feature[0].discriminant === 'image' && (
               <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
                 <Image
                   className="aspect-video rounded-2xl object-cover"
-                  src={event.image as string}
-                  alt=""
+                  src={event.feature[0].value.asset}
+                  alt={event.feature[0].value.alt}
                   width={1200}
                   height={675}
                 />
               </div>
             )}
-
-            {featuredMedia === 'video' && (
+            {event.feature[0].discriminant === 'video' && (
               <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
                 <YouTubeEmbed
                   className="aspect-video rounded-2xl object-cover"
-                  videoUrl={event.video}
+                  videoUrl={event.feature[0].value.url}
                 />
               </div>
             )}

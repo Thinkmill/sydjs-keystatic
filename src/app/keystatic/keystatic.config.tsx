@@ -58,16 +58,31 @@ export default config({
         address: fields.text({ label: 'Address' }),
         startTime: fields.text({ label: 'Start time' }),
         endTime: fields.text({ label: 'End time' }),
-        image: fields.image({
-          label: 'Featured Image',
-          directory: 'public/images/events',
-          publicPath: '/images/events/',
-        }),
-        video: fields.text({
-          label: 'Featured Video',
-          description:
-            'A YouTube video URL. If specified, the video will take precedence over the image.',
-        }),
+        feature: fields.blocks(
+          {
+            image: {
+              label: 'Featured image',
+              schema: fields.object({
+                asset: fields.image({
+                  label: 'Image',
+                  directory: 'public/images/events',
+                  publicPath: '/images/events/',
+                  validation: { isRequired: true },
+                }),
+                alt: fields.text({ label: 'Alt' }),
+              }),
+            },
+            video: {
+              label: 'Featured video',
+              schema: fields.object({
+                url: fields.text({
+                  label: 'A YouTube video URL.',
+                }),
+              }),
+            },
+          },
+          { label: 'Featured Media', validation: { length: { max: 1 } } }
+        ),
       },
     }),
 

@@ -8,5 +8,7 @@ location: Atlassian HQ
 address: Level 6, 341 George St (Atlassian)
 startTime: 5:30 PM
 endTime: 8:30 PM
-image: /images/events/keystatic-syd-js-takeover-by-thinkmill/image.jpg
-video: https://www.youtube.com/watch?v=6l2YWCyPsWk
+feature:
+  - discriminant: video
+    value:
+      url: https://www.youtube.com/watch?v=6l2YWCyPsWk
