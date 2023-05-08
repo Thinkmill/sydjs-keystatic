@@ -67,11 +67,11 @@ export default function EventCard({
       <div className="hidden @4xl:block">
         <div
           className={clsx(
-            'rounded-[40px] p-16',
+            'rounded-t-[40px] p-16',
+            !featuredMedia && 'rounded-b-[40px]',
             eventStatusClasses[event.status]
           )}
         >
-          {' '}
           <div
             className={clsx(
               displayContext === 'details' && 'mx-auto max-w-6xl px-6 lg:px-8'
@@ -157,33 +157,28 @@ export default function EventCard({
               </ul>
             </div>
           </div>
-          {displayContext === 'details' && featuredMedia && (
-            <div className="h-80"></div>
-          )}
         </div>
         {/* Featured media */}
-        {displayContext === 'details' && !!event.feature.length && (
-          <>
-            {event.feature[0].discriminant === 'image' && (
-              <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
+        {displayContext === 'details' && featuredMedia && (
+          <div className="before:l-0 relative  before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:bg-highlight before:content-['']">
+            <div className="relative px-4 lg:px-8">
+              {event.feature[0].discriminant === 'image' && (
                 <Image
-                  className="aspect-video rounded-2xl object-cover"
+                  className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
                   src={event.feature[0].value.asset}
                   alt={event.feature[0].value.alt}
                   width={1200}
                   height={675}
                 />
-              </div>
-            )}
-            {event.feature[0].discriminant === 'video' && (
-              <div className="mx-auto -mt-80 max-w-6xl px-4 lg:px-8">
+              )}
+              {event.feature[0].discriminant === 'video' && (
                 <YouTubeEmbed
-                  className="aspect-video rounded-2xl object-cover"
+                  className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
                   videoUrl={event.feature[0].value.url}
                 />
-              </div>
-            )}
-          </>
+              )}
+            </div>
+          </div>
         )}
       </div>
 
