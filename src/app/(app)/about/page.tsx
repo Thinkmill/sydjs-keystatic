@@ -22,12 +22,12 @@ const componentBlocksRenderer: InferRenderersForComponentBlocks<
   typeof componentBlocks
 > = {
   organiserList: (props) => (
-    <div className="-mx-12 flex flex-wrap">
+    <div className="justfiy-between flex w-full flex-wrap gap-x-8 gap-y-8 sm:gap-y-12">
       {props.content.map((el) => (
-        <div className="w-full max-w-xs px-12" key={el.organiser}>
+        <>
           {/* @ts-expect-error Server Component */}
-          <Organiser slug={el.organiser} />
-        </div>
+          <Organiser key={el.organiser} slug={el.organiser} />
+        </>
       ))}
     </div>
   ),
@@ -36,7 +36,7 @@ const componentBlocksRenderer: InferRenderersForComponentBlocks<
 export default async function Page() {
   const data = await getData()
   return (
-    <div className="prose mx-auto mt-20 max-w-5xl px-6">
+    <div className="prose mx-auto mt-20 max-w-4xl px-6 lg:prose-lg">
       <DocumentRenderer
         document={data.aboutPage || []}
         componentBlocks={componentBlocksRenderer}

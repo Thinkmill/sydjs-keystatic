@@ -139,6 +139,7 @@ export default config({
         avatar: fields.image({
           label: 'Avatar',
           directory: 'public/images/avatars',
+          publicPath: '/images/avatars/',
         }),
         twitterHandle: fields.text({ label: 'Twitter Handle' }),
         socialLinks: fields.array(

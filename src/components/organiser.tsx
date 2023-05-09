@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import keystaticConfig from '@/app/keystatic/keystatic.config'
 import { createReader } from '@keystatic/core/reader'
 
@@ -9,28 +10,29 @@ async function getData(slug: string) {
 export const Organiser = async ({ slug }: { slug: string }) => {
   const data = await getData(slug)
   return (
-    <div className="not-prose">
+    <div className="not-prose flex flex-col md:flex-1">
       {data?.avatar && (
-        <div className="relative mb-2 aspect-square overflow-hidden rounded-xl">
-          <img
-            src={`/images/avatars/${slug}/${data.avatar}`}
-            alt=""
-            className="w-fill h-full object-cover"
-          />
-        </div>
+        <Image
+          width={160}
+          height={160}
+          src={data.avatar}
+          alt=""
+          className="aspect-square w-44 rounded-2xl object-cover"
+        />
       )}
-      <p className="not-prose text-2xl font-medium">{data?.name}</p>
-      {data?.socialLinks.map((el) => (
+      <p className="not-prose mt-4 text-2xl font-medium text-black">
+        {data?.name}
+      </p>
+      {data?.twitterHandle && (
         <a
-          href={el.link}
-          className="not-prose underline hover:no-underline"
+          href={`https://twitter.com/${data.twitterHandle}`}
+          className="not-prose font-semibold text-black underline hover:no-underline"
           target="_blank"
           rel="noopener noreferrer"
-          key={`${slug}-${el.link}`}
         >
-          {el.label}
+          @{data.twitterHandle}
         </a>
-      ))}
+      )}
     </div>
   )
 }
