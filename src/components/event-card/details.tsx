@@ -119,28 +119,7 @@ export default function EventCard({ event }: EventCardProps) {
             </div>
           </div>
         </div>
-        {/* Featured media */}
-        {featuredMedia && (
-          <div className="before:l-0 relative  before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:bg-highlight before:content-['']">
-            <div className="relative px-4 lg:px-8">
-              {event.feature[0].discriminant === 'image' && (
-                <Image
-                  className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-                  src={event.feature[0].value.asset}
-                  alt={event.feature[0].value.alt}
-                  width={1200}
-                  height={675}
-                />
-              )}
-              {event.feature[0].discriminant === 'video' && (
-                <YouTubeEmbed
-                  className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-                  videoUrl={event.feature[0].value.url}
-                />
-              )}
-            </div>
-          </div>
-        )}
+        {featuredMedia && <FeaturedMedia event={event} />}
       </div>
 
       {/* ---------------------------- */}
@@ -149,7 +128,8 @@ export default function EventCard({ event }: EventCardProps) {
       <div className="block h-full @4xl:hidden">
         <div
           className={clsx(
-            'h-full rounded-[40px] p-10',
+            'rounded-t-[40px] p-10',
+            !featuredMedia && 'rounded-b-[40px]',
             eventStatusClasses[event.status]
           )}
         >
@@ -185,7 +165,7 @@ export default function EventCard({ event }: EventCardProps) {
               {event.rsvpLink && (
                 <Button
                   href={event.rsvpLink}
-                  emphasis="low"
+                  emphasis="high"
                   iconPosition="after"
                   size="large"
                   icon={OpenOutlineIcon}
@@ -196,6 +176,31 @@ export default function EventCard({ event }: EventCardProps) {
             </div>
           )}
         </div>
+        {featuredMedia && <FeaturedMedia event={event} />}
+      </div>
+    </div>
+  )
+}
+
+function FeaturedMedia({ event }: { event: EventWithStatusAndSlug }) {
+  return (
+    <div className="before:l-0 relative before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:bg-highlight before:content-['']">
+      <div className="relative px-6 lg:px-8">
+        {event.feature[0].discriminant === 'image' && (
+          <Image
+            className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
+            src={event.feature[0].value.asset}
+            alt={event.feature[0].value.alt}
+            width={1200}
+            height={675}
+          />
+        )}
+        {event.feature[0].discriminant === 'video' && (
+          <YouTubeEmbed
+            className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
+            videoUrl={event.feature[0].value.url}
+          />
+        )}
       </div>
     </div>
   )

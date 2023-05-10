@@ -25,11 +25,11 @@ export default function Navigation() {
           <li className="text-lg/none font-semibold ">
             <TextLink href="/about">About</TextLink>
           </li>
-          <li>
+          {/* <li>
             <Button emphasis="high" onClick={() => setIsModalOpen(true)}>
               <span className="whitespace-nowrap">Join mailing list</span>
             </Button>
-          </li>
+          </li> */}
           <li className="-ml-4 hidden md:block">
             <IconButton
               emphasis="low"
@@ -39,11 +39,11 @@ export default function Navigation() {
           </li>
         </ul>
       </nav>
-      <Modal
+      {/* <Modal
         open={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title="Join the SydJS mailing list"
-      />
+      /> */}
     </>
   )
 }
