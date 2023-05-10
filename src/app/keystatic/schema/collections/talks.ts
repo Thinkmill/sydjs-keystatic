@@ -13,6 +13,7 @@ export default collection({
     description: fields.document({
       label: 'Description',
       formatting: true,
+      links: true,
     }),
     speakers: fields.array(
       fields.relationship({

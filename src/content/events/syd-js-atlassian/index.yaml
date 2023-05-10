@@ -7,4 +7,5 @@ endTime: 9:00 PM
 feature: []
 talks:
   - zero-runtime-cost-css-in-js
+  - gsap
 sponsors: []
