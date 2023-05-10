@@ -176,7 +176,7 @@ export default function EventCard({ event }: EventCardProps) {
                 )
               })}
           </ul>
-          <div className="mt-8 line-clamp-[7] space-y-4 text-lg/6">
+          <div className="mt-8 space-y-4 text-lg/6">
             <DocumentRenderer document={event.description} />
           </div>
 
