@@ -3,7 +3,6 @@ import { format } from 'date-fns'
 import clsx from 'clsx'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
-import type { EventWithStatusAndSlug } from '@/lib/types'
 import YouTubeEmbed from '../youtube-embed'
 import Button from '../button'
 import {
@@ -14,19 +13,29 @@ import {
   OpenOutlineIcon,
 } from '../svg-icons'
 import { TextLink } from '../text-link'
+import { reader } from '@/app/keystatic/reader'
+import { getStatus } from '@/lib/get-status'
+import { Entry } from '@keystatic/core/reader'
+import keystaticConfig from '@/app/keystatic/keystatic.config'
+import { asyncComponent } from '@/lib/async-component'
 
-export type EventCardProps = {
-  event: EventWithStatusAndSlug
-}
-
-const eventStatusClasses: Record<EventCardProps['event']['status'], string> = {
+const eventStatusClasses = {
   UPCOMING: 'bg-highlight',
   TODAY: 'bg-highlight',
   PAST: 'bg-accent',
 }
 
-export default function EventCard({ event }: EventCardProps) {
-  let featuredMedia = !!event.feature.length
+export const EventDetailsCard = asyncComponent(async function EventCard(props: {
+  slug: string
+}) {
+  const event = await reader.collections.events.readOrThrow(props.slug, {
+    resolveLinkedFiles: true,
+  })
+  const status = getStatus(event.date)
+
+  const featuredMedia = !!event.feature.length && (
+    <FeaturedMedia feature={event.feature} />
+  )
 
   const eventMeta = [
     {
@@ -56,12 +65,12 @@ export default function EventCard({ event }: EventCardProps) {
           className={clsx(
             'rounded-t-[40px] p-16',
             !featuredMedia && 'rounded-b-[40px]',
-            eventStatusClasses[event.status]
+            eventStatusClasses[status]
           )}
         >
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
             <span className="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
-              {event.status === 'PAST' ? 'past' : 'upcoming'} event
+              {status === 'PAST' ? 'past' : 'upcoming'} event
             </span>
 
             <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
@@ -72,7 +81,7 @@ export default function EventCard({ event }: EventCardProps) {
                 </div>
 
                 <div className="mt-8 flex items-center gap-4">
-                  {event?.status !== 'PAST' && event.rsvpLink && (
+                  {status !== 'PAST' && event.rsvpLink && (
                     <Button
                       href={event.rsvpLink}
                       size="large"
@@ -119,7 +128,7 @@ export default function EventCard({ event }: EventCardProps) {
             </div>
           </div>
         </div>
-        {featuredMedia && <FeaturedMedia event={event} />}
+        {featuredMedia}
       </div>
 
       {/* ---------------------------- */}
@@ -130,15 +139,15 @@ export default function EventCard({ event }: EventCardProps) {
           className={clsx(
             'rounded-t-[40px] p-10',
             !featuredMedia && 'rounded-b-[40px]',
-            eventStatusClasses[event.status]
+            eventStatusClasses[status]
           )}
         >
-          {event?.status !== 'PAST' && (
+          {status !== 'PAST' && (
             <span className="mb-4 inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
               upcoming event
             </span>
           )}
-          <TextLink href={`/events/${event.slug}`}>
+          <TextLink href={`/events/${props.slug}`}>
             <h2 className="line-clamp-2 text-2xl font-bold">{event.name}</h2>
           </TextLink>
           <ul className="mt-6 space-y-4">
@@ -160,7 +169,7 @@ export default function EventCard({ event }: EventCardProps) {
             <DocumentRenderer document={event.description} />
           </div>
 
-          {event.status !== 'PAST' && (
+          {status !== 'PAST' && (
             <div className="mt-8 flex flex-wrap items-center gap-4">
               {event.rsvpLink && (
                 <Button
@@ -176,29 +185,33 @@ export default function EventCard({ event }: EventCardProps) {
             </div>
           )}
         </div>
-        {featuredMedia && <FeaturedMedia event={event} />}
+        {featuredMedia}
       </div>
     </div>
   )
-}
+})
 
-function FeaturedMedia({ event }: { event: EventWithStatusAndSlug }) {
+function FeaturedMedia({
+  feature,
+}: {
+  feature: Entry<(typeof keystaticConfig)['collections']['events']>['feature']
+}) {
   return (
     <div className="before:l-0 relative before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:bg-highlight before:content-['']">
       <div className="relative px-6 lg:px-8">
-        {event.feature[0].discriminant === 'image' && (
+        {feature[0].discriminant === 'image' && (
           <Image
             className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-            src={event.feature[0].value.asset}
-            alt={event.feature[0].value.alt}
+            src={feature[0].value.asset}
+            alt={feature[0].value.alt}
             width={1200}
             height={675}
           />
         )}
-        {event.feature[0].discriminant === 'video' && (
+        {feature[0].discriminant === 'video' && (
           <YouTubeEmbed
             className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-            videoUrl={event.feature[0].value.url}
+            videoUrl={feature[0].value.url}
           />
         )}
       </div>

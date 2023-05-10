@@ -1,9 +1,13 @@
 import Link from 'next/link'
+import { ReactNode } from 'react'
 
-export const TextLink: React.FC<{
+export function TextLink({
+  href,
+  children,
+}: {
   href: string
-  children: React.ReactNode
-}> = ({ href, children }) => {
+  children: ReactNode
+}) {
   return (
     <Link
       href={href}

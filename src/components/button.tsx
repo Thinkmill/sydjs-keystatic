@@ -44,7 +44,7 @@ const emphasisClasses: Record<
 }
 
 // The component
-const Button: React.FC<ButtonProps> = ({
+export default function Button({
   size = 'default',
   tone = 'highlight',
   emphasis = 'default',
@@ -53,7 +53,7 @@ const Button: React.FC<ButtonProps> = ({
   href,
   children,
   ...restProps
-}) => {
+}: ButtonProps) {
   const allClasses = cx(
     baseClasses,
     sizeClasses[size],
@@ -79,5 +79,3 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   )
 }
-
-export default Button

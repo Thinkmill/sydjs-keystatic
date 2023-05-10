@@ -1,15 +1,23 @@
+'use client'
+
 import { useMouse } from 'ahooks'
 import { useRef } from 'react'
 
 import { usePrefersReducedMotion } from '@/lib/prefers-reduced-motion'
 
-export const SkewImage: React.FC<{
+export function SkewImage({
+  src,
+  alt,
+  maskId,
+  path,
+  viewBox,
+}: {
   src: string
   alt: string
   maskId: string
   path: string
   viewBox: string
-}> = ({ src, alt, maskId, path, viewBox }) => {
+}) {
   const ref = useRef(null)
   const mouse = useMouse(ref.current)
   const prefersReducedMotion = usePrefersReducedMotion()

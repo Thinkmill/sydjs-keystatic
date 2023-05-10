@@ -1,6 +1,6 @@
 import { isFuture } from 'date-fns'
 
-import type { Status } from './types'
+export type Status = 'UPCOMING' | 'TODAY' | 'PAST'
 
 export function getStatus(date: string): Status {
   const today = new Date()

@@ -1,38 +1,37 @@
 import Image from 'next/image'
-import keystaticConfig from '@/app/keystatic/keystatic.config'
-import { createReader } from '@keystatic/core/reader'
+import { asyncComponent } from '@/lib/async-component'
+import { reader } from '@/app/keystatic/reader'
 
-async function getData(slug: string) {
-  const reader = createReader('', keystaticConfig)
-  return reader.collections.persons.read(slug)
-}
-
-export const Organiser = async ({ slug }: { slug: string }) => {
-  const data = await getData(slug)
+export const Organiser = asyncComponent(async function Organiser({
+  slug,
+}: {
+  slug: string
+}) {
+  const person = await reader.collections.persons.read(slug)
   return (
     <div className="not-prose flex flex-col md:flex-1">
-      {data?.avatar && (
+      {person?.avatar && (
         <Image
           width={160}
           height={160}
-          src={data.avatar}
+          src={person.avatar}
           alt=""
           className="aspect-square w-32 rounded-2xl object-cover"
         />
       )}
       <p className="not-prose mt-4 text-2xl font-medium text-black">
-        {data?.name}
+        {person?.name}
       </p>
-      {data?.twitterHandle && (
+      {person?.twitterHandle && (
         <a
-          href={`https://twitter.com/${data.twitterHandle}`}
+          href={`https://twitter.com/${person.twitterHandle}`}
           className="not-prose font-semibold text-black underline hover:no-underline"
           target="_blank"
           rel="noopener noreferrer"
         >
-          @{data.twitterHandle}
+          @{person.twitterHandle}
         </a>
       )}
     </div>
   )
-}
+})

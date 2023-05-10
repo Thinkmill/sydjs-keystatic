@@ -5,9 +5,7 @@ import { getStatus } from '@/lib/get-status'
 // Events
 // ------------------------------
 export async function getEvents() {
-  const allEvents = await reader.collections.events.all({
-    resolveLinkedFiles: true,
-  })
+  const allEvents = await reader.collections.events.all()
   const formattedEvents = allEvents
     .map((event) => ({
       slug: event.slug,
@@ -30,18 +28,8 @@ export async function getEvents() {
   }
 
   return {
-    futureEvents,
+    futureEvents: futureEvents,
     nextEvent: futureEvents[0],
-    pastEvents,
+    pastEvents: pastEvents,
   }
-}
-
-// ------------------------------
-// Admin Page
-// ------------------------------
-export async function getAdminPage() {
-  const adminPage = await reader.singletons.admin.readOrThrow({
-    resolveLinkedFiles: true,
-  })
-  return adminPage
 }

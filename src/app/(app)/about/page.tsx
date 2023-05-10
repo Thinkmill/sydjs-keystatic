@@ -9,15 +9,6 @@ export const metadata = {
   title: 'About',
 }
 
-async function getData() {
-  const admin = await reader.singletons.admin.readOrThrow()
-
-  return {
-    admin,
-    aboutPage: await admin?.aboutPage(),
-  }
-}
-
 const componentBlocksRenderer: InferRenderersForComponentBlocks<
   typeof componentBlocks
 > = {
@@ -25,7 +16,6 @@ const componentBlocksRenderer: InferRenderersForComponentBlocks<
     <div className="justfiy-between flex w-full flex-wrap gap-x-8 gap-y-8 sm:gap-y-12">
       {props.content.map((el) => (
         <>
-          {/* @ts-expect-error Server Component */}
           <Organiser key={el.organiser} slug={el.organiser} />
         </>
       ))}
@@ -34,15 +24,15 @@ const componentBlocksRenderer: InferRenderersForComponentBlocks<
 }
 
 export default async function Page() {
-  const data = await getData()
+  const aboutPage = await (
+    await reader.singletons.admin.readOrThrow()
+  ).aboutPage()
   return (
     <div className="prose mx-auto mt-20 max-w-4xl px-6 lg:prose-lg">
       <DocumentRenderer
-        document={data.aboutPage || []}
+        document={aboutPage}
         componentBlocks={componentBlocksRenderer}
       />
     </div>
   )
 }
-
-export const dynamicParams = true
