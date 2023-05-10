@@ -4,14 +4,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
-import EventCard from '@/components/event-card'
 import YouTubeEmbed from '@/components/youtube-embed'
+import EventDetailsCard from '@/components/event-card/details'
 
 export default function EventDetailsPage({ event }: any) {
   return (
     <>
       <div className="mx-auto mt-8 max-w-[96rem] space-y-6 px-6">
-        <EventCard displayContext="details" event={event} />
+        <EventDetailsCard event={event} />
       </div>
       {event.talks.length > 0 && (
         <div className="mx-auto mt-8 max-w-5xl px-6">

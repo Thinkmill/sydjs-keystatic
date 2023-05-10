@@ -3,7 +3,7 @@
 import Link from 'next/link'
 
 import Button from '@/components/button'
-import EventCard from '@/components/event-card'
+import EventListingCard from '@/components/event-card/listing'
 import AtlassianLogo from '@/components/svg-logos/atlassian'
 import ThinkmillLogo from '@/components/svg-logos/thinkmill'
 import LookaheadLogo from '@/components/svg-logos/lookahead'
@@ -94,7 +94,7 @@ export default function Home({
         </div>
       </div>
       <div className="mx-auto max-w-7xl px-6">
-        {nextEvent && <EventCard event={nextEvent} />}
+        {nextEvent && <EventListingCard event={nextEvent} />}
       </div>
       <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
         <div className="-mr-6 flex items-center justify-between">
@@ -111,7 +111,7 @@ export default function Home({
         <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {pastEvents.map((event) => (
             <li key={event.slug}>
-              <EventCard event={event} />
+              <EventListingCard event={event} />
             </li>
           ))}
         </ul>

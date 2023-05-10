@@ -1,7 +1,7 @@
 'use client'
 import { isFuture } from 'date-fns'
 
-import EventCard from '@/components/event-card'
+import EventListingCard from '@/components/event-card/listing'
 
 import type { EventWithStatusAndSlug } from '@/lib/types'
 
@@ -29,7 +29,7 @@ export default function AllEvents({
       {futureEvents.length > 0 && (
         <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
           {futureEvents.map((event) => (
-            <EventCard key={event.slug} event={event} />
+            <EventListingCard key={event.slug} event={event} />
           ))}
         </div>
       )}
@@ -39,7 +39,7 @@ export default function AllEvents({
       <div className="mx-auto mt-8 max-w-6xl px-6">
         <div className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {pastEvents.map((event) => (
-            <EventCard key={event.slug} event={event} />
+            <EventListingCard key={event.slug} event={event} />
           ))}
         </div>
       </div>

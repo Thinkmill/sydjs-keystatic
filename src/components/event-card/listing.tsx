@@ -1,31 +1,19 @@
-// TODO: Refactor this, there is too much complexity between the
-// displayContext, the event status, featured media and
-// container queries.
-
-// It's a good prototype, but it needs to be simplified!
-
-import Image from 'next/image'
 import { format } from 'date-fns'
 import clsx from 'clsx'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
 import type { EventWithStatusAndSlug } from '@/lib/types'
-import YouTubeEmbed from './youtube-embed'
-import Button from './button'
+import Button from '../button'
 import {
   CalendarClearOutlineIcon,
   DesktopIcon,
   ClockIcon,
   LocationOutlineIcon,
   OpenOutlineIcon,
-} from './svg-icons'
-import { TextLink } from './text-link'
-
-type DisplayContext = 'listing' | 'details'
+} from '../svg-icons'
+import { TextLink } from '../text-link'
 
 export type EventCardProps = {
-  displayContext?: DisplayContext
-} & {
   event: EventWithStatusAndSlug
 }
 
@@ -35,12 +23,7 @@ const eventStatusClasses: Record<EventCardProps['event']['status'], string> = {
   PAST: 'bg-accent',
 }
 
-export default function EventCard({
-  displayContext = 'listing',
-  event,
-}: EventCardProps) {
-  let featuredMedia = !!event.feature.length
-
+export default function EventCard({ event }: EventCardProps) {
   const eventMeta = [
     {
       icon: CalendarClearOutlineIcon,
@@ -67,16 +50,11 @@ export default function EventCard({
       <div className="hidden @4xl:block">
         <div
           className={clsx(
-            'rounded-t-[40px] p-16',
-            !featuredMedia && 'rounded-b-[40px]',
+            'rounded-[40px] p-16',
             eventStatusClasses[event.status]
           )}
         >
-          <div
-            className={clsx(
-              displayContext === 'details' && 'mx-auto max-w-6xl px-6 lg:px-8'
-            )}
-          >
+          <div>
             <span className="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
               {event.status === 'PAST' ? 'past' : 'upcoming'} event
             </span>
@@ -87,42 +65,23 @@ export default function EventCard({
                 <div className="mt-4 space-y-4 text-lg">
                   <DocumentRenderer document={event.description} />
                 </div>
-                {/* Listing */}
-                {displayContext === 'listing' && (
-                  <div className="mt-6 flex items-center gap-4">
-                    <Button href={`/events/${event.slug}`} size="large">
-                      View events details
-                    </Button>
-                    {event?.status !== 'PAST' && (
-                      <Button
-                        href="#"
-                        size="large"
-                        emphasis="low"
-                        iconPosition="after"
-                        icon={OpenOutlineIcon}
-                      >
-                        RSVP on Lu.ma
-                      </Button>
-                    )}
-                  </div>
-                )}
 
-                {/* Event details */}
-                {displayContext === 'details' && (
-                  <div className="mt-8 flex items-center gap-4">
-                    {event?.status !== 'PAST' && (
-                      <Button
-                        href="#"
-                        size="large"
-                        emphasis="high"
-                        iconPosition="after"
-                        icon={OpenOutlineIcon}
-                      >
-                        RSVP on Lu.ma
-                      </Button>
-                    )}
-                  </div>
-                )}
+                <div className="mt-6 flex items-center gap-4">
+                  <Button href={`/events/${event.slug}`} size="large">
+                    View events details
+                  </Button>
+                  {event?.status !== 'PAST' && (
+                    <Button
+                      href="#"
+                      size="large"
+                      emphasis="low"
+                      iconPosition="after"
+                      icon={OpenOutlineIcon}
+                    >
+                      RSVP on Lu.ma
+                    </Button>
+                  )}
+                </div>
               </div>
               <ul className="space-y-4">
                 {eventMeta.map((event) => {
@@ -158,28 +117,6 @@ export default function EventCard({
             </div>
           </div>
         </div>
-        {/* Featured media */}
-        {displayContext === 'details' && featuredMedia && (
-          <div className="before:l-0 relative  before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:bg-highlight before:content-['']">
-            <div className="relative px-4 lg:px-8">
-              {event.feature[0].discriminant === 'image' && (
-                <Image
-                  className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-                  src={event.feature[0].value.asset}
-                  alt={event.feature[0].value.alt}
-                  width={1200}
-                  height={675}
-                />
-              )}
-              {event.feature[0].discriminant === 'video' && (
-                <YouTubeEmbed
-                  className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-                  videoUrl={event.feature[0].value.url}
-                />
-              )}
-            </div>
-          </div>
-        )}
       </div>
 
       {/* ---------------------------- */}
@@ -221,11 +158,9 @@ export default function EventCard({
 
           {event.status !== 'PAST' && (
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              {displayContext === 'listing' && (
-                <Button href={`/events/${event.slug}`} size="large">
-                  View events details
-                </Button>
-              )}
+              <Button href={`/events/${event.slug}`} size="large">
+                View events details
+              </Button>
 
               <Button
                 href="#"
