@@ -17,7 +17,7 @@ export const Organiser = async ({ slug }: { slug: string }) => {
           height={160}
           src={data.avatar}
           alt=""
-          className="aspect-square w-44 rounded-2xl object-cover"
+          className="aspect-square w-32 rounded-2xl object-cover"
         />
       )}
       <p className="not-prose mt-4 text-2xl font-medium text-black">
