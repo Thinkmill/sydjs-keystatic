@@ -40,6 +40,18 @@ export default collection({
         'The Meetup.com URL to the registration page for this event.',
     }),
 
+    // WIP featured conditional flow
+    foo: fields.conditional(
+      fields.select({
+        label: 'Foo',
+        options: [{ label: 'A', value: 'a' }],
+        defaultValue: 'a',
+      }),
+      {
+        a: fields.text({ label: 'Text' }),
+      }
+    ),
+
     // Featured media (image or video)
     feature: fields.blocks(
       {
