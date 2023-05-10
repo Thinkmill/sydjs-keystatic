@@ -1,14 +1,15 @@
 name: Nodevember
+feature:
+  - discriminant: image
+    value:
+      asset: /images/events/nodevember/feature/0/value/asset.jpg
+date: '2013-11-20'
+location: Atlassian HQ
+address: Level 6, 341 George St · Sydney
+startTime: 5:00 PM
+endTime: 8:00 PM
 talks:
   - keystone-js-a-head-start-on-the-features-you-need
   - berzerk-interactive-charting-via-backbone
   - a-node-powered-arcade-machine
 sponsors: []
-date: '2013-11-20'
-location: Atlassian HQ
-startTime: 5:00 PM
-endTime: 8:00 PM
-feature:
-  - discriminant: image
-    value:
-      asset: /images/events/nodevember/feature/0/value/asset.jpg
