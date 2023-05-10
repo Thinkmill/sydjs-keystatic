@@ -20,6 +20,20 @@ export default collection({
       description: 'The copy that will show in the event card.',
       formatting: true,
     }),
+    date: fields.date({ label: 'Date', validation: { isRequired: true } }),
+    location: fields.text({
+      label: 'Location',
+      description: 'Venue name, short. Use address field for details.',
+    }),
+    address: fields.text({ label: 'Address' }),
+    startTime: fields.text({
+      label: 'Start time',
+      description: 'Example: 6:30 PM',
+    }),
+    endTime: fields.text({
+      label: 'End time',
+      description: 'Example: 8:30 PM',
+    }),
 
     // Featured media (image or video)
     feature: fields.blocks(
@@ -52,21 +66,6 @@ export default collection({
         validation: { length: { max: 1 } },
       }
     ),
-
-    date: fields.date({ label: 'Date', validation: { isRequired: true } }),
-    location: fields.text({
-      label: 'Location',
-      description: 'Venue name, short. Use address field for details.',
-    }),
-    address: fields.text({ label: 'Address' }),
-    startTime: fields.text({
-      label: 'Start time',
-      description: 'Example: 6:30 PM',
-    }),
-    endTime: fields.text({
-      label: 'End time',
-      description: 'Example: 8:30 PM',
-    }),
 
     // Relationship to Talks
     talks: fields.array(

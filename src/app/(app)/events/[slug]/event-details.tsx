@@ -29,7 +29,7 @@ export default function EventDetailsPage({ event }: any) {
                           className="flex items-center gap-3"
                         >
                           <Image
-                            src={`/images/avatars/${speaker.slug}/${speaker.avatar}`}
+                            src={speaker.avatar}
                             alt={`Avatar for ${speaker.name}`}
                             width={40}
                             height={40}
