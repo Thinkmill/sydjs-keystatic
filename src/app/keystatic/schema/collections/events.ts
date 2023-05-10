@@ -36,7 +36,8 @@ export default collection({
     }),
     rsvpLink: fields.text({
       label: 'RSVP link',
-      description: 'The URL to the registration page.',
+      description:
+        'The Meetup.com URL to the registration page for this event.',
     }),
 
     // Featured media (image or video)
