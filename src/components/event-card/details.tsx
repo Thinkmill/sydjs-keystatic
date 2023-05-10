@@ -72,15 +72,15 @@ export default function EventCard({ event }: EventCardProps) {
                 </div>
 
                 <div className="mt-8 flex items-center gap-4">
-                  {event?.status !== 'PAST' && (
+                  {event?.status !== 'PAST' && event.rsvpLink && (
                     <Button
-                      href="#"
+                      href={event.rsvpLink}
                       size="large"
                       emphasis="high"
                       iconPosition="after"
                       icon={OpenOutlineIcon}
                     >
-                      RSVP on Lu.ma
+                      RSVP on Meetup.com
                     </Button>
                   )}
                 </div>
@@ -182,15 +182,17 @@ export default function EventCard({ event }: EventCardProps) {
 
           {event.status !== 'PAST' && (
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button
-                href="#"
-                emphasis="low"
-                iconPosition="after"
-                size="large"
-                icon={OpenOutlineIcon}
-              >
-                RSVP on Lu.ma
-              </Button>
+              {event.rsvpLink && (
+                <Button
+                  href={event.rsvpLink}
+                  emphasis="low"
+                  iconPosition="after"
+                  size="large"
+                  icon={OpenOutlineIcon}
+                >
+                  RSVP on Meetup.com
+                </Button>
+              )}
             </div>
           )}
         </div>

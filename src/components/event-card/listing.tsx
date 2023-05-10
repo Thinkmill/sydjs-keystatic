@@ -70,15 +70,15 @@ export default function EventCard({ event }: EventCardProps) {
                   <Button href={`/events/${event.slug}`} size="large">
                     View events details
                   </Button>
-                  {event?.status !== 'PAST' && (
+                  {event?.status !== 'PAST' && event.rsvpLink && (
                     <Button
-                      href="#"
+                      href={event.rsvpLink}
                       size="large"
                       emphasis="low"
                       iconPosition="after"
                       icon={OpenOutlineIcon}
                     >
-                      RSVP on Lu.ma
+                      RSVP on Meetup.com
                     </Button>
                   )}
                 </div>
@@ -162,15 +162,17 @@ export default function EventCard({ event }: EventCardProps) {
                 View events details
               </Button>
 
-              <Button
-                href="#"
-                emphasis="low"
-                iconPosition="after"
-                size="large"
-                icon={OpenOutlineIcon}
-              >
-                RSVP on Lu.ma
-              </Button>
+              {event.rsvpLink && (
+                <Button
+                  href={event.rsvpLink}
+                  emphasis="low"
+                  iconPosition="after"
+                  size="large"
+                  icon={OpenOutlineIcon}
+                >
+                  RSVP on Meetup.com
+                </Button>
+              )}
             </div>
           )}
         </div>

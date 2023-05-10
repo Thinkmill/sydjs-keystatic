@@ -34,6 +34,10 @@ export default collection({
       label: 'End time',
       description: 'Example: 8:30 PM',
     }),
+    rsvpLink: fields.text({
+      label: 'RSVP link',
+      description: 'The URL to the registration page.',
+    }),
 
     // Featured media (image or video)
     feature: fields.blocks(
