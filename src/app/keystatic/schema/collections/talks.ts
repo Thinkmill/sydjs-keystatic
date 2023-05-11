@@ -3,6 +3,9 @@ import { collection, fields } from '@keystatic/core'
 export default collection({
   label: 'Talks',
   path: 'src/content/talks/*',
+  format: {
+    contentField: 'description',
+  },
   slugField: 'name',
   schema: {
     name: fields.slug({

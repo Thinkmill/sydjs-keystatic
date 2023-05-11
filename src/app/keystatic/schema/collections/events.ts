@@ -2,7 +2,10 @@ import { collection, fields } from '@keystatic/core'
 
 export default collection({
   label: 'Events',
-  path: 'src/content/events/*/',
+  path: 'src/content/events/*',
+  format: {
+    contentField: 'description',
+  },
   slugField: 'name',
   schema: {
     name: fields.slug({
@@ -40,6 +43,66 @@ export default collection({
         'The Meetup.com URL to the registration page for this event.',
     }),
 
+    // select: fields.select({
+    //   label: 'Event type',
+    //   description: 'The type of event.',
+    //   options: [
+    //     { label: 'Meetup', value: 'meetup' },
+    //     { label: 'Workshop', value: 'workshop' },
+    //     { label: 'Hackathon', value: 'hackathon' },
+    //     { label: 'Conference', value: 'conference' },
+    //     { label: 'Other', value: 'other' },
+    //   ],
+    //   defaultValue: 'meetup',
+    // }),
+
+    // // WIP Featured media
+    // featuredMedia: fields.conditional(
+    //   fields.select({
+    //     label: 'Featured media',
+    //     description:
+    //       'Toggle between image/video options for an optional hero media.',
+    //     options: [
+    //       { label: 'None', value: 'none' },
+    //       { label: 'Image', value: 'image' },
+    //       { label: 'Video', value: 'video' },
+    //     ],
+    //     defaultValue: 'image',
+    //   }),
+    //   {
+    //     image: fields.object({
+    //       none: fields.empty(),
+    //       asset: fields.image({
+    //         label: 'Image',
+    //         directory: 'public/images/events',
+    //         publicPath: '/images/events/',
+    //         validation: { isRequired: true },
+    //       }),
+    //       alt: fields.text({ label: 'Alt' }),
+    //     }),
+    //     video: fields.object({
+    //       url: fields.text({
+    //         label: 'A YouTube video URL.',
+    //       }),
+    //     }),
+    //   }
+    // ),
+
+    // Relationship to Talks
+    talks: fields.array(
+      fields.relationship({
+        label: 'Talk',
+        collection: 'talks',
+        validation: { isRequired: true },
+      }),
+      {
+        label: 'Talks',
+        description:
+          'The talks (from the Talks collection) that will be presented at this event.',
+        itemLabel: (props) => props.value ?? 'Please select a talk',
+      }
+    ),
+
     // Featured media (image or video)
     feature: fields.blocks(
       {
@@ -69,21 +132,6 @@ export default collection({
         description:
           'Optional image or video to display as a "hero" featured media on the event details page.',
         validation: { length: { max: 1 } },
-      }
-    ),
-
-    // Relationship to Talks
-    talks: fields.array(
-      fields.relationship({
-        label: 'Talk',
-        collection: 'talks',
-        validation: { isRequired: true },
-      }),
-      {
-        label: 'Talks',
-        description:
-          'The talks (from the Talks collection) that will be presented at this event.',
-        itemLabel: (props) => props.value ?? 'Please select a talk',
       }
     ),
 
