@@ -43,50 +43,44 @@ export default collection({
         'The Meetup.com URL to the registration page for this event.',
     }),
 
-    // select: fields.select({
-    //   label: 'Event type',
-    //   description: 'The type of event.',
-    //   options: [
-    //     { label: 'Meetup', value: 'meetup' },
-    //     { label: 'Workshop', value: 'workshop' },
-    //     { label: 'Hackathon', value: 'hackathon' },
-    //     { label: 'Conference', value: 'conference' },
-    //     { label: 'Other', value: 'other' },
-    //   ],
-    //   defaultValue: 'meetup',
-    // }),
-
-    // // WIP Featured media
-    // featuredMedia: fields.conditional(
-    //   fields.select({
-    //     label: 'Featured media',
-    //     description:
-    //       'Toggle between image/video options for an optional hero media.',
-    //     options: [
-    //       { label: 'None', value: 'none' },
-    //       { label: 'Image', value: 'image' },
-    //       { label: 'Video', value: 'video' },
-    //     ],
-    //     defaultValue: 'image',
-    //   }),
-    //   {
-    //     image: fields.object({
-    //       none: fields.empty(),
-    //       asset: fields.image({
-    //         label: 'Image',
-    //         directory: 'public/images/events',
-    //         publicPath: '/images/events/',
-    //         validation: { isRequired: true },
-    //       }),
-    //       alt: fields.text({ label: 'Alt' }),
-    //     }),
-    //     video: fields.object({
-    //       url: fields.text({
-    //         label: 'A YouTube video URL.',
-    //       }),
-    //     }),
-    //   }
-    // ),
+    // WIP Featured media
+    featuredMedia: fields.conditional(
+      fields.select({
+        label: 'Featured media',
+        description: 'Optional image/video options for an optional hero media.',
+        options: [
+          { label: 'No media', value: 'none' },
+          { label: 'Image', value: 'image' },
+          { label: 'Video', value: 'video' },
+        ],
+        defaultValue: 'none',
+      }),
+      {
+        none: fields.empty(),
+        image: fields.object({
+          asset: fields.image({
+            label: 'Image',
+            directory: 'public/images/events',
+            publicPath: '/images/events/',
+            validation: { isRequired: true },
+          }),
+          alt: fields.text({ label: 'Alt', description: 'Image alt text.' }),
+        }),
+        video: fields.object({
+          url: fields.text({
+            label: 'A YouTube video URL.',
+          }),
+          image: fields.object({
+            asset: fields.image({
+              label: 'Image',
+              description: 'Thumbnail image override for the video.',
+              directory: 'public/images/events',
+              publicPath: '/images/events/',
+            }),
+          }),
+        }),
+      }
+    ),
 
     // Relationship to Talks
     talks: fields.array(

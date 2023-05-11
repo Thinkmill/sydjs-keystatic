@@ -36,7 +36,7 @@ const EventTalks = asyncComponent(async function EventTalks(props: {
   slug: string
 }) {
   const event = await reader.collections.events.readOrThrow(props.slug)
-  return (
+  return event.talks.length > 0 ? (
     <div className="mx-auto mt-8 max-w-5xl px-6">
       <h2 className="mt-20 text-4xl font-bold">Talks</h2>
       <ul className="mt-12 grid gap-18">
@@ -45,7 +45,7 @@ const EventTalks = asyncComponent(async function EventTalks(props: {
         ))}
       </ul>
     </div>
-  )
+  ) : null
 })
 
 const EventTalk = asyncComponent(async function EventTalk(props: {

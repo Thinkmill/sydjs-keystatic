@@ -1,22 +1,19 @@
-import Image from 'next/image'
 import { format } from 'date-fns'
 import clsx from 'clsx'
 import { DocumentRenderer } from '@keystatic/core/renderer'
+import { reader } from '@/app/keystatic/reader'
 
-import YouTubeEmbed from '../youtube-embed'
-import Button from '../button'
+import Button from '@/components/button'
+import { FeaturedMedia } from '@/components/featured-media'
 import {
   CalendarClearOutlineIcon,
   DesktopIcon,
   ClockIcon,
   LocationOutlineIcon,
   OpenOutlineIcon,
-} from '../svg-icons'
-import { TextLink } from '../text-link'
-import { reader } from '@/app/keystatic/reader'
+} from '@/components/svg-icons'
+import { TextLink } from '@/components/text-link'
 import { getStatus } from '@/lib/get-status'
-import { Entry } from '@keystatic/core/reader'
-import keystaticConfig from '@/app/keystatic/keystatic.config'
 import { asyncComponent } from '@/lib/async-component'
 
 const eventStatusClasses = {
@@ -31,10 +28,11 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
   const event = await reader.collections.events.readOrThrow(props.slug, {
     resolveLinkedFiles: true,
   })
+
   const status = getStatus(event.date)
 
-  const featuredMedia = !!event.feature.length && (
-    <FeaturedMedia feature={event.feature} />
+  const featuredMedia = event.featuredMedia.discriminant !== 'none' && (
+    <FeaturedMedia media={event.featuredMedia} status={status} />
   )
 
   const eventMeta = [
@@ -190,31 +188,3 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
     </div>
   )
 })
-
-function FeaturedMedia({
-  feature,
-}: {
-  feature: Entry<(typeof keystaticConfig)['collections']['events']>['feature']
-}) {
-  return (
-    <div className="before:l-0 relative before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:bg-highlight before:content-['']">
-      <div className="relative px-6 lg:px-8">
-        {feature[0].discriminant === 'image' && (
-          <Image
-            className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-            src={feature[0].value.asset}
-            alt={feature[0].value.alt}
-            width={1200}
-            height={675}
-          />
-        )}
-        {feature[0].discriminant === 'video' && (
-          <YouTubeEmbed
-            className="mx-auto aspect-video max-w-6xl rounded-2xl object-cover"
-            videoUrl={feature[0].value.url}
-          />
-        )}
-      </div>
-    </div>
-  )
-}
