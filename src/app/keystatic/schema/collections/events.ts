@@ -43,7 +43,7 @@ export default collection({
         'The Meetup.com URL to the registration page for this event.',
     }),
 
-    // WIP Featured media
+    // Featured media
     featuredMedia: fields.conditional(
       fields.select({
         label: 'Featured media',
@@ -94,38 +94,6 @@ export default collection({
         description:
           'The talks (from the Talks collection) that will be presented at this event.',
         itemLabel: (props) => props.value ?? 'Please select a talk',
-      }
-    ),
-
-    // Featured media (image or video)
-    feature: fields.blocks(
-      {
-        image: {
-          label: 'Featured image',
-          schema: fields.object({
-            asset: fields.image({
-              label: 'Image',
-              directory: 'public/images/events',
-              publicPath: '/images/events/',
-              validation: { isRequired: true },
-            }),
-            alt: fields.text({ label: 'Alt' }),
-          }),
-        },
-        video: {
-          label: 'Featured video',
-          schema: fields.object({
-            url: fields.text({
-              label: 'A YouTube video URL.',
-            }),
-          }),
-        },
-      },
-      {
-        label: 'Featured Media',
-        description:
-          'Optional image or video to display as a "hero" featured media on the event details page.',
-        validation: { length: { max: 1 } },
       }
     ),
 
