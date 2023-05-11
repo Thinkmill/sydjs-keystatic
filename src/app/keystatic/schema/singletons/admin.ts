@@ -21,6 +21,7 @@ export default singleton({
     }),
     aboutPage: fields.document({
       label: 'About Page',
+      description: 'The page copy for the anbout page',
       componentBlocks,
       formatting: {
         headingLevels: {
