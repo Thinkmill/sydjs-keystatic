@@ -6,6 +6,10 @@ import { DocumentRenderer } from '@keystatic/core/renderer'
 import Image from 'next/image'
 import Link from 'next/link'
 import { getStatus, Status } from '@/lib/get-status'
+import {
+  sharedOpenGraphMetadata,
+  sharedTwitterMetadata,
+} from '@/lib/shared-metadata'
 
 import { FeaturedMedia } from '@/components/featured-media'
 
@@ -14,9 +18,32 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }) {
-  const event = await reader.collections.events.readOrThrow(slug)
-  // TODO: add meta description, og image etc
-  return { title: event?.name }
+  const event = await reader.collections.events.readOrThrow(slug, {
+    resolveLinkedFiles: true,
+  })
+
+  const metaTitleAndMaybeDescription: {
+    title: string
+    description?: string
+  } = {
+    title: event.name,
+  }
+
+  if (event?.seoDescription) {
+    metaTitleAndMaybeDescription['description'] = event.seoDescription
+  }
+
+  return {
+    ...metaTitleAndMaybeDescription,
+    openGraph: {
+      ...metaTitleAndMaybeDescription,
+      ...sharedOpenGraphMetadata,
+    },
+    twitter: {
+      ...metaTitleAndMaybeDescription,
+      ...sharedTwitterMetadata,
+    },
+  }
 }
 
 export async function generateStaticParams() {

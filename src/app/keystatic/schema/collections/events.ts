@@ -18,6 +18,11 @@ export default collection({
           'The slug for the event. This is auto-generated and will be used in the URL.',
       },
     }),
+    seoDescription: fields.text({
+      label: 'SEO description',
+      description: 'This will be used for the meta description tag.',
+      multiline: true,
+    }),
     description: fields.document({
       label: 'Event description',
       description: 'The copy that will show in the event card.',

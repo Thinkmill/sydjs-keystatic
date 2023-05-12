@@ -1,9 +1,26 @@
 import { isFuture } from 'date-fns'
 import { EventListingCard } from '@/components/event-card/listing'
 import { getEvents } from '@/lib/get-data'
+import {
+  sharedOpenGraphMetadata,
+  sharedTwitterMetadata,
+} from '@/lib/shared-metadata'
+
+const metaTitleAndDescription = {
+  title: 'Events',
+  description: 'A list of upcoming and past SydJS events.',
+}
 
 export const metadata = {
-  title: 'Events',
+  ...metaTitleAndDescription,
+  openGraph: {
+    ...metaTitleAndDescription,
+    ...sharedOpenGraphMetadata,
+  },
+  twitter: {
+    ...metaTitleAndDescription,
+    ...sharedTwitterMetadata,
+  },
 }
 
 export default async function AllEvents() {

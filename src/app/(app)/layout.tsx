@@ -1,22 +1,39 @@
 import { Metadata } from 'next'
 import { Poppins } from 'next/font/google'
-import { createReader } from '@keystatic/core/reader'
+import { reader } from '@/app/keystatic/reader'
 
 import '@/styles/globals.css'
-import keystaticConfig from '@/app/keystatic/keystatic.config'
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
 
-// https://beta.nextjs.org/docs/api-reference/metadata#metadata-object
+import {
+  sharedOpenGraphMetadata,
+  sharedTwitterMetadata,
+} from '@/lib/shared-metadata'
+
 export async function generateMetadata(): Promise<Metadata> {
-  const reader = createReader('', keystaticConfig)
   const admin = await reader.singletons.admin.read()
+
+  const title = admin?.siteTitle || ''
+  const description = admin?.siteDescription || ''
+
   return {
+    metadataBase: new URL('https://sydjs.com'),
     title: {
       template: `%s | ${admin?.siteTitle}`,
-      default: admin?.siteTitle || '',
+      default: title,
     },
-    description: admin?.siteDescription,
+    description: description,
+    openGraph: {
+      title,
+      description,
+      ...sharedOpenGraphMetadata,
+    },
+    twitter: {
+      title,
+      description,
+      ...sharedTwitterMetadata,
+    },
   }
 }
 

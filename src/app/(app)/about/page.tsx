@@ -4,9 +4,27 @@ import { DocumentRenderer } from '@keystatic/core/renderer'
 import { reader } from '@/app/keystatic/reader'
 import { componentBlocks } from '@/app/keystatic/blocks'
 import { Organiser } from '@/components/organiser'
+import {
+  sharedOpenGraphMetadata,
+  sharedTwitterMetadata,
+} from '@/lib/shared-metadata'
+
+const metaTitleAndDescription = {
+  title: 'About',
+  description:
+    'We are a community of JavaScript enthusiasts based in Sydney, Australia. Our mission is to bring together developers of all skill levels to share knowledge, discuss interesting topics, and foster a vibrant community.',
+}
 
 export const metadata = {
-  title: 'About',
+  ...metaTitleAndDescription,
+  openGraph: {
+    ...metaTitleAndDescription,
+    ...sharedOpenGraphMetadata,
+  },
+  twitter: {
+    ...metaTitleAndDescription,
+    ...sharedTwitterMetadata,
+  },
 }
 
 const componentBlocksRenderer: InferRenderersForComponentBlocks<
