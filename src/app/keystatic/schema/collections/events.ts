@@ -32,6 +32,7 @@ export default collection({
     startTime: fields.text({
       label: 'Start time',
       description: 'Example: 6:30 PM',
+      validation: { length: { min: 1 } },
     }),
     endTime: fields.text({
       label: 'End time',
@@ -41,6 +42,11 @@ export default collection({
       label: 'RSVP link',
       description:
         'The Meetup.com URL to the registration page for this event.',
+    }),
+    zoomLink: fields.text({
+      label: 'Zoom link',
+      description:
+        'If the event is live streamed, paste the Zoom link to allow folks to join remotely.',
     }),
 
     // Featured media
@@ -99,17 +105,17 @@ export default collection({
       }
     ),
 
-    // Relationship to Sponsors
-    sponsors: fields.array(
-      fields.relationship({
-        label: 'Sponsor',
-        collection: 'sponsors',
-        validation: { isRequired: true },
-      }),
-      {
-        label: 'Sponsors',
-        itemLabel: (props) => props.value ?? 'Please select a sponsor',
-      }
-    ),
+    // Relationship to Sponsors (not a thing yet, but let's leave the schema as demo)
+    // sponsors: fields.array(
+    //   fields.relationship({
+    //     label: 'Sponsor',
+    //     collection: 'sponsors',
+    //     validation: { isRequired: true },
+    //   }),
+    //   {
+    //     label: 'Sponsors',
+    //     itemLabel: (props) => props.value ?? 'Please select a sponsor',
+    //   }
+    // ),
   },
 })

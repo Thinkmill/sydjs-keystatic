@@ -11,6 +11,7 @@ import {
   ClockIcon,
   LocationOutlineIcon,
   OpenOutlineIcon,
+  ExitOutlineIcon,
 } from '@/components/svg-icons'
 import { TextLink } from '@/components/text-link'
 import { getStatus } from '@/lib/get-status'
@@ -44,21 +45,6 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
     </div>
   )
 
-  const eventMeta = [
-    {
-      icon: CalendarClearOutlineIcon,
-      text: event.date
-        ? format(new Date(event.date), 'EEEE, d MMMM yyy')
-        : 'no  date',
-    },
-    {
-      icon: ClockIcon,
-      text: `${event.startTime} — ${event.endTime}`,
-      secondary: true,
-    },
-    { icon: LocationOutlineIcon, text: event.location, details: event.address },
-    { icon: DesktopIcon, text: 'Online event', secondary: true },
-  ]
   return (
     // We're using container queries here!
     // The wrapped is flagged as a `@container`
@@ -101,37 +87,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
                   )}
                 </div>
               </div>
-              <ul className="space-y-4">
-                {eventMeta.map((event) => {
-                  const Icon = event.icon
-                  return (
-                    <li
-                      key={event.text}
-                      className={clsx(
-                        'flex gap-3',
-                        event.details ? 'items-start' : 'items-center'
-                      )}
-                    >
-                      <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
-                        <Icon className="h-5 w-5 fill-black" />
-                      </div>
-                      <div>
-                        <p
-                          className={clsx(
-                            'text-lg font-medium',
-                            event.details && 'mt-1.5'
-                          )}
-                        >
-                          {event.text}
-                        </p>
-                        {event.details && (
-                          <p className="text-sm">{event.details}</p>
-                        )}
-                      </div>
-                    </li>
-                  )
-                })}
-              </ul>
+              <EventInfo slug={props.slug} />
             </div>
           </div>
         </div>
@@ -157,21 +113,9 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
           <TextLink href={`/events/${props.slug}`}>
             <h2 className="line-clamp-2 text-2xl font-bold">{event.name}</h2>
           </TextLink>
-          <ul className="mt-6 space-y-4">
-            {eventMeta
-              .filter((event) => !event.secondary)
-              .map((event) => {
-                const Icon = event.icon
-                return (
-                  <li key={event.text} className="flex items-center gap-3">
-                    <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
-                      <Icon className="h-5 w-5 stroke-black" />
-                    </div>
-                    <span className="text-lg/6 font-medium">{event.text}</span>
-                  </li>
-                )
-              })}
-          </ul>
+          <div className="mt-6">
+            <EventInfo slug={props.slug} />
+          </div>
           <div className="mt-8 space-y-4 text-lg/6">
             <DocumentRenderer document={event.description} />
           </div>
@@ -195,5 +139,80 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
         {featuredMedia}
       </div>
     </div>
+  )
+})
+
+const EventInfo = asyncComponent(async function Component(props: {
+  slug: string
+}) {
+  const event = await reader.collections.events.readOrThrow(props.slug, {
+    resolveLinkedFiles: true,
+  })
+
+  const formatted = {
+    date: event.date
+      ? format(new Date(event.date), 'EEEE, d MMMM yyy')
+      : 'no  date',
+    time: event.startTime + (event?.endTime && ` — ${event.endTime}`),
+  }
+
+  return (
+    <ul className="space-y-4">
+      {/* Date */}
+      <li className="flex items-center gap-3">
+        <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+          <CalendarClearOutlineIcon className="h-5 w-5 fill-black" />
+        </div>
+        <div>
+          <p className="text-lg font-medium">{formatted.date}</p>
+        </div>
+      </li>
+
+      {/* Time */}
+      <li className="flex items-center gap-3">
+        <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+          <ClockIcon className="h-5 w-5 fill-black" />
+        </div>
+        <div>
+          <p className="text-lg font-medium">{formatted.time}</p>
+        </div>
+      </li>
+
+      {/* Location */}
+      <li
+        className={clsx(
+          'flex gap-3',
+          event.address ? 'items-start' : 'items-center'
+        )}
+      >
+        <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+          <LocationOutlineIcon className="h-5 w-5 fill-black" />
+        </div>
+        <div>
+          <p className="text-lg font-medium">{event.location}</p>
+          {event.address && <p className="text-sm/none">{event.address}</p>}
+        </div>
+      </li>
+      {/* Online event */}
+      {event.zoomLink && (
+        <li className="flex items-start gap-3">
+          <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+            <DesktopIcon className="h-5 w-5 fill-black" />
+          </div>
+          <div>
+            <p className="text-lg font-medium">Online event</p>
+
+            <p className="text-sm/none">
+              <a href={event.zoomLink} className="flex items-center gap-2">
+                <span className="border-b border-black/40 font-semibold">
+                  Join Zoom
+                </span>
+                <ExitOutlineIcon className="h-5 w-5" />
+              </a>
+            </p>
+          </div>
+        </li>
+      )}
+    </ul>
   )
 })
