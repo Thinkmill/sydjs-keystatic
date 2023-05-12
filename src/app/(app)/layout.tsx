@@ -18,7 +18,9 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = admin?.siteDescription || ''
 
   return {
-    metadataBase: new URL('https://sydjs.com'),
+    // TODO: Replace with the URL below before switching DNS servers
+    metadataBase: new URL('https://sydjs-keystatic.vercel.app/'),
+    // metadataBase: new URL('https://sydjs.com'),
     title: {
       template: `%s | ${admin?.siteTitle}`,
       default: title,
