@@ -5,6 +5,9 @@ import { asyncComponent } from '@/lib/async-component'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 import Image from 'next/image'
 import Link from 'next/link'
+import { getStatus, Status } from '@/lib/get-status'
+
+import { FeaturedMedia } from '@/components/featured-media'
 
 export async function generateMetadata({
   params: { slug },
@@ -41,7 +44,7 @@ const EventTalks = asyncComponent(async function EventTalks(props: {
       <h2 className="mt-20 text-4xl font-bold">Talks</h2>
       <ul className="mt-12 grid gap-18">
         {event.talks.map((talk) => (
-          <EventTalk key={talk} talk={talk} />
+          <EventTalk key={talk} talk={talk} status={getStatus(event.date)} />
         ))}
       </ul>
     </div>
@@ -50,6 +53,7 @@ const EventTalks = asyncComponent(async function EventTalks(props: {
 
 const EventTalk = asyncComponent(async function EventTalk(props: {
   talk: string
+  status: Status
 }) {
   const talk = await reader.collections.talks.readOrThrow(props.talk, {
     resolveLinkedFiles: true,
@@ -71,17 +75,12 @@ const EventTalk = asyncComponent(async function EventTalk(props: {
         </div>
       </div>
       <div>
-        {talk.image && !talk.video && (
-          <Image
-            className="aspect-video rounded-2xl object-cover"
-            src={talk.image}
-            alt=""
-            height={720}
-            width={480}
+        {talk.featuredMedia.discriminant !== 'none' && (
+          <FeaturedMedia
+            media={talk.featuredMedia}
+            status={props.status}
+            kind="talk"
           />
-        )}
-        {talk.video && (
-          <YouTubeEmbed videoUrl={talk.video} className="rounded-2xl" />
         )}
       </div>
     </li>

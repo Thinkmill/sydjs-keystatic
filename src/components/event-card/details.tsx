@@ -32,7 +32,16 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
   const status = getStatus(event.date)
 
   const featuredMedia = event.featuredMedia.discriminant !== 'none' && (
-    <FeaturedMedia media={event.featuredMedia} status={status} />
+    <div
+      className={clsx(
+        "before:l-0 relative before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:content-['']",
+        status === 'PAST' ? 'before:bg-accent' : 'before:bg-highlight'
+      )}
+    >
+      <div className="px-6 lg:px-8">
+        <FeaturedMedia media={event.featuredMedia} status={status} />
+      </div>
+    </div>
   )
 
   const eventMeta = [

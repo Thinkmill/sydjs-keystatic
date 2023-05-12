@@ -69,6 +69,7 @@ export default collection({
         video: fields.object({
           url: fields.text({
             label: 'A YouTube video URL.',
+            validation: { length: { min: 1 } },
           }),
           image: fields.object({
             asset: fields.image({
@@ -77,6 +78,7 @@ export default collection({
               directory: 'public/images/events',
               publicPath: '/images/events/',
             }),
+            alt: fields.text({ label: 'Alt', description: 'Image alt text.' }),
           }),
         }),
       }

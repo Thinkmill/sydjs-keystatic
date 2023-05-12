@@ -31,8 +31,8 @@ export function SkewImage({
               prefersReducedMotion
                 ? { transform: `scale(0.9)`, transformOrigin: 'center' }
                 : {
-                    transform: `skew(${mouse.elementX / 100}deg, ${
-                      mouse.elementY / 100
+                    transform: `skew(${mouse.elementX / 180}deg, ${
+                      mouse.elementY / 180
                     }deg) scale(0.9)`,
                     transformOrigin: 'center',
                   }

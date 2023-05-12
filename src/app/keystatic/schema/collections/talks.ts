@@ -60,6 +60,7 @@ export default collection({
         video: fields.object({
           url: fields.text({
             label: 'A YouTube video URL.',
+            validation: { length: { min: 1 } },
           }),
           image: fields.object({
             asset: fields.image({
@@ -68,19 +69,10 @@ export default collection({
               directory: 'public/images/talks',
               publicPath: '/images/talks/',
             }),
+            alt: fields.text({ label: 'Alt', description: 'Image alt text.' }),
           }),
         }),
       }
     ),
-    image: fields.image({
-      label: 'Featured Image',
-      directory: 'public/images/talks',
-      publicPath: '/images/talks/',
-    }),
-    video: fields.text({
-      label: 'Featured Video',
-      description:
-        'A YouTube video URL. Can include a timestamp! If specified, the video will take precedence over the image.',
-    }),
   },
 })
