@@ -6,18 +6,24 @@ export default singleton({
   label: 'Admin',
   path: 'src/content/admin/',
   schema: {
-    siteTitle: fields.text({ label: 'Site Title' }),
+    siteTitle: fields.text({
+      label: 'Site Title',
+      description: 'This will be used as the homepage SEO title.',
+    }),
     siteDescription: fields.text({
       label: 'Site Description',
       multiline: true,
+      description: 'This will be used as the homepage SEO description.',
     }),
     homepageTitle: fields.text({
       label: 'Homepage Title',
       multiline: true,
+      description: 'The homepage hero headline title.',
     }),
     homepageDescription: fields.text({
       label: 'Homepage Description',
       multiline: true,
+      description: 'The homepage hero headline description.',
     }),
     aboutPage: fields.document({
       label: 'About Page',

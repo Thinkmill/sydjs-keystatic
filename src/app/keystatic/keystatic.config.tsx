@@ -27,7 +27,7 @@ export default config({
     events,
     talks,
     persons,
-    sponsors,
+    // sponsors,
   },
   singletons: {
     admin,
