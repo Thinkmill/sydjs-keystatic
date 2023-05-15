@@ -111,7 +111,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
             </span>
           )}
           <TextLink href={`/events/${props.slug}`}>
-            <h2 className="line-clamp-2 text-2xl font-bold">{event.name}</h2>
+            <h2 className="text-2xl font-bold">{event.name}</h2>
           </TextLink>
           <div className="mt-6">
             <EventInfo slug={props.slug} />

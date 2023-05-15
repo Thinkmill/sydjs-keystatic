@@ -66,7 +66,7 @@ export const EventListingCard = asyncComponent(
               <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
                 <div className="md:col-span-2">
                   <h2 className="mt-8 text-4xl font-bold">{event.name}</h2>
-                  <div className="mt-4 line-clamp-[8] space-y-4 text-lg">
+                  <div className="mt-4 line-clamp-[8] space-y-4 text-lg safari:line-clamp-none">
                     <DocumentRenderer document={event.description} />
                   </div>
 
@@ -139,7 +139,9 @@ export const EventListingCard = asyncComponent(
               </span>
             )}
             <TextLink href={`/events/${props.slug}`}>
-              <h2 className="line-clamp-2 text-2xl font-bold">{event.name}</h2>
+              <h2 className="line-clamp-2 text-2xl font-bold safari:line-clamp-none">
+                {event.name}
+              </h2>
             </TextLink>
             <ul className="mt-6 space-y-4">
               {eventMeta
@@ -158,7 +160,10 @@ export const EventListingCard = asyncComponent(
                   )
                 })}
             </ul>
-            <div className="mt-8 line-clamp-[7] space-y-4 text-lg/6">
+            <div
+              className="mt-8 line-clamp-[7]
+            space-y-4 text-lg/6 safari:line-clamp-none"
+            >
               <DocumentRenderer document={event.description} />
             </div>
 

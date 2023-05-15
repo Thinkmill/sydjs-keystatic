@@ -1,6 +1,14 @@
 import { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 import containerQueriesPlugin from '@tailwindcss/container-queries'
+import plugin from 'tailwindcss/plugin'
+
+const safariVariant = plugin(function ({ addVariant }) {
+  addVariant(
+    'safari',
+    '@media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) { & }}'
+  )
+})
 
 const config = {
   content: [
@@ -32,7 +40,11 @@ const config = {
       },
     },
   },
-  plugins: [containerQueriesPlugin, require('@tailwindcss/typography')],
+  plugins: [
+    containerQueriesPlugin,
+    require('@tailwindcss/typography'),
+    safariVariant,
+  ],
 } satisfies Config
 
 export default config
