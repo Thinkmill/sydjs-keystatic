@@ -22,18 +22,6 @@ export default collection({
       formatting: true,
       links: true,
     }),
-    speakers: fields.array(
-      fields.relationship({
-        label: 'Speaker',
-        collection: 'persons',
-        validation: { isRequired: true },
-      }),
-      {
-        label: 'Speakers',
-        description: 'A list of one or multiple speakers presenting the talk.',
-        itemLabel: (props) => props.value ?? 'Please select a speaker',
-      }
-    ),
     // Featured media
     featuredMedia: fields.conditional(
       fields.select({
@@ -72,6 +60,18 @@ export default collection({
             alt: fields.text({ label: 'Alt', description: 'Image alt text.' }),
           }),
         }),
+      }
+    ),
+    speakers: fields.array(
+      fields.relationship({
+        label: 'Speaker',
+        collection: 'persons',
+        validation: { isRequired: true },
+      }),
+      {
+        label: 'Speakers',
+        description: 'A list of one or multiple speakers presenting the talk.',
+        itemLabel: (props) => props.value ?? 'Please select a speaker',
       }
     ),
   },
