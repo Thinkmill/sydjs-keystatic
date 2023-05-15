@@ -28,7 +28,7 @@ export function FeaturedMedia({ media, status, kind = 'event' }: MediaProps) {
       {/* Featured image */}
       {media.discriminant === 'image' && (
         <Image
-          className="relative mx-auto aspect-video w-full max-w-6xl rounded-2xl object-cover"
+          className="relative mx-auto aspect-video w-full max-w-6xl rounded-2xl object-cover ring-1 ring-black/10"
           src={media.value.asset}
           alt={media.value.alt}
           width={1200}
