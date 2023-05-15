@@ -32,7 +32,7 @@ export default async function AllEvents() {
   return (
     <>
       <div className="mx-auto mt-24 max-w-6xl px-6">
-        <h1 className="text-6xl font-bold">SydJS events</h1>
+        <h1 className="text-5xl font-bold sm:text-6xl">SydJS events</h1>
         <p className="mt-8 text-2xl font-medium">
           Here’s the full list of upcoming and past SydJS events.
         </p>

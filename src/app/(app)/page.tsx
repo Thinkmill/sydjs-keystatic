@@ -86,7 +86,9 @@ const Header = asyncComponent(async function Header() {
   const adminPage = await reader.singletons.admin.readOrThrow()
   return (
     <>
-      <h1 className="text-6xl font-bold">{adminPage.homepageTitle}</h1>
+      <h1 className="text-5xl font-bold sm:text-6xl">
+        {adminPage.homepageTitle}
+      </h1>
       <p className="mt-6 text-2xl font-medium">
         {adminPage.homepageDescription}
       </p>
