@@ -104,16 +104,18 @@ const Events = asyncComponent(async function Events() {
       <div className="mx-auto mt-20 max-w-6xl px-6 lg:px-8">
         <div className="-mr-6 flex items-center justify-between">
           <h2 className="text-3xl font-bold">Past events</h2>
-          <Button
-            href="/events"
-            emphasis="low"
-            icon={ChevronRightIcon}
-            iconPosition="after"
-          >
-            View all events
-          </Button>
+          <div className="hidden sm:block">
+            <Button
+              href="/events"
+              emphasis="low"
+              icon={ChevronRightIcon}
+              iconPosition="after"
+            >
+              View all events
+            </Button>
+          </div>
         </div>
-        <ul className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-6 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {pastEvents.map((event) => (
             <li key={event.slug}>
               <EventListingCard slug={event.slug} />

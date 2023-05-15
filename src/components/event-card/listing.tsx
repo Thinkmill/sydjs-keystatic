@@ -129,7 +129,7 @@ export const EventListingCard = asyncComponent(
         <div className="block h-full @4xl:hidden">
           <div
             className={clsx(
-              'h-full rounded-[40px] p-10',
+              'h-full rounded-[40px] p-8 sm:p-10',
               eventStatusClasses[status]
             )}
           >

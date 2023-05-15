@@ -39,7 +39,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
         status === 'PAST' ? 'before:bg-accent' : 'before:bg-highlight'
       )}
     >
-      <div className="px-6 lg:px-8">
+      <div className="px-2 sm:px-4 lg:px-8">
         <FeaturedMedia media={event.featuredMedia} status={status} />
       </div>
     </div>
@@ -100,7 +100,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
       <div className="block h-full @4xl:hidden">
         <div
           className={clsx(
-            'rounded-t-[40px] p-10',
+            'rounded-t-[40px] p-8 sm:p-10',
             !featuredMedia && 'rounded-b-[40px]',
             eventStatusClasses[status]
           )}

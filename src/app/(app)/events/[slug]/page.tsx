@@ -66,16 +66,23 @@ const EventTalks = asyncComponent(async function EventTalks(props: {
   slug: string
 }) {
   const event = await reader.collections.events.readOrThrow(props.slug)
-  return event.talks.length > 0 ? (
+
+  return (
     <div className="mx-auto mt-8 max-w-5xl px-6">
       <h2 className="mt-20 text-4xl font-bold">Talks</h2>
-      <ul className="mt-12 grid gap-18">
-        {event.talks.map((talk) => (
-          <EventTalk key={talk} talk={talk} status={getStatus(event.date)} />
-        ))}
-      </ul>
+      {event.talks.length > 0 ? (
+        <ul className="mt-12 grid gap-18">
+          {event.talks.map((talk) => (
+            <EventTalk key={talk} talk={talk} status={getStatus(event.date)} />
+          ))}
+        </ul>
+      ) : (
+        <p className="mt-4 text-lg">
+          No information about talks available for this event.
+        </p>
+      )}
     </div>
-  ) : null
+  )
 })
 
 const EventTalk = asyncComponent(async function EventTalk(props: {
