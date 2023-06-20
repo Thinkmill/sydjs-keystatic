@@ -14,6 +14,7 @@ import { TextLink } from '../text-link'
 import { asyncComponent } from '@/lib/async-component'
 import { reader } from '@/app/keystatic/reader'
 import { Status, getStatus } from '@/lib/get-status'
+import events from '@/app/keystatic/schema/collections/events'
 
 const eventStatusClasses: Record<Status, string> = {
   UPCOMING: 'bg-highlight',
@@ -27,7 +28,7 @@ export const EventListingCard = asyncComponent(
       resolveLinkedFiles: true,
     })
     const status = getStatus(event.date)
-    const eventMeta = [
+    let eventMeta = [
       {
         icon: CalendarClearOutlineIcon,
         text: event.date
@@ -44,8 +45,15 @@ export const EventListingCard = asyncComponent(
         text: event.location,
         details: event.address,
       },
-      { icon: DesktopIcon, text: 'Online event', secondary: true },
     ]
+
+    if (event.zoomLink) {
+      eventMeta.push({
+        icon: DesktopIcon,
+        text: 'Online event',
+        secondary: true,
+      })
+    }
     return (
       // We're using container queries here!
       // The wrapped is flagged as a `@container`
