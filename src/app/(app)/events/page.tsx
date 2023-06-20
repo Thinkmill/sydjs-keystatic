@@ -43,7 +43,7 @@ export default async function AllEvents() {
       {futureEvents.length > 0 && (
         <div className="mx-auto mt-8 max-w-7xl space-y-6 px-6">
           {futureEvents.map((event) => (
-            <EventListingCard key={event.slug} slug={event.slug} />
+            <EventListingCard heading="h3" key={event.slug} slug={event.slug} />
           ))}
         </div>
       )}
@@ -53,7 +53,7 @@ export default async function AllEvents() {
       <div className="mx-auto mt-8 max-w-6xl px-6">
         <div className="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">
           {pastEvents.map((event) => (
-            <EventListingCard key={event.slug} slug={event.slug} />
+            <EventListingCard heading="h3" key={event.slug} slug={event.slug} />
           ))}
         </div>
       </div>

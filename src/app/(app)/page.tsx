@@ -13,7 +13,7 @@ import { reader } from '../keystatic/reader'
 
 export default function Home() {
   return (
-    <main className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden">
       {/* Hero section */}
       <div className="relative mx-auto grid max-w-6xl px-6 lg:grid-cols-2 lg:pl-8 lg:pr-0">
         <div className="py-8 lg:py-40">
@@ -22,6 +22,7 @@ export default function Home() {
           <ul className="mt-6 flex flex-wrap items-center gap-4 lg:justify-between">
             <li>
               <Link
+                aria-label="Atlassian (Opens in new tab)"
                 href="https://www.atlassian.com/"
                 target="_blank"
                 className="transition-opacity hover:opacity-50"
@@ -33,6 +34,7 @@ export default function Home() {
             <li className="h-6 w-px bg-gray-200"></li>
             <li>
               <Link
+                aria-label="Thinkmill (Opens in new tab)"
                 href="https://www.thinkmill.com.au/"
                 target="_blank"
                 className="transition-opacity hover:opacity-50"
@@ -44,6 +46,7 @@ export default function Home() {
             <li className="h-6 w-px bg-gray-200"></li>
             <li>
               <Link
+                aria-label="Lookahead (Opens in new tab)"
                 href="https://lookahead.com.au/"
                 target="_blank"
                 className="transition-opacity hover:opacity-50"
@@ -78,7 +81,7 @@ export default function Home() {
         </div>
       </div>
       <Events />
-    </main>
+    </div>
   )
 }
 
@@ -120,7 +123,7 @@ const Events = asyncComponent(async function Events() {
         <ul className="mt-6 grid gap-8 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {pastEvents.map((event) => (
             <li key={event.slug}>
-              <EventListingCard slug={event.slug} />
+              <EventListingCard heading="h3" slug={event.slug} />
             </li>
           ))}
         </ul>

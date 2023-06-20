@@ -9,7 +9,7 @@ export const Organiser = asyncComponent(async function Organiser({
 }) {
   const person = await reader.collections.persons.read(slug)
   return (
-    <div className="not-prose flex flex-col md:flex-1">
+    <li className="not-prose flex flex-col md:flex-1">
       {person?.avatar && (
         <Image
           width={160}
@@ -24,7 +24,7 @@ export const Organiser = asyncComponent(async function Organiser({
       </p>
       {person?.twitterHandle && (
         <a
-          href={`https://twitter.com/${person.twitterHandle}`}
+          href={`https://twitter.com/${person.twitterHandle} (Opens in new tab)`}
           className="not-prose font-semibold text-black underline hover:no-underline"
           target="_blank"
           rel="noopener noreferrer"
@@ -32,6 +32,6 @@ export const Organiser = asyncComponent(async function Organiser({
           @{person.twitterHandle}
         </a>
       )}
-    </div>
+    </li>
   )
 })

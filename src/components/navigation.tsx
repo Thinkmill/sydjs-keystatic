@@ -15,7 +15,7 @@ export default function Navigation() {
   return (
     <>
       <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between overflow-x-scroll px-6 py-4 lg:px-8">
-        <Link className="pr-8" href="/">
+        <Link aria-label="SydJS" className="pr-8" href="/">
           <Logo />
         </Link>
         <ul className="flex items-center gap-8">
@@ -32,6 +32,7 @@ export default function Navigation() {
           </li> */}
           <li className="-ml-4 hidden md:block">
             <IconButton
+              aria-label="SydJS on Twitter"
               emphasis="low"
               href="https://twitter.com/sydjs"
               icon={TwitterIcon}
