@@ -49,6 +49,14 @@ export default function Footer() {
               A new static content management system by the fine folks at
               Thinkmill
             </p>
+            <p className="mt-2 text-sm">
+              <a
+                href="https://github.com/Thinkmill/sydjs-keystatic"
+                className="underline"
+              >
+                View source on GitHub
+              </a>
+            </p>
           </div>
           <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
             © 2023 Thinkmill & Contributors. All rights reserved.
