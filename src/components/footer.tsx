@@ -22,7 +22,7 @@ export default function Footer() {
           <div>
             <p className="flex items-center gap-1">
               <span className="text-sm font-medium">Powered by</span>
-              <a className="group" href="https://keystatic.thinkmill.com.au">
+              <a className="group" href="https://keystatic.com">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
