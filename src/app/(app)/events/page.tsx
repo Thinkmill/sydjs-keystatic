@@ -34,7 +34,8 @@ export default async function AllEvents() {
       <div className="mx-auto mt-24 max-w-6xl px-6">
         <h1 className="text-5xl font-bold sm:text-6xl">SydJS events</h1>
         <p className="mt-8 text-2xl font-medium">
-          Here’s the full list of upcoming and past SydJS events.
+          Here’s the <del>full</del> partial (for the moment) list of SydJS
+          events over the years.
         </p>
         <h2 className="mt-20 text-4xl font-bold">
           {isLastEventInTheFuture ? 'Upcoming' : 'Most recent event'}
