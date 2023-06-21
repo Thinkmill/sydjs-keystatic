@@ -51,7 +51,7 @@ export default function Footer() {
             </p>
           </div>
           <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
-            © 2023 SydJS. All rights reserved.
+            © 2023 Thinkmill & Contributors. All rights reserved.
           </p>
         </div>
       </div>
