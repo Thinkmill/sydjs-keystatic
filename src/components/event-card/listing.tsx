@@ -187,9 +187,13 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
           </ul>
           <div
             className="mt-8 line-clamp-[7]
-            space-y-4 text-lg/6 safari:line-clamp-none"
+            space-y-4 text-lg/6"
           >
-            <DocumentRenderer document={event.description} />
+            {/** In Safari line-clamp is applied to each child independently rather than as a whole like other browser,
+             *   so each paragraph will be rendered with clamping, but it also looks broken. This quick fix only renders
+             *   the first node, hopefully a paragraph.
+             */}
+            <DocumentRenderer document={[event.description[0]]} />
           </div>
 
           {status !== 'PAST' && (
