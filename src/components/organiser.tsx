@@ -24,7 +24,7 @@ export const Organiser = asyncComponent(async function Organiser({
       </p>
       {person?.twitterHandle && (
         <a
-          aria-label={`@{person.twitterHandle} (Opens in new tab)`}
+          aria-label={`@${person.twitterHandle} (Opens in new tab)`}
           href={`https://twitter.com/${person.twitterHandle}`}
           className="not-prose font-semibold text-black underline hover:no-underline"
           target="_blank"
