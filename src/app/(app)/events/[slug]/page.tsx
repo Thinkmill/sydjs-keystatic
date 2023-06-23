@@ -55,7 +55,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
   return (
     <>
       <div className="mx-auto mt-8 max-w-[96rem] space-y-6 px-6">
-        <EventDetailsCard slug={params.slug} />
+        <EventDetailsCard heading="h1" slug={params.slug} />
       </div>
       <EventTalks slug={params.slug} />
     </>
@@ -95,7 +95,7 @@ const EventTalk = asyncComponent(async function EventTalk(props: {
   return (
     <li className="grid gap-8 lg:grid-cols-3">
       <div className="lg:col-span-2">
-        <h2 className="text-3xl font-bold">{talk.name}</h2>
+        <h3 className="text-3xl font-bold">{talk.name}</h3>
         <ul className="mt-3 flex flex-wrap gap-x-10 gap-y-4">
           {talk.speakers &&
             talk.speakers

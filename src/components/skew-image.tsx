@@ -23,7 +23,7 @@ export function SkewImage({
   const prefersReducedMotion = usePrefersReducedMotion()
   return (
     <>
-      <svg viewBox={viewBox} ref={ref}>
+      <svg aria-label={alt} role="img" viewBox={viewBox} ref={ref}>
         <mask id={maskId}>
           <path
             d={path}
@@ -40,13 +40,7 @@ export function SkewImage({
             fill="white"
           />
         </mask>
-        <image
-          href={src}
-          // @ts-ignore
-          alt={alt}
-          className="w-full"
-          mask={`url(#${maskId})`}
-        />
+        <image href={src} className="w-full" mask={`url(#${maskId})`} />
       </svg>
     </>
   )

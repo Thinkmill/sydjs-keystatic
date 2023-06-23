@@ -23,10 +23,14 @@ const eventStatusClasses = {
   PAST: 'bg-accent',
 }
 
-export const EventDetailsCard = asyncComponent(async function EventCard(props: {
+export const EventDetailsCard = asyncComponent(async function EventCard({
+  heading: Heading = 'h2',
+  slug,
+}: {
+  heading?: 'h1' | 'h2' | 'h3'
   slug: string
 }) {
-  const event = await reader.collections.events.readOrThrow(props.slug, {
+  const event = await reader.collections.events.readOrThrow(slug, {
     resolveLinkedFiles: true,
   })
 
@@ -68,7 +72,9 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
 
             <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
               <div className="md:col-span-2">
-                <h2 className="mt-8 text-4xl font-bold">{event.name}</h2>
+                <Heading className="mt-8 text-4xl font-bold">
+                  {event.name}
+                </Heading>
                 <div className="mt-4 space-y-4 text-lg">
                   <DocumentRenderer document={event.description} />
                 </div>
@@ -87,7 +93,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
                   )}
                 </div>
               </div>
-              <EventInfo slug={props.slug} />
+              <EventInfo slug={slug} />
             </div>
           </div>
         </div>
@@ -110,11 +116,11 @@ export const EventDetailsCard = asyncComponent(async function EventCard(props: {
               upcoming event
             </span>
           )}
-          <TextLink href={`/events/${props.slug}`}>
-            <h2 className="text-2xl font-bold">{event.name}</h2>
+          <TextLink href={`/events/${slug}`}>
+            <Heading className="text-2xl font-bold">{event.name}</Heading>
           </TextLink>
           <div className="mt-6">
-            <EventInfo slug={props.slug} />
+            <EventInfo slug={slug} />
           </div>
           <div className="mt-8 space-y-4 text-lg/6">
             <DocumentRenderer document={event.description} />
@@ -160,7 +166,11 @@ const EventInfo = asyncComponent(async function Component(props: {
     <ul className="space-y-4">
       {/* Date */}
       <li className="flex items-center gap-3">
-        <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+        <div
+          aria-label="Date"
+          className="shrink-0 rounded-xl bg-black/10 p-2.5"
+          role="text"
+        >
           <CalendarClearOutlineIcon className="h-5 w-5 fill-black" />
         </div>
         <div>
@@ -170,7 +180,11 @@ const EventInfo = asyncComponent(async function Component(props: {
 
       {/* Time */}
       <li className="flex items-center gap-3">
-        <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+        <div
+          aria-label="Time"
+          className="shrink-0 rounded-xl bg-black/10 p-2.5"
+          role="text"
+        >
           <ClockIcon className="h-5 w-5 fill-black" />
         </div>
         <div>
@@ -185,7 +199,11 @@ const EventInfo = asyncComponent(async function Component(props: {
           event.address ? 'items-start' : 'items-center'
         )}
       >
-        <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+        <div
+          aria-label="Location"
+          className="shrink-0 rounded-xl bg-black/10 p-2.5"
+          role="text"
+        >
           <LocationOutlineIcon className="h-5 w-5 fill-black" />
         </div>
         <div>
@@ -196,7 +214,11 @@ const EventInfo = asyncComponent(async function Component(props: {
       {/* Online event */}
       {event.zoomLink && (
         <li className="flex items-start gap-3">
-          <div className="shrink-0 rounded-xl bg-black/10 p-2.5">
+          <div
+            aria-label="Location"
+            className="shrink-0 rounded-xl bg-black/10 p-2.5"
+            role="text"
+          >
             <DesktopIcon className="h-5 w-5 fill-black" />
           </div>
           <div>

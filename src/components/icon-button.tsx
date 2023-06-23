@@ -57,13 +57,14 @@ export default function Button({
     emphasisClasses[tone][emphasis]
   )
   const iconRender = <Icon className="-my-1 h-6 w-6" />
+  const { 'aria-label': ariaLabel, ...rest } = restProps
 
   return href ? (
-    <Link className={allClasses} href={href}>
+    <Link aria-label={ariaLabel} className={allClasses} href={href}>
       {iconRender}
     </Link>
   ) : (
-    <button className={allClasses} {...restProps}>
+    <button aria-label={ariaLabel} className={allClasses} {...rest}>
       {iconRender}
     </button>
   )
