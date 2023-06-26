@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import Logo from './logo'
 import IconButton from '@/components/icon-button'
-import { TwitterIcon } from './svg-icons'
+import { TwitterIcon, YouTubeIcon } from './svg-icons'
 
 export default function Footer() {
   return (
@@ -12,12 +12,20 @@ export default function Footer() {
           <Link aria-label="SydJS" href="/">
             <Logo />
           </Link>
-          <IconButton
-            aria-label="SydJS on Twitter"
-            emphasis="low"
-            href="https://twitter.com/sydjs"
-            icon={TwitterIcon}
-          />
+          <div className="flex gap-4 items-center">
+            <IconButton
+              aria-label="SydJS on Twitter"
+              emphasis="low"
+              href="https://twitter.com/sydjs"
+              icon={TwitterIcon}
+            />
+            <IconButton
+              aria-label="SydJS on YouTube"
+              emphasis="low"
+              href="https://www.youtube.com/@SydJSMeetup"
+              icon={YouTubeIcon}
+            />
+          </div>
         </div>
         <div className="mt-12 items-end md:flex">
           <div>
