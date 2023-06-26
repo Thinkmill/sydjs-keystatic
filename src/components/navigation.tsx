@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import Modal from './modal'
-import { TwitterIcon } from './svg-icons'
+import { TwitterIcon, YouTubeIcon } from './svg-icons'
 
 import Logo from './logo'
 import Button from './button'
@@ -36,6 +36,14 @@ export default function Navigation() {
               emphasis="low"
               href="https://twitter.com/sydjs"
               icon={TwitterIcon}
+            />
+          </li>
+          <li className="-ml-4 hidden md:block">
+            <IconButton
+              aria-label="SydJS on Twitter"
+              emphasis="low"
+              href="https://www.youtube.com/@SydJSMeetup"
+              icon={YouTubeIcon}
             />
           </li>
         </ul>
