@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 import { reader } from '@/app/keystatic/reader'
 
@@ -38,7 +38,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard({
 
   const featuredMedia = event.featuredMedia.discriminant !== 'none' && (
     <div
-      className={clsx(
+      className={classnames(
         "before:l-0 relative before:absolute before:h-1/2 before:w-full before:rounded-b-[40px] before:content-['']",
         status === 'PAST' ? 'before:bg-accent' : 'before:bg-highlight'
       )}
@@ -59,7 +59,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard({
       {/* ---------------------------- */}
       <div className="hidden @4xl:block">
         <div
-          className={clsx(
+          className={classnames(
             'rounded-t-[40px] p-16',
             !featuredMedia && 'rounded-b-[40px]',
             eventStatusClasses[status]
@@ -105,7 +105,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard({
       {/* ---------------------------- */}
       <div className="block h-full @4xl:hidden">
         <div
-          className={clsx(
+          className={classnames(
             'rounded-t-[40px] p-8 sm:p-10',
             !featuredMedia && 'rounded-b-[40px]',
             eventStatusClasses[status]
@@ -194,7 +194,7 @@ const EventInfo = asyncComponent(async function Component(props: {
 
       {/* Location */}
       <li
-        className={clsx(
+        className={classnames(
           'flex gap-3',
           event.address ? 'items-start' : 'items-center'
         )}

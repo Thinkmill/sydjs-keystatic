@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Transition } from '@headlessui/react'
 import Image from 'next/image'
-import clsx from 'clsx'
+import classnames from 'classnames'
 
 import { Entry } from '@keystatic/core/reader'
 import { Status } from '@/lib/get-status'
@@ -100,7 +100,7 @@ function ThumbnailOverlay({
           tone={status === 'PAST' ? 'accent' : 'highlight'}
         >
           <PlayOutlineIcon
-            className={clsx(
+            className={classnames(
               '-ml-1 -mr-2',
               kind === 'event' ? 'h-8 w-8' : 'h-6 w-6'
             )}
