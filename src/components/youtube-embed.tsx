@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { getYouTubeEmbedUrl } from '@/lib/get-youtube-embed-url'
 
 type YouTubeEmbedProps = {
@@ -13,7 +13,7 @@ export default function YouTubeEmbed({
 
   return (
     <iframe
-      className={clsx('aspect-video w-full', className)}
+      className={classnames('aspect-video w-full', className)}
       src={embedUrl}
       title="YouTube video player"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"

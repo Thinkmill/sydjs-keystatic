@@ -1,5 +1,5 @@
 import { format } from 'date-fns'
-import clsx from 'clsx'
+import classnames from 'classnames'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
 import Button from '../button'
@@ -73,7 +73,10 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
       {/* ---------------------------- */}
       <div className="hidden @4xl:block">
         <div
-          className={clsx('rounded-[40px] p-16', eventStatusClasses[status])}
+          className={classnames(
+            'rounded-[40px] p-16',
+            eventStatusClasses[status]
+          )}
         >
           <div>
             <span className="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
@@ -112,7 +115,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                   return (
                     <li
                       key={event.text}
-                      className={clsx(
+                      className={classnames(
                         'flex gap-3',
                         event.details ? 'items-start' : 'items-center'
                       )}
@@ -126,7 +129,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                       </div>
                       <div>
                         <p
-                          className={clsx(
+                          className={classnames(
                             'text-lg font-medium',
                             event.details && 'mt-1.5'
                           )}
@@ -151,7 +154,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
       {/* ---------------------------- */}
       <div className="block h-full @4xl:hidden">
         <div
-          className={clsx(
+          className={classnames(
             'h-full rounded-[40px] p-8 sm:p-10',
             eventStatusClasses[status]
           )}
