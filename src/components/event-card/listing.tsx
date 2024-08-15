@@ -88,7 +88,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                 <Heading className="mt-8 text-4xl font-bold">
                   {event.name}
                 </Heading>
-                <div className="mt-4 line-clamp-[8] space-y-4 text-lg safari:line-clamp-none">
+                <div className="mt-4 line-clamp-[8] space-y-4 text-lg safari:line-clamp-none [&_a]:underline hover:[&_a]:no-underline">
                   <DocumentRenderer document={event.description} />
                 </div>
 
@@ -190,7 +190,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
           </ul>
           <div
             className="mt-8 line-clamp-[7]
-            space-y-4 text-lg/6"
+            space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline"
           >
             {/** In Safari line-clamp is applied to each child independently rather than as a whole like other browser,
              *   so each paragraph will be rendered with clamping, but it also looks broken. This quick fix only renders
