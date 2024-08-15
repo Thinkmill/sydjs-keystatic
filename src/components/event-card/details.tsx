@@ -75,7 +75,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard({
                 <Heading className="mt-8 text-4xl font-bold">
                   {event.name}
                 </Heading>
-                <div className="mt-4 space-y-4 text-lg">
+                <div className="mt-4 space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline">
                   <DocumentRenderer document={event.description} />
                 </div>
 
@@ -122,7 +122,7 @@ export const EventDetailsCard = asyncComponent(async function EventCard({
           <div className="mt-6">
             <EventInfo slug={slug} />
           </div>
-          <div className="mt-8 space-y-4 text-lg/6">
+          <div className="mt-8 space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline">
             <DocumentRenderer document={event.description} />
           </div>
 
