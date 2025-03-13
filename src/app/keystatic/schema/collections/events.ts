@@ -27,6 +27,7 @@ export default collection({
       label: 'Event description',
       description: 'The copy that will show in the event card.',
       formatting: true,
+      links: true
     }),
     date: fields.date({ label: 'Date', validation: { isRequired: true } }),
     location: fields.text({
