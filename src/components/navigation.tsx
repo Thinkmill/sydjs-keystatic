@@ -2,11 +2,9 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Modal from './modal'
-import { TwitterIcon, YouTubeIcon } from './svg-icons'
+import { TwitterIcon, YouTubeIcon, LinkedInIcon, MeetupIcon } from './svg-icons'
 
 import Logo from './logo'
-import Button from './button'
 import IconButton from './icon-button'
 import { TextLink } from './text-link'
 
@@ -32,6 +30,22 @@ export default function Navigation() {
           </li> */}
           <li className="-ml-4 hidden md:block">
             <IconButton
+              aria-label="SydJS on Meetup"
+              emphasis="low"
+              href="https://www.meetup.com/en-AU/sydjs-classic/"
+              icon={MeetupIcon}
+            />
+          </li>
+          <li className="-ml-4 hidden md:block">
+            <IconButton
+              aria-label="SydJS on LinkedIn"
+              emphasis="low"
+              href="https://www.linkedin.com/company/sydjs"
+              icon={LinkedInIcon}
+            />
+          </li>
+          <li className="-ml-4 hidden md:block">
+            <IconButton
               aria-label="SydJS on Twitter"
               emphasis="low"
               href="https://twitter.com/sydjs"
@@ -40,7 +54,7 @@ export default function Navigation() {
           </li>
           <li className="-ml-4 hidden md:block">
             <IconButton
-              aria-label="SydJS on Twitter"
+              aria-label="SydJS on YouTube"
               emphasis="low"
               href="https://www.youtube.com/@SydJSMeetup"
               icon={YouTubeIcon}
