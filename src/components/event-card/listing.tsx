@@ -14,7 +14,6 @@ import { TextLink } from '../text-link'
 import { asyncComponent } from '@/lib/async-component'
 import { reader } from '@/app/keystatic/reader'
 import { Status, getStatus } from '@/lib/get-status'
-import events from '@/app/keystatic/schema/collections/events'
 
 const eventStatusClasses: Record<Status, string> = {
   UPCOMING: 'bg-highlight',
