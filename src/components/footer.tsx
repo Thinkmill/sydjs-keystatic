@@ -1,8 +1,7 @@
 import Link from 'next/link'
 
 import Logo from './logo'
-import IconButton from '@/components/icon-button'
-import { TwitterIcon, YouTubeIcon } from './svg-icons'
+import { socialIcons } from '@/components/social-icons'
 
 export default function Footer() {
   return (
@@ -12,19 +11,8 @@ export default function Footer() {
           <Link aria-label="SydJS" href="/">
             <Logo />
           </Link>
-          <div className="flex gap-4 items-center">
-            <IconButton
-              aria-label="SydJS on Twitter"
-              emphasis="low"
-              href="https://twitter.com/sydjs"
-              icon={TwitterIcon}
-            />
-            <IconButton
-              aria-label="SydJS on YouTube"
-              emphasis="low"
-              href="https://www.youtube.com/@SydJSMeetup"
-              icon={YouTubeIcon}
-            />
+          <div className="flex items-center gap-4">
+            {Array.from(Object.values(socialIcons))}
           </div>
         </div>
         <div className="mt-12 items-end md:flex">
@@ -72,7 +60,7 @@ export default function Footer() {
             </p>
           </div>
           <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
-            © 2023 Thinkmill & Contributors. All rights reserved.
+            &copy; 2025 Thinkmill &amp; Contributors. All rights reserved.
           </p>
         </div>
       </div>
