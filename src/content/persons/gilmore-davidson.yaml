@@ -1,4 +1,6 @@
 name: Gilmore Davidson
-# avatar: /images/avatars/dinesh-pandiyan/avatar.png
-# twitterHandle: flexdinesh
-socialLinks: []
+avatar: /images/avatars/gilmore-davidson/avatar.jpg
+twitterHandle: iamnotyourbroom
+socialLinks:
+  - label: Website
+    link: https://shoehornwithteeth.com/
