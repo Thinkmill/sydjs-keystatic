@@ -15,6 +15,7 @@ export function TextLink({
       href={href}
       className="decoration-2 underline-offset-2 hover:underline"
       target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
     >
       {children}
     </Link>

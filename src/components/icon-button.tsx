@@ -67,6 +67,7 @@ export default function Button({
       className={allClasses}
       href={href}
       target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
     >
       {iconRender}
     </Link>
