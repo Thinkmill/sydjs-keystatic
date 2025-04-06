@@ -1,8 +1,7 @@
 import Link from 'next/link'
 
 import Logo from './logo'
-import IconButton from '@/components/icon-button'
-import { TwitterIcon, YouTubeIcon, MeetupIcon, LinkedInIcon } from './svg-icons'
+import { socialIcons } from '@/components/social-icons'
 
 export default function Footer() {
   return (
@@ -13,30 +12,7 @@ export default function Footer() {
             <Logo />
           </Link>
           <div className="flex items-center gap-4">
-            <IconButton
-              aria-label="SydJS on Meetup"
-              emphasis="low"
-              href="https://www.meetup.com/en-AU/sydjs-classic/"
-              icon={MeetupIcon}
-            />
-            <IconButton
-              aria-label="SydJS on LinkedIn"
-              emphasis="low"
-              href="https://www.linkedin.com/company/sydjs"
-              icon={LinkedInIcon}
-            />
-            <IconButton
-              aria-label="SydJS on Twitter"
-              emphasis="low"
-              href="https://twitter.com/sydjs"
-              icon={TwitterIcon}
-            />
-            <IconButton
-              aria-label="SydJS on YouTube"
-              emphasis="low"
-              href="https://www.youtube.com/@SydJSMeetup"
-              icon={YouTubeIcon}
-            />
+            {Array.from(Object.values(socialIcons))}
           </div>
         </div>
         <div className="mt-12 items-end md:flex">
