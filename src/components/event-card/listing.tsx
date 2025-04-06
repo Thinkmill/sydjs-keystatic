@@ -94,7 +94,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
 
                 <div className="mt-6 flex items-center gap-4">
                   <Button href={`/events/${slug}`} size="large">
-                    View events details
+                    View event details
                   </Button>
                   {status !== 'PAST' && event.rsvpLink && (
                     <Button
@@ -202,7 +202,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
           {status !== 'PAST' && (
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Button href={`/events/${slug}`} size="large">
-                View events details
+                View event details
               </Button>
 
               {event.rsvpLink && (
