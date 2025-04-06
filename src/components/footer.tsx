@@ -1,28 +1,29 @@
 import Link from 'next/link'
 
 import Logo from './logo'
-import IconButton from '@/components/icon-button'
-import { TwitterIcon } from './svg-icons'
+import { socialIcons } from '@/components/social-icons'
 
 export default function Footer() {
   return (
     <footer className="mt-20 bg-gray-100">
       <div className="mx-auto max-w-6xl px-6 py-8 pt-16 lg:px-8">
-        <nav className="flex items-center justify-between">
-          <Link href="/">
+        <div className="flex items-center justify-between">
+          <Link aria-label="SydJS" href="/">
             <Logo />
           </Link>
-          <IconButton
-            emphasis="low"
-            href="https://twitter.com/sydjs"
-            icon={TwitterIcon}
-          />
-        </nav>
+          <div className="flex items-center gap-4">
+            {Array.from(Object.values(socialIcons))}
+          </div>
+        </div>
         <div className="mt-12 items-end md:flex">
           <div>
             <p className="flex items-center gap-1">
               <span className="text-sm font-medium">Powered by</span>
-              <a className="group" href="https://keystatic.com">
+              <a
+                aria-label="Keystatic"
+                className="group"
+                href="https://keystatic.com"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -59,7 +60,7 @@ export default function Footer() {
             </p>
           </div>
           <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
-            © 2023 Thinkmill & Contributors. All rights reserved.
+            &copy; 2025 Thinkmill &amp; Contributors. All rights reserved.
           </p>
         </div>
       </div>

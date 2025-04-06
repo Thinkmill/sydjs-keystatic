@@ -31,13 +31,13 @@ const componentBlocksRenderer: InferRenderersForComponentBlocks<
   typeof componentBlocks
 > = {
   organiserList: (props) => (
-    <div className="justfiy-between flex w-full flex-wrap gap-x-8 gap-y-8 sm:gap-y-12">
+    <ul className="justfiy-between flex w-full flex-wrap gap-x-8 gap-y-8 sm:gap-y-12">
       {props.content.map((el) => (
         <>
           <Organiser key={el.organiser} slug={el.organiser} />
         </>
       ))}
-    </div>
+    </ul>
   ),
 }
 
