@@ -13,6 +13,7 @@ export type IconButtonProps = {
   tone?: 'highlight' | 'accent'
   emphasis?: 'high' | 'default' | 'low'
   href?: string
+  openInNewTab?: boolean
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 //  Tailwind classes lookup
@@ -49,6 +50,7 @@ export default function Button({
   emphasis = 'default',
   icon: Icon,
   href,
+  openInNewTab = false,
   ...restProps
 }: IconButtonProps) {
   const allClasses = cx(
@@ -60,7 +62,13 @@ export default function Button({
   const { 'aria-label': ariaLabel, ...rest } = restProps
 
   return href ? (
-    <Link aria-label={ariaLabel} className={allClasses} href={href}>
+    <Link
+      aria-label={ariaLabel}
+      className={allClasses}
+      href={href}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener noreferrer' : undefined}
+    >
       {iconRender}
     </Link>
   ) : (

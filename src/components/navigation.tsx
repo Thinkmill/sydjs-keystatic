@@ -7,12 +7,13 @@ import { TwitterIcon, YouTubeIcon, LinkedInIcon, MeetupIcon } from './svg-icons'
 import Logo from './logo'
 import IconButton from './icon-button'
 import { TextLink } from './text-link'
+import { socialIcons } from '@/components/social-icons'
 
 export default function Navigation() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   return (
     <>
-      <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between overflow-x-scroll px-6 py-4 lg:px-8">
+      <nav className="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between overflow-x-auto px-6 py-4 lg:px-8">
         <Link aria-label="SydJS" className="pr-8" href="/">
           <Logo />
         </Link>
@@ -28,38 +29,11 @@ export default function Navigation() {
               <span className="whitespace-nowrap">Join mailing list</span>
             </Button>
           </li> */}
-          <li className="-ml-4 hidden md:block">
-            <IconButton
-              aria-label="SydJS on Meetup"
-              emphasis="low"
-              href="https://www.meetup.com/en-AU/sydjs-classic/"
-              icon={MeetupIcon}
-            />
-          </li>
-          <li className="-ml-4 hidden md:block">
-            <IconButton
-              aria-label="SydJS on LinkedIn"
-              emphasis="low"
-              href="https://www.linkedin.com/company/sydjs"
-              icon={LinkedInIcon}
-            />
-          </li>
-          <li className="-ml-4 hidden md:block">
-            <IconButton
-              aria-label="SydJS on Twitter"
-              emphasis="low"
-              href="https://twitter.com/sydjs"
-              icon={TwitterIcon}
-            />
-          </li>
-          <li className="-ml-4 hidden md:block">
-            <IconButton
-              aria-label="SydJS on YouTube"
-              emphasis="low"
-              href="https://www.youtube.com/@SydJSMeetup"
-              icon={YouTubeIcon}
-            />
-          </li>
+          {Object.entries(socialIcons).map(([key, icon]) => (
+            <li key={key} className="-ml-4 hidden md:block">
+              {icon}
+            </li>
+          ))}
         </ul>
       </nav>
       {/* <Modal
