@@ -31,7 +31,7 @@ const urls: Record<PersonLink, string> = {
   website: '',
 }
 
-export default function getPersonLinks(person: Person) {
+export default function getPersonLinks(person: Partial<Person>) {
   const sortOrder: PersonLink[] = [
     'bluesky',
     'mastodon',
@@ -41,19 +41,15 @@ export default function getPersonLinks(person: Person) {
     'website',
   ]
 
-  const links: [string, string][] = Object.entries(person)
-    .filter((arr): arr is [string, string] => {
-      const [key, value] = arr
-      return sortOrder.includes(key as PersonLink) && !!value
-    })
-    .sort(
-      ([keyA], [keyB]) =>
-        sortOrder.indexOf(keyA as PersonLink) -
-        sortOrder.indexOf(keyB as PersonLink)
+  const links: [PersonLink, string][] = sortOrder
+    .map((key) => [key, person[key]])
+    .filter(
+      (pair): pair is [PersonLink, string] =>
+        typeof pair[1] === 'string' && pair[1].length > 0
     )
 
   return links.map(([key, value]) => {
-    let label = value
+    let label
 
     if (key === 'website') {
       const url = new URL(value)
