@@ -8,7 +8,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'SydJS',
     short_name: 'SydJS',
     description:
-      'We are a community of JavaScript enthusiasts based in Sydney, Australia.',
+      'Join the vibrant and inclusive community of web developers discussing the latest in JavaScript from Sydney, Australia.',
     lang: 'en-AU',
     start_url: '/',
     display: 'minimal-ui',
@@ -24,6 +24,43 @@ export default function manifest(): MetadataRoute.Manifest {
         src: '/images/sydjs-512.png',
         sizes: '512x512',
         type: 'image/png',
+      },
+    ],
+    screenshots: [
+      {
+        src: '/images/pwa-desktop.webp',
+        sizes: '1440x1094',
+        type: 'image/webp',
+        // @ts-expect-error https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Manifest/Reference/screenshots#form_factor
+        form_factor: 'wide',
+      },
+      {
+        src: '/images/pwa-desktop-2.webp',
+        sizes: '1440x1094',
+        type: 'image/webp',
+        // @ts-expect-error
+        form_factor: 'wide',
+      },
+      {
+        src: '/images/pwa-mobile.webp',
+        sizes: '860x1820',
+        type: 'image/webp',
+        // @ts-expect-error
+        form_factor: 'narrow',
+      },
+      {
+        src: '/images/pwa-mobile-2.webp',
+        sizes: '860x1820',
+        type: 'image/webp',
+        // @ts-expect-error
+        form_factor: 'narrow',
+      },
+      {
+        src: '/images/pwa-mobile-3.webp',
+        sizes: '860x1820',
+        type: 'image/webp',
+        // @ts-expect-error
+        form_factor: 'narrow',
       },
     ],
   }
