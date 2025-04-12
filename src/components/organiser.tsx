@@ -25,18 +25,16 @@ export const Organiser = asyncComponent(async function Organiser({
         {person?.name}
       </p>
       {primaryLink && (
-        <div className="flex items-center gap-1">
+        <a
+          aria-label={`${primaryLink.label} (Opens in new tab)`}
+          href={primaryLink.url}
+          className="not-prose flex items-center gap-1 font-semibold text-black underline hover:no-underline"
+          target="_blank"
+          rel="noopener"
+        >
           <primaryLink.icon width={20} height={20} />
-          <a
-            aria-label={`${primaryLink.label} (Opens in new tab)`}
-            href={primaryLink.url}
-            className="not-prose font-semibold text-black underline hover:no-underline"
-            target="_blank"
-            rel="noopener"
-          >
-            {primaryLink.label}
-          </a>
-        </div>
+          <span>{primaryLink.label}</span>
+        </a>
       )}
     </li>
   )
