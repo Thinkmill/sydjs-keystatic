@@ -1,13 +1,15 @@
 import Image from 'next/image'
 import { asyncComponent } from '@/lib/async-component'
 import { reader } from '@/app/keystatic/reader'
+import getPersonLinks from '@/lib/get-person-links'
 
 export const Organiser = asyncComponent(async function Organiser({
   slug,
 }: {
   slug: string
 }) {
-  const person = await reader.collections.persons.read(slug)
+  const person = await reader.collections.persons.readOrThrow(slug)
+  const [primaryLink] = getPersonLinks(person)
   return (
     <li className="not-prose flex flex-col md:flex-1">
       {person?.avatar && (
@@ -22,16 +24,19 @@ export const Organiser = asyncComponent(async function Organiser({
       <p className="not-prose mt-4 text-2xl font-medium text-black">
         {person?.name}
       </p>
-      {person?.twitterHandle && (
-        <a
-          aria-label={`@${person.twitterHandle} (Opens in new tab)`}
-          href={`https://twitter.com/${person.twitterHandle}`}
-          className="not-prose font-semibold text-black underline hover:no-underline"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          @{person.twitterHandle}
-        </a>
+      {primaryLink && (
+        <div className="flex items-center gap-1">
+          <primaryLink.icon width={20} height={20} />
+          <a
+            aria-label={`${primaryLink.label} (Opens in new tab)`}
+            href={primaryLink.url}
+            className="not-prose font-semibold text-black underline hover:no-underline"
+            target="_blank"
+            rel="noopener"
+          >
+            {primaryLink.label}
+          </a>
+        </div>
       )}
     </li>
   )

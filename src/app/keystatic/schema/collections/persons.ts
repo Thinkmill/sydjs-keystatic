@@ -1,6 +1,7 @@
 import { collection, fields } from '@keystatic/core'
+import { Reader } from '@keystatic/core/reader'
 
-export default collection({
+const persons = collection({
   label: 'Persons',
   path: 'src/content/persons/*',
   slugField: 'name',
@@ -31,9 +32,9 @@ export default collection({
       label: 'LinkedIn',
       description: 'The LinkedIn username.',
     }),
-    mastodon: fields.text({
+    mastodon: fields.url({
       label: 'Mastodon',
-      description: 'The Mastodon username.',
+      description: 'The Mastodon profile URL.',
     }),
     website: fields.url({
       label: 'Website',
@@ -56,3 +57,13 @@ export default collection({
     ),
   },
 })
+export default persons
+
+export type Person = Exclude<
+  Awaited<
+    ReturnType<
+      Reader<{ persons: typeof persons }, {}>['collections']['persons']['read']
+    >
+  >,
+  null | undefined
+>
