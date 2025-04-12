@@ -1,14 +1,13 @@
 import React from 'react'
 import Link from 'next/link'
-
-import { TwitterIcon } from './svg-icons'
+import { type IconComponent } from './svg-icons'
 
 function cx(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ')
 }
 
 export type IconButtonProps = {
-  icon: typeof TwitterIcon
+  icon: IconComponent
   size?: 'default' | 'large'
   tone?: 'highlight' | 'accent'
   emphasis?: 'high' | 'default' | 'low'
@@ -67,7 +66,7 @@ export default function Button({
       className={allClasses}
       href={href}
       target={openInNewTab ? '_blank' : undefined}
-      rel={openInNewTab ? 'noopener noreferrer' : undefined}
+      rel={openInNewTab ? 'noopener' : undefined}
     >
       {iconRender}
     </Link>

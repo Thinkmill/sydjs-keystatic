@@ -2,7 +2,7 @@ import IconButton from '@/components/icon-button'
 import {
   LinkedInIcon,
   MeetupIcon,
-  TwitterIcon,
+  XIcon,
   YouTubeIcon,
 } from '@/components/svg-icons'
 
@@ -27,13 +27,13 @@ export const socialIcons = {
       openInNewTab
     />
   ),
-  twitter: (
+  x: (
     <IconButton
-      key="twitter"
-      aria-label="SydJS on Twitter"
+      key="x"
+      aria-label="SydJS on X"
       emphasis="low"
-      href="https://twitter.com/sydjs"
-      icon={TwitterIcon}
+      href="https://x.com/sydjs"
+      icon={XIcon}
       openInNewTab
     />
   ),

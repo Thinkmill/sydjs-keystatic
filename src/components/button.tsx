@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
-import { TwitterIcon } from './svg-icons'
+import { type IconComponent } from './svg-icons'
 
 function cx(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -10,7 +10,7 @@ export type ButtonProps = {
   size?: 'default' | 'large'
   tone?: 'highlight' | 'accent'
   emphasis?: 'high' | 'default' | 'low'
-  icon?: typeof TwitterIcon
+  icon?: IconComponent
   iconPosition?: 'before' | 'after'
   href?: string
   children: ReactNode

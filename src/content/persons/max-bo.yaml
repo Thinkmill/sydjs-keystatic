@@ -1,10 +1,6 @@
 name: Max Bo
 avatar: /images/avatars/max-bo/avatar.jpg
 twitterHandle: _max_bo_
-socialLinks:
-  - label: maxbo.me
-    link: https://maxbo.me/
-  - label: GitHub
-    link: http://github.com/MaxwellBo
-  - label: LinkedIn
-    link: https://www.linkedin.com/in/max-bo/
+website: https://maxbo.me/
+github: MaxwellBo
+linkedin: max-bo

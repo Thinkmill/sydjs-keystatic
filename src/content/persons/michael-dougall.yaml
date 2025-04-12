@@ -1,8 +1,5 @@
 name: Michael Dougall
 avatar: /images/avatars/michael-dougall/avatar.jpeg
 twitterHandle: _douges
-socialLinks:
-  - label: LinkedIn
-    link: https://www.linkedin.com/in/madou/
-  - label: GitHub
-    link: https://github.com/itsdouges
+linkedin: madou
+github: itsdouges

@@ -2,10 +2,8 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { TwitterIcon, YouTubeIcon, LinkedInIcon, MeetupIcon } from './svg-icons'
 
 import Logo from './logo'
-import IconButton from './icon-button'
 import { TextLink } from './text-link'
 import { socialIcons } from '@/components/social-icons'
 

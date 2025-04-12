@@ -12,6 +12,7 @@ import {
 } from '@/lib/shared-metadata'
 
 import { FeaturedMedia } from '@/components/featured-media'
+import getPersonLinks from '@/lib/get-person-links'
 
 export async function generateMetadata({
   params: { slug },
@@ -125,6 +126,9 @@ const TalkSpeaker = asyncComponent(async function TalkSpeaker(props: {
   speaker: string
 }) {
   const speaker = await reader.collections.persons.readOrThrow(props.speaker)
+
+  const [primaryLink, ...restLinks] = getPersonLinks(speaker)
+  const iconSize = 20
   return (
     <li className="flex items-center gap-3">
       {speaker.avatar && (
@@ -138,14 +142,24 @@ const TalkSpeaker = asyncComponent(async function TalkSpeaker(props: {
       )}
       <div>
         <p className="text-sm/none font-medium">By {speaker.name}</p>
-        {speaker.twitterHandle && (
-          <Link
-            className="text-sm/none font-semibold"
-            href={`https://twitter.com/${speaker.twitterHandle}`}
-          >
-            @{speaker.twitterHandle}
-          </Link>
-        )}
+        <div className="mt-1 flex items-center gap-2">
+          {primaryLink && (
+            <Link
+              className="flex items-center gap-1 text-sm/none font-semibold"
+              href={primaryLink.url}
+              target="_blank"
+              rel="noopener"
+            >
+              {primaryLink.label}
+              <primaryLink.icon width={iconSize} height={iconSize} />
+            </Link>
+          )}
+          {restLinks.map((link) => (
+            <Link key={link.key} href={link.url} target="_blank" rel="noopener">
+              <link.icon width={iconSize} height={iconSize} />
+            </Link>
+          ))}
+        </div>
       </div>
     </li>
   )

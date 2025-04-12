@@ -1,6 +1,7 @@
 import { collection, fields } from '@keystatic/core'
+import { Reader } from '@keystatic/core/reader'
 
-export default collection({
+const persons = collection({
   label: 'Persons',
   path: 'src/content/persons/*',
   slugField: 'name',
@@ -19,6 +20,26 @@ export default collection({
       label: 'Twitter Handle',
       description: 'The twitter handle, without the `@` symbol.',
     }),
+    bluesky: fields.text({
+      label: 'Bluesky Handle',
+      description: 'The bluesky handle, without the `@` symbol.',
+    }),
+    github: fields.text({
+      label: 'GitHub',
+      description: 'The GitHub username.',
+    }),
+    linkedin: fields.text({
+      label: 'LinkedIn',
+      description: 'The LinkedIn username.',
+    }),
+    mastodon: fields.url({
+      label: 'Mastodon',
+      description: 'The Mastodon profile URL.',
+    }),
+    website: fields.url({
+      label: 'Website',
+      description: 'The personal website URL.',
+    }),
     socialLinks: fields.array(
       fields.object({
         label: fields.text({ label: 'Label' }),
@@ -29,11 +50,20 @@ export default collection({
       }),
       {
         label: 'Social Links',
-        description:
-          'If any other social media links than Twitter, add them here.',
+        description: 'If any other social media links, add them here.',
         itemLabel: (props) =>
           props.fields.label.value ?? 'Please enter a label',
       }
     ),
   },
 })
+export default persons
+
+export type Person = Exclude<
+  Awaited<
+    ReturnType<
+      Reader<{ persons: typeof persons }, {}>['collections']['persons']['read']
+    >
+  >,
+  null | undefined
+>
