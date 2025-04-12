@@ -14,7 +14,6 @@ import { TextLink } from '../text-link'
 import { asyncComponent } from '@/lib/async-component'
 import { reader } from '@/app/keystatic/reader'
 import { Status, getStatus } from '@/lib/get-status'
-import events from '@/app/keystatic/schema/collections/events'
 
 const eventStatusClasses: Record<Status, string> = {
   UPCOMING: 'bg-highlight',
@@ -183,7 +182,14 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                     >
                       <Icon aria-hidden className="h-5 w-5 stroke-black" />
                     </div>
-                    <span className="text-lg/6 font-medium">{event.text}</span>
+                    <div>
+                      <span className="text-lg/6 font-medium">
+                        {event.text}
+                      </span>
+                      {event.details && (
+                        <p className="text-sm">{event.details}</p>
+                      )}
+                    </div>
                   </li>
                 )
               })}
