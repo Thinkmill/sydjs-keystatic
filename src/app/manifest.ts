@@ -35,7 +35,28 @@ export default function manifest(): MetadataRoute.Manifest {
         form_factor: 'wide',
       },
       {
+        src: '/images/pwa-desktop-2.webp',
+        sizes: '1440x1094',
+        type: 'image/webp',
+        // @ts-expect-error
+        form_factor: 'wide',
+      },
+      {
         src: '/images/pwa-mobile.webp',
+        sizes: '860x1820',
+        type: 'image/webp',
+        // @ts-expect-error
+        form_factor: 'narrow',
+      },
+      {
+        src: '/images/pwa-mobile-2.webp',
+        sizes: '860x1820',
+        type: 'image/webp',
+        // @ts-expect-error
+        form_factor: 'narrow',
+      },
+      {
+        src: '/images/pwa-mobile-3.webp',
         sizes: '860x1820',
         type: 'image/webp',
         // @ts-expect-error
