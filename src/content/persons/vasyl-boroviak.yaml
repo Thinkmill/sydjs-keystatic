@@ -1,8 +1,5 @@
 name: Vasyl Boroviak
 avatar: /images/avatars/vasyl-boroviak/avatar.webp
 twitterHandle: kore_sar
-socialLinks:
-  - label: LinkedIn
-    link: https://www.linkedin.com/in/vasylboroviak/
-  - label: GitHub
-    link: https://github.com/koresar
+linkedin: vasylboroviak
+github: koresar
