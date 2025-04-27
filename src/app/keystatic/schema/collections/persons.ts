@@ -32,11 +32,12 @@ const persons = collection({
       label: 'LinkedIn',
       description: 'The LinkedIn username.',
     }),
-    mastodon: fields.url({
+    // We can't make these URLs, otherwise they become required
+    mastodon: fields.text({
       label: 'Mastodon',
       description: 'The Mastodon profile URL.',
     }),
-    website: fields.url({
+    website: fields.text({
       label: 'Website',
       description: 'The personal website URL.',
     }),
