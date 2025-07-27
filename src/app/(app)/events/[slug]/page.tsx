@@ -141,7 +141,7 @@ const TalkSpeaker = asyncComponent(async function TalkSpeaker(props: {
         />
       )}
       <div>
-        <p className="text-sm/none font-medium">By {speaker.name}</p>
+        <p className="text-sm/none font-medium">by {speaker.name}</p>
         <div className="mt-1 flex items-center gap-2">
           {primaryLink && (
             <Link
