@@ -7,7 +7,7 @@ import classnames from 'classnames'
 
 import { Entry } from '@keystatic/core/reader'
 import { Status } from '@/lib/get-status'
-import keystaticConfig from '@/app/keystatic/keystatic.config'
+import keystaticConfig from '../../keystatic.config'
 import YouTubeEmbed from '@/components/youtube-embed'
 import Button from '@/components/button'
 import { PlayOutlineIcon } from '@/components/svg-icons'
@@ -48,7 +48,7 @@ export function FeaturedMedia({ media, status, kind = 'event' }: MediaProps) {
               className="aspect-video object-cover"
               videoUrl={media.value.url}
             />
-            {media.value.image?.asset !== null ?? (
+            {media.value.image?.asset !== null && (
               <ThumbnailOverlay
                 // Don't understand why TS thinks `asset` can be null after the check above
                 image={media.value.image as any}

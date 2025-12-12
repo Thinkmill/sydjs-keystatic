@@ -2,11 +2,11 @@ import { config } from '@keystatic/core'
 import type { LocalConfig, GitHubConfig } from '@keystatic/core'
 
 // Schema
-import admin from './schema/singletons/admin'
-import events from './schema/collections/events'
-import talks from './schema/collections/talks'
-import persons from './schema/collections/persons'
-import sponsors from './schema/collections/sponsors'
+import admin from './src/app/keystatic/schema/singletons/admin'
+import events from './src/app/keystatic/schema/collections/events'
+import talks from './src/app/keystatic/schema/collections/talks'
+import persons from './src/app/keystatic/schema/collections/persons'
+import sponsors from './src/app/keystatic/schema/collections/sponsors'
 
 // Storage strategy
 const storage: LocalConfig['storage'] | GitHubConfig['storage'] =
