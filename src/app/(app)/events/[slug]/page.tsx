@@ -14,12 +14,11 @@ import {
 import { FeaturedMedia } from '@/components/featured-media'
 import getPersonLinks from '@/lib/get-person-links'
 
-export async function generateMetadata({
-  params: { slug },
-}: {
-  params: { slug: string }
+export async function generateMetadata(props: {
+  params: Promise<{ slug: string }>
 }) {
-  const event = await reader.collections.events.readOrThrow(slug, {
+  const params = await props.params
+  const event = await reader.collections.events.readOrThrow(params.slug, {
     resolveLinkedFiles: true,
   })
 
@@ -52,7 +51,10 @@ export async function generateStaticParams() {
   return eventSlugs.map((slug) => ({ slug }))
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: {
+  params: Promise<{ slug: string }>
+}) {
+  const params = await props.params
   return (
     <>
       <div className="mx-auto mt-8 max-w-[96rem] space-y-6 px-6">
