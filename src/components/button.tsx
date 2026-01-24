@@ -14,6 +14,7 @@ export type ButtonProps = {
   iconPosition?: 'before' | 'after'
   href?: string
   children: ReactNode
+  className?: string
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 //  Tailwind classes lookup
@@ -52,12 +53,14 @@ export default function Button({
   iconPosition = 'before',
   href,
   children,
+  className,
   ...restProps
 }: ButtonProps) {
   const allClasses = cx(
     baseClasses,
     sizeClasses[size],
-    emphasisClasses[tone][emphasis]
+    emphasisClasses[tone][emphasis],
+    className
   )
   const contents = Icon ? (
     <span className="flex items-center gap-2">
