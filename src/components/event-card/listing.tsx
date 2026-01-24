@@ -9,7 +9,6 @@ import {
   DesktopIcon,
   ClockIcon,
   LocationOutlineIcon,
-  OpenOutlineIcon,
 } from '../svg-icons'
 import { TextLink } from '../text-link'
 import { asyncComponent } from '@/lib/async-component'
@@ -114,8 +113,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                       href={event.rsvpLink}
                       size="large"
                       emphasis="low"
-                      iconPosition="after"
-                      icon={OpenOutlineIcon}
+                      openInNewTab
                       className="relative z-10"
                     >
                       RSVP on Meetup.com
@@ -241,9 +239,8 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                 <Button
                   href={event.rsvpLink}
                   emphasis="low"
-                  iconPosition="after"
                   size="large"
-                  icon={OpenOutlineIcon}
+                  openInNewTab
                   className="relative z-10"
                 >
                   RSVP on Meetup.com
