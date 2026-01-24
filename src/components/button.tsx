@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react'
 import Link from 'next/link'
-import { type IconComponent } from './svg-icons'
+import { type IconComponent, OpenOutlineIcon } from './svg-icons'
 
 function cx(...classes: (string | undefined)[]) {
   return classes.filter(Boolean).join(' ')
@@ -13,7 +13,9 @@ export type ButtonProps = {
   icon?: IconComponent
   iconPosition?: 'before' | 'after'
   href?: string
+  openInNewTab?: boolean
   children: ReactNode
+  className?: string
 } & React.ButtonHTMLAttributes<HTMLButtonElement>
 
 //  Tailwind classes lookup
@@ -48,29 +50,46 @@ export default function Button({
   size = 'default',
   tone = 'highlight',
   emphasis = 'default',
-  icon: Icon,
+  icon,
   iconPosition = 'before',
   href,
+  openInNewTab = false,
   children,
+  className,
   ...restProps
 }: ButtonProps) {
+  // Automatically use OpenOutlineIcon when openInNewTab is true and no icon is provided
+  const Icon = icon || (openInNewTab ? OpenOutlineIcon : undefined)
+  // Default to 'after' position when using the automatic openInNewTab icon
+  const effectiveIconPosition = icon
+    ? iconPosition
+    : openInNewTab
+      ? 'after'
+      : iconPosition
+
   const allClasses = cx(
     baseClasses,
     sizeClasses[size],
-    emphasisClasses[tone][emphasis]
+    emphasisClasses[tone][emphasis],
+    className,
   )
   const contents = Icon ? (
     <span className="flex items-center gap-2">
-      {iconPosition === 'before' && <Icon className="-my-1 h-6 w-6" />}
+      {effectiveIconPosition === 'before' && <Icon className="-my-1 h-6 w-6" />}
       {children}
-      {iconPosition === 'after' && <Icon className="-my-1 h-6 w-6" />}
+      {effectiveIconPosition === 'after' && <Icon className="-my-1 h-6 w-6" />}
     </span>
   ) : (
     children
   )
 
   return href ? (
-    <Link className={allClasses} href={href}>
+    <Link
+      className={allClasses}
+      href={href}
+      target={openInNewTab ? '_blank' : undefined}
+      rel={openInNewTab ? 'noopener' : undefined}
+    >
       {contents}
     </Link>
   ) : (

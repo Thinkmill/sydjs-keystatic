@@ -28,7 +28,10 @@ export default function Navigation() {
             </Button>
           </li> */}
           {Object.entries(socialIcons).map(([key, icon]) => (
-            <li key={key} className="-ml-4 hidden md:block">
+            <li
+              key={key}
+              className={`-ml-4 ${key === 'meetup' ? '' : 'hidden md:block'}`}
+            >
               {icon}
             </li>
           ))}

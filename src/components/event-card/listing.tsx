@@ -2,13 +2,13 @@ import { format } from 'date-fns'
 import classnames from 'classnames'
 import { DocumentRenderer } from '@keystatic/core/renderer'
 
+import Link from 'next/link'
 import Button from '../button'
 import {
   CalendarClearOutlineIcon,
   DesktopIcon,
   ClockIcon,
   LocationOutlineIcon,
-  OpenOutlineIcon,
 } from '../svg-icons'
 import { TextLink } from '../text-link'
 import { asyncComponent } from '@/lib/async-component'
@@ -73,7 +73,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
       <div className="hidden @4xl:block">
         <div
           className={classnames(
-            'rounded-[40px] p-16',
+            'relative rounded-[40px] p-16 transition-transform hover:scale-[1.02]',
             eventStatusClasses[status]
           )}
         >
@@ -85,14 +85,27 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
             <div className="grid gap-16 md:grid-cols-3 xl:gap-28">
               <div className="md:col-span-2">
                 <Heading className="mt-8 text-4xl font-bold">
-                  {event.name}
+                  {/* Stretched link pattern: This link's ::after pseudo-element 
+                      covers the entire card, avoiding nested <a> tags */}
+                  <Link
+                    href={`/events/${slug}`}
+                    className="after:absolute after:inset-0 after:rounded-[40px]"
+                  >
+                    {event.name}
+                  </Link>
                 </Heading>
                 <div className="mt-4 line-clamp-[8] space-y-4 text-lg safari:line-clamp-none [&_a]:underline hover:[&_a]:no-underline">
                   <DocumentRenderer document={event.description} />
                 </div>
 
                 <div className="mt-6 flex items-center gap-4">
-                  <Button href={`/events/${slug}`} size="large">
+                  {/* relative z-10 positions these buttons above the stretched 
+                      link so they are still clickable */}
+                  <Button
+                    href={`/events/${slug}`}
+                    size="large"
+                    className="relative z-10"
+                  >
                     View event details
                   </Button>
                   {status !== 'PAST' && event.rsvpLink && (
@@ -100,8 +113,8 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                       href={event.rsvpLink}
                       size="large"
                       emphasis="low"
-                      iconPosition="after"
-                      icon={OpenOutlineIcon}
+                      openInNewTab
+                      className="relative z-10"
                     >
                       RSVP on Meetup.com
                     </Button>
@@ -154,7 +167,7 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
       <div className="block h-full @4xl:hidden">
         <div
           className={classnames(
-            'h-full rounded-[40px] p-8 sm:p-10',
+            'relative h-full rounded-[40px] p-8 transition-transform hover:scale-[1.02] sm:p-10',
             eventStatusClasses[status]
           )}
         >
@@ -163,11 +176,16 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
               upcoming event
             </span>
           )}
-          <TextLink href={`/events/${slug}`}>
-            <Heading className="line-clamp-2 text-2xl font-bold safari:line-clamp-none">
+          <Heading className="line-clamp-2 text-2xl font-bold safari:line-clamp-none">
+            {/* Stretched link pattern: This link's ::after pseudo-element 
+                covers the entire card, avoiding nested <a> tags */}
+            <Link
+              href={`/events/${slug}`}
+              className="after:absolute after:inset-0 after:rounded-[40px]"
+            >
               {event.name}
-            </Heading>
-          </TextLink>
+            </Link>
+          </Heading>
           <ul className="mt-6 space-y-4">
             {eventMeta
               .filter((event) => !event.secondary)
@@ -207,7 +225,13 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
 
           {status !== 'PAST' && (
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button href={`/events/${slug}`} size="large">
+              {/* relative z-10 positions these buttons above the stretched 
+                  link so they are still clickable */}
+              <Button
+                href={`/events/${slug}`}
+                size="large"
+                className="relative z-10"
+              >
                 View event details
               </Button>
 
@@ -215,9 +239,9 @@ export const EventListingCard = asyncComponent(async function EventListingCard({
                 <Button
                   href={event.rsvpLink}
                   emphasis="low"
-                  iconPosition="after"
                   size="large"
-                  icon={OpenOutlineIcon}
+                  openInNewTab
+                  className="relative z-10"
                 >
                   RSVP on Meetup.com
                 </Button>
