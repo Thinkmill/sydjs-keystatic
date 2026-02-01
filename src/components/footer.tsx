@@ -60,7 +60,7 @@ export default function Footer() {
             </p>
           </div>
           <p className="mt-8 flex-1 text-sm md:mt-0 md:text-right">
-            &copy; 2025 Thinkmill &amp; Contributors. All rights reserved.
+            &copy; {new Date().getFullYear()} Thinkmill &amp; Contributors. All rights reserved.
           </p>
         </div>
       </div>
