@@ -1,0 +1,12 @@
+---
+name: '"Escape Room Software Engineering" and how Loom Meeting Recordings eventually broke out to greatly improve reliability'
+featuredMedia:
+  discriminant: none
+speakers:
+  - justin-talbott
+---
+Throughout the last year, the Loom Meeting Recording team has had to react to sudden, unexpected changes to our supported video platforms. At the time of the feature's inception, there were no official real-time APIs to consume meeting video and audio, so we were forced to use browser automation to record meetings.
+
+Because these integrations are unofficial, the video platforms have no obligation to alert us of new platform changes or help us when we encounter issues. When new issues arise, we were often left hunting for clues in auto-generated HTML, minified JavaScript files, and guesses as to what their server might be doing. We've internally coined the term "Escape Room Software Engineering".
+
+The talk covers this concept, explains our methods of confronting this type of problem solving, and describes how we went from a meeting recording failure rate of ~6% to under 0.1% in the last quarter. It also emphasises the strong preference to avoid this type of software maintenance when possible, and describes our adoption of real-time APIs that Google and Zoom currently have in developer preview that will negate the need to solve these types of issues in the future.
