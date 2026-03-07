@@ -1,3 +1,15 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  ::selection {
+    background-color: #FFE22199;
+  }
+}
+
+@layer utilities {
+  .selection-default ::selection {
+    background-color: highlight;
+  }
+}

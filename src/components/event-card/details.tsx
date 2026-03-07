@@ -61,7 +61,8 @@ export const EventDetailsCard = asyncComponent(async function EventCard({
           className={classnames(
             'rounded-t-[40px] p-16',
             !featuredMedia && 'rounded-b-[40px]',
-            eventStatusClasses[status]
+            eventStatusClasses[status],
+            status !== 'PAST' && 'selection-default'
           )}
         >
           <div className="mx-auto max-w-6xl px-6 lg:px-8">
@@ -106,7 +107,8 @@ export const EventDetailsCard = asyncComponent(async function EventCard({
           className={classnames(
             'rounded-t-[40px] p-8 sm:p-10',
             !featuredMedia && 'rounded-b-[40px]',
-            eventStatusClasses[status]
+            eventStatusClasses[status],
+            status !== 'PAST' && 'selection-default'
           )}
         >
           {status !== 'PAST' && (
