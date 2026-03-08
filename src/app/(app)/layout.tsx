@@ -45,21 +45,19 @@ const poppins = Poppins({
   variable: '--font-poppins',
 })
 
-export default function RootLayout({
+export default function AppLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
   return (
-    <html lang="en-AU">
-      <body
-        className={`${poppins.variable} grid min-h-screen grid-rows-[auto,1fr,auto] font-sans antialiased`}
-        suppressHydrationWarning={true}
-      >
-        <Navigation />
-        <main>{children}</main>
-        <Footer />
-      </body>
-    </html>
+    <div
+      className={`${poppins.variable} grid min-h-screen grid-rows-[auto,1fr,auto] font-sans antialiased`}
+      suppressHydrationWarning={true}
+    >
+      <Navigation />
+      <main>{children}</main>
+      <Footer />
+    </div>
   )
 }
