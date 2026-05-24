@@ -1,0 +1,15 @@
+# Treat Markdoc files as Markdown for GitHub language stats and diffs
+*.mdoc linguist-language=Markdown
+
+# Normalize all text files to LF on commit and checkout
+* text=auto eol=lf
+
+*.png   binary
+*.jpg   binary
+*.jpeg  binary
+*.webp  binary
+*.avif  binary
+*.gif   binary
+*.ico   binary
+*.woff  binary
+*.woff2 binary
