@@ -1,10 +1,11 @@
-# GitHub Pages publishes one site per repo, so PR previews cannot get their
-# own hostname. Each preview is a static export with a matching basePath,
-# stored under /pr-preview/pr-<number>/ on the gh-pages branch, then folded
-# into the next production Pages artifact.
+# GitHub Pages publishes one site per repo. Preview HTML is stored on the
+# gh-pages branch, then this job builds production from main, copies the
+# preview under /pr-preview/pr-<number>/, and deploys that combined folder
+# with actions/deploy-pages (the only thing sydjs.com actually serves).
 #
-# Run on pull_request only (not every branch push): previews need a PR number
-# for the URL, a comment target, and a close event for cleanup.
+# We deploy from this workflow instead of dispatching deploy-pages.yml on
+# main: workflow_dispatch always uses the YAML on main, which cannot compose
+# until this change is merged.
 name: Deploy PR preview
 
 on:
@@ -12,33 +13,36 @@ on:
     types: [opened, synchronize, reopened, closed]
 
 concurrency:
-  group: pages-preview-${{ github.event.pull_request.number }}
-  cancel-in-progress: true
+  group: pages-deploy
+  cancel-in-progress: false
 
 permissions:
   contents: write
   pull-requests: write
-  actions: write
+  pages: write
+  id-token: write
 
 jobs:
   preview:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout pull request
         uses: actions/checkout@v4
 
       - name: Set up pnpm
-        if: github.event.action != 'closed'
         uses: pnpm/action-setup@v4
 
       - name: Set up Node.js
-        if: github.event.action != 'closed'
         uses: actions/setup-node@v4
         with:
           node-version: 26
           cache: pnpm
 
-      - name: Install dependencies
+      - name: Install pull request dependencies
         if: github.event.action != 'closed'
         run: pnpm install --frozen-lockfile
 
@@ -58,28 +62,52 @@ jobs:
           NEXT_PUBLIC_PR_URL: ${{ github.event.pull_request.html_url }}
           NEXT_PUBLIC_SITE_URL: https://sydjs.com/pr-preview/pr-${{ github.event.number }}
 
-      - name: Add .nojekyll
+      - name: Stash preview output
         if: github.event.action != 'closed'
-        run: touch out/.nojekyll
+        run: |
+          touch out/.nojekyll
+          mv out preview-out
 
-      - name: Deploy or remove preview
-        if: github.event.pull_request.head.repo.full_name == github.repository
+      - name: Store or remove preview on gh-pages
         uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
         with:
-          source-dir: ./out
+          source-dir: preview-out
           preview-branch: gh-pages
           umbrella-dir: pr-preview
           pages-base-url: sydjs.com
           action: auto
 
-      - name: Publish previews with the production site
-        if: github.event.pull_request.head.repo.full_name == github.repository
-        uses: actions/github-script@v7
+      - name: Checkout main
+        uses: actions/checkout@v4
         with:
-          script: |
-            await github.rest.actions.createWorkflowDispatch({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'deploy-pages.yml',
-              ref: 'main',
-            })
+          ref: main
+          path: production-src
+
+      - name: Install and build production from main
+        working-directory: production-src
+        run: |
+          pnpm install --frozen-lockfile
+          rm -rf 'src/app/keystatic/[[...params]]'
+          rm -rf 'src/app/api/keystatic/[...params]'
+          STATIC_EXPORT=true pnpm build
+
+      - name: Compose production and preview
+        run: |
+          rm -rf composed
+          cp -a production-src/out composed
+          if [ -d preview-out ]; then
+            mkdir -p "composed/pr-preview/pr-${{ github.event.number }}"
+            cp -a preview-out/. "composed/pr-preview/pr-${{ github.event.number }}/"
+          fi
+
+      - name: Set up GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: composed
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
