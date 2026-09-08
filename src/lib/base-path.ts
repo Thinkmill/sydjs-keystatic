@@ -3,7 +3,7 @@
  * a subdirectory (e.g. /pr-preview/pr-12) and need a matching Next.js basePath.
  */
 export function getPagesBasePath(
-  env: NodeJS.ProcessEnv = process.env,
+  env: Record<string, string | undefined> = process.env,
 ): string {
   const raw = env.BASE_PATH?.trim() ?? ''
   if (!raw || raw === '/') {
