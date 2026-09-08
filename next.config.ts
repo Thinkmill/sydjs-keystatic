@@ -1,16 +1,16 @@
 import { NextConfig } from 'next'
 
+const isStaticExport = process.env.STATIC_EXPORT === 'true'
+
 const nextConfig: NextConfig = {
   reactStrictMode: false,
-  async redirects() {
-    return [
-      {
-        source: '/events/syd-js-returns-in-2023',
-        destination: '/events/thinkmill-takes-over-syd-js',
-        permanent: true,
-      },
-    ]
-  },
+  ...(isStaticExport && {
+    output: 'export',
+    trailingSlash: true,
+    images: {
+      unoptimized: true,
+    },
+  }),
 }
 
 module.exports = nextConfig

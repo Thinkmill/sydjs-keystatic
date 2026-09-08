@@ -18,9 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = admin?.siteDescription || ''
 
   return {
-    // TODO: Replace with the URL below before switching DNS servers
-    metadataBase: new URL('https://sydjs-keystatic.vercel.app/'),
-    // metadataBase: new URL('https://sydjs.com'),
+    metadataBase: new URL('https://sydjs.com'),
     title: {
       template: `%s | ${admin?.siteTitle}`,
       default: title,
@@ -45,11 +43,7 @@ const poppins = Poppins({
   variable: '--font-poppins',
 })
 
-export default function AppLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
     <div
       className={`${poppins.variable} grid min-h-screen grid-rows-[auto,1fr,auto] font-sans antialiased`}

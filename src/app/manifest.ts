@@ -1,5 +1,7 @@
 import type { MetadataRoute } from 'next'
 
+export const dynamic = 'force-static'
+
 type Manifest = Omit<MetadataRoute.Manifest, 'screenshots'> & {
   screenshots: Screenshots
 }
