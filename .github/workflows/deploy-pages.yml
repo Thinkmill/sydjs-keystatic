@@ -46,7 +46,10 @@ jobs:
         env:
           STATIC_EXPORT: 'true'
 
+      # Only when a PR preview workflow asks us to republish. A push to main
+      # deploys production alone and drops any previously composed previews.
       - name: Include PR preview sites
+        if: github.event_name == 'workflow_dispatch'
         run: |
           if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
             git fetch origin gh-pages --depth=1
