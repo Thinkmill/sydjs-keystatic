@@ -1,0 +1,86 @@
+# GitHub Pages publishes one site per repo, so PR previews cannot get their
+# own hostname. Each preview is a static export with a matching basePath,
+# stored under /pr-preview/pr-<number>/ on the gh-pages branch. A dispatch
+# of deploy-pages.yml (on main) then builds production and copies those
+# folders into the Pages artifact — the only thing sydjs.com serves.
+#
+# We cannot call deploy-pages from this pull_request job: the github-pages
+# environment only allows the main branch.
+name: Deploy PR preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+concurrency:
+  group: pages-preview-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up pnpm
+        if: github.event.action != 'closed'
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node.js
+        if: github.event.action != 'closed'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26
+          cache: pnpm
+
+      - name: Install dependencies
+        if: github.event.action != 'closed'
+        run: pnpm install --frozen-lockfile
+
+      - name: Remove server-only Keystatic routes
+        if: github.event.action != 'closed'
+        run: |
+          rm -rf 'src/app/keystatic/[[...params]]'
+          rm -rf 'src/app/api/keystatic/[...params]'
+
+      - name: Build static preview
+        if: github.event.action != 'closed'
+        run: pnpm build
+        env:
+          STATIC_EXPORT: 'true'
+          BASE_PATH: /pr-preview/pr-${{ github.event.number }}
+          NEXT_PUBLIC_PR_NUMBER: ${{ github.event.number }}
+          NEXT_PUBLIC_PR_URL: ${{ github.event.pull_request.html_url }}
+          NEXT_PUBLIC_SITE_URL: https://sydjs.com/pr-preview/pr-${{ github.event.number }}
+
+      - name: Add .nojekyll
+        if: github.event.action != 'closed'
+        run: touch out/.nojekyll
+
+      - name: Store or remove preview on gh-pages
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: rossjrw/pr-preview-action@ffa7509e91a3ec8dfc2e5536c4d5c1acdf7a6de9 # v1.8.1
+        with:
+          source-dir: ./out
+          preview-branch: gh-pages
+          umbrella-dir: pr-preview
+          pages-base-url: sydjs.com
+          action: auto
+
+      - name: Publish previews with the production site
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'deploy-pages.yml',
+              ref: 'main',
+            })

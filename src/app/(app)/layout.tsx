@@ -5,6 +5,7 @@ import { reader } from '@/app/keystatic/reader'
 import '@/styles/globals.css'
 import Navigation from '@/components/navigation'
 import Footer from '@/components/footer'
+import { PreviewBanner } from '@/components/preview-banner'
 
 import {
   sharedOpenGraphMetadata,
@@ -16,18 +17,24 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const title = admin?.siteTitle || ''
   const description = admin?.siteDescription || ''
+  const previewSiteUrl = process.env.NEXT_PUBLIC_SITE_URL
+  const isPreview = Boolean(process.env.NEXT_PUBLIC_PR_NUMBER)
 
   return {
-    metadataBase: new URL('https://sydjs.com'),
+    metadataBase: new URL(previewSiteUrl || 'https://sydjs.com'),
     title: {
       template: `%s | ${admin?.siteTitle}`,
       default: title,
     },
     description: description,
+    ...(isPreview && {
+      robots: { index: false, follow: false },
+    }),
     openGraph: {
       title,
       description,
       ...sharedOpenGraphMetadata,
+      ...(previewSiteUrl && { url: previewSiteUrl }),
     },
     twitter: {
       title,
@@ -49,7 +56,10 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
       className={`${poppins.variable} grid min-h-screen grid-rows-[auto,1fr,auto] font-sans antialiased`}
       suppressHydrationWarning={true}
     >
-      <Navigation />
+      <div>
+        <PreviewBanner />
+        <Navigation />
+      </div>
       <main>{children}</main>
       <Footer />
     </div>

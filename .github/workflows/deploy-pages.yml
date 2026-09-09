@@ -3,7 +3,6 @@ name: Build and deploy to GitHub Pages
 on:
   push:
     branches: [main]
-  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -12,7 +11,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages-${{ github.event_name == 'pull_request' && github.event.pull_request.number || 'deploy' }}
+  group: pages-deploy
   cancel-in-progress: false
 
 jobs:
@@ -32,7 +31,6 @@ jobs:
           cache: pnpm
 
       - name: Set up GitHub Pages
-        if: github.event_name != 'pull_request'
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
@@ -48,14 +46,31 @@ jobs:
         env:
           STATIC_EXPORT: 'true'
 
+      # Only when a PR preview workflow asks us to republish. A push to main
+      # deploys production alone and drops any previously composed previews.
+      - name: Include PR preview sites
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            git fetch origin gh-pages --depth=1
+            if git archive origin/gh-pages pr-preview >/tmp/pr-preview.tar 2>/dev/null; then
+              rm -rf out/pr-preview
+              mkdir -p out
+              tar -x -f /tmp/pr-preview.tar -C out
+              echo "Included $(find out/pr-preview -mindepth 1 -maxdepth 1 -type d | wc -l) PR preview(s)"
+            else
+              echo "gh-pages has no pr-preview directory yet"
+            fi
+          else
+            echo "No gh-pages branch yet; skipping previews"
+          fi
+
       - name: Upload Pages artifact
-        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: out
 
   deploy:
-    if: github.event_name != 'pull_request'
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
