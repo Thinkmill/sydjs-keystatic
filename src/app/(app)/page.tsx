@@ -95,6 +95,9 @@ const Header = asyncComponent(async function Header() {
       <p className="mt-6 text-2xl font-medium">
         {adminPage.homepageDescription}
       </p>
+      <p className="mt-4 text-sm font-semibold text-black/70">
+        Pages preview smoke test
+      </p>
     </>
   )
 })
