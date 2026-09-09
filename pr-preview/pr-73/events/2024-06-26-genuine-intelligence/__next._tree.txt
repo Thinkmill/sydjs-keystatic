@@ -1,6 +1,0 @@
-:HL["/pr-preview/pr-73/_next/static/chunks/b2308d078e7f4d6f.css","style"]
-:HL["/pr-preview/pr-73/_next/static/media/47fe1b7cd6e6ed85-s.p.855a563b.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/pr-preview/pr-73/_next/static/media/8e6fa89aa22d24ec-s.p.3aec397d.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/pr-preview/pr-73/_next/static/media/a218039a3287bcfd-s.p.4a23d71b.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-:HL["/pr-preview/pr-73/_next/static/media/e2334d715941921e-s.p.d82a9aff.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
-0:{"buildId":"fAHMUhdzuVkKPPENvrhFn","tree":{"name":"","paramType":null,"paramKey":"","hasRuntimePrefetch":false,"slots":{"children":{"name":"(app)","paramType":null,"paramKey":"(app)","hasRuntimePrefetch":false,"slots":{"children":{"name":"events","paramType":null,"paramKey":"events","hasRuntimePrefetch":false,"slots":{"children":{"name":"slug","paramType":"d","paramKey":"2024-06-26-genuine-intelligence","hasRuntimePrefetch":false,"slots":{"children":{"name":"__PAGE__","paramType":null,"paramKey":"__PAGE__","hasRuntimePrefetch":false,"slots":null,"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":false}},"isRootLayout":true},"staleTime":300}
