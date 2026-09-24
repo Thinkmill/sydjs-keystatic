@@ -1,0 +1,18 @@
+---
+const prNumber = import.meta.env.PUBLIC_PR_NUMBER
+const prUrl = import.meta.env.PUBLIC_PR_URL
+---
+
+{prNumber && (
+  <div class="bg-highlight px-4 py-2 text-center text-sm font-semibold">
+    Preview of pull request{' '}
+    {prUrl ? (
+      <a class="underline" href={prUrl}>
+        #{prNumber}
+      </a>
+    ) : (
+      `#${prNumber}`
+    )}
+    . Not the live SydJS site.
+  </div>
+)}

@@ -6,7 +6,7 @@ describe('get-person-links', () => {
     expect(
       getPersonLinks({
         bluesky: 'example.bsky.social',
-      })
+      }),
     ).toEqual([
       expect.objectContaining({
         key: 'bluesky',
@@ -20,7 +20,7 @@ describe('get-person-links', () => {
     expect(
       getPersonLinks({
         bluesky: 'example.com',
-      })
+      }),
     ).toEqual([
       expect.objectContaining({
         key: 'bluesky',
@@ -34,7 +34,7 @@ describe('get-person-links', () => {
     expect(
       getPersonLinks({
         linkedin: 'example-user-1234abcd',
-      })
+      }),
     ).toEqual([
       expect.objectContaining({
         key: 'linkedin',
@@ -48,7 +48,7 @@ describe('get-person-links', () => {
     expect(
       getPersonLinks({
         mastodon: 'https://mastodon.social/@example',
-      })
+      }),
     ).toEqual([
       expect.objectContaining({
         key: 'mastodon',
@@ -62,7 +62,7 @@ describe('get-person-links', () => {
     expect(
       getPersonLinks({
         mastodon: 'https://aus.social/@example',
-      })
+      }),
     ).toEqual([
       expect.objectContaining({
         key: 'mastodon',
@@ -76,7 +76,7 @@ describe('get-person-links', () => {
     expect(
       getPersonLinks({
         website: 'https://example.com',
-      })
+      }),
     ).toEqual([
       expect.objectContaining({
         key: 'website',
@@ -90,7 +90,7 @@ describe('get-person-links', () => {
     expect(
       getPersonLinks({
         name: 'Example Person',
-      })
+      }),
     ).toEqual([])
   })
 
@@ -99,7 +99,7 @@ describe('get-person-links', () => {
       getPersonLinks({
         website: 'https://example.com',
         bluesky: 'example.bsky.social',
-      })
+      }),
     ).toEqual([
       expect.objectContaining({
         key: 'bluesky',

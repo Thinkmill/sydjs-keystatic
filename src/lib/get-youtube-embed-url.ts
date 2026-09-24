@@ -5,7 +5,7 @@
 */
 export function getYouTubeEmbedUrl(url: string) {
   const videoIdMatch = url.match(
-    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?(?:.*&)?v=))([\w-]{11})/
+    /(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?(?:.*&)?v=))([\w-]{11})/,
   )
   const timestampMatch = url.match(/[?&]t=(\d+)/)
 

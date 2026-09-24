@@ -1,6 +1,6 @@
 /**
  * GitHub Pages serves one site per repo. PR previews therefore live under
- * a subdirectory (e.g. /pr-preview/pr-12) and need a matching Next.js basePath.
+ * a subdirectory (e.g. /pr-preview/pr-12) and need a matching Astro base.
  */
 export function getPagesBasePath(
   env: Record<string, string | undefined> = process.env,
@@ -14,7 +14,7 @@ export function getPagesBasePath(
 
 export function withBasePath(
   path: string,
-  basePath = process.env.NEXT_PUBLIC_BASE_PATH || '',
+  basePath = process.env.NEXT_PUBLIC_BASE_PATH || process.env.BASE_PATH || '',
 ): string {
   if (!basePath || !path.startsWith('/') || path.startsWith('//')) {
     return path

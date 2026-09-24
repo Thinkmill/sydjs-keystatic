@@ -1,9 +1,11 @@
 ---
 name: add-event
-description: Scaffolds a new SydJS event file in src/content/events/. Use when the user wants to add, create, or scaffold a new meetup event.
+description: Scaffolds a new SydJS event file in src/content/events/ for the Astro content collection. Use when the user wants to add, create, or scaffold a new meetup event.
 ---
 
 # Add a New SydJS Event
+
+Schema source: `src/content.config.ts` (`events` collection)
 
 Creates a single event `.mdoc` file in `src/content/events/`.
 
@@ -25,16 +27,20 @@ If the meetup.com URL can't be fetched, ask the user to provide the event name, 
 
 Example: `2026-05-21-the-future-is-now.mdoc`
 
+The public URL is `/events/YYYY-MM/`, taken from the `date` field. Renaming the file when the title is known does not change that URL. There is one event per month; a second event in the same month fails the build.
+
+Filenames that were already published are listed in `src/lib/event-legacy-slugs.ts` and redirect to the month URL. Add a row there only when a previously published filename would otherwise 404. New events do not need a row.
+
 ## Defaults
 
-| Field           | Default                            | Override when…                                                                                      |
-| --------------- | ---------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `location`      | fetched from meetup.com            | Falls back to `Atlassian Headquarters` if not found                                                 |
+| Field           | Default                            | Override when…                                                                                                             |
+| --------------- | ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `location`      | fetched from meetup.com            | Falls back to `Atlassian Headquarters` if not found                                                                        |
 | `address`       | `Level 29, 363 George St · Sydney` | Use `Level 6, 341 George St · Sydney` for the other Atlassian floor; override entirely if a non-Atlassian venue is fetched |
-| `startTime`     | `06:00 PM`                         | User specifies otherwise                                                                            |
-| `endTime`       | `08:00 PM`                         | User specifies otherwise                                                                            |
-| `featuredMedia` | `discriminant: none`               | Never change this at creation time                                                                  |
-| `talks`         | _(empty list)_                     | Leave empty — talks are added separately                                                            |
+| `startTime`     | `06:00 PM`                         | User specifies otherwise                                                                                                   |
+| `endTime`       | `08:00 PM`                         | User specifies otherwise                                                                                                   |
+| `featuredMedia` | `discriminant: none`               | Never change this at creation time                                                                                         |
+| `talks`         | _(empty list)_                     | Leave empty — talks are added separately                                                                                   |
 
 ## Template
 

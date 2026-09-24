@@ -1,26 +1,9 @@
-import type { Person } from '@/app/keystatic/schema/collections/persons'
-import {
-  GitHubIcon,
-  LinkIcon,
-  MastodonIcon,
-  BlueskyIcon,
-  LinkedInIcon,
-  XIcon,
-  type IconComponent,
-} from '@/components/svg-icons'
+import type { Person } from '@/content.config'
 
 type PersonLink = keyof Pick<
   Person,
   'bluesky' | 'mastodon' | 'twitterHandle' | 'github' | 'linkedin' | 'website'
 >
-const icons: Record<PersonLink, IconComponent> = {
-  bluesky: BlueskyIcon,
-  mastodon: MastodonIcon,
-  twitterHandle: XIcon,
-  github: GitHubIcon,
-  linkedin: LinkedInIcon,
-  website: LinkIcon,
-}
 
 const urls: Record<PersonLink, string> = {
   bluesky: 'https://bsky.app/profile/',
@@ -45,7 +28,7 @@ export default function getPersonLinks(person: Partial<Person>) {
     .map((key) => [key, person[key]])
     .filter(
       (pair): pair is [PersonLink, string] =>
-        typeof pair[1] === 'string' && pair[1].length > 0
+        typeof pair[1] === 'string' && pair[1].length > 0,
     )
 
   return links.map(([key, value]) => {
@@ -71,7 +54,6 @@ export default function getPersonLinks(person: Partial<Person>) {
       key,
       label,
       url: urls[key as PersonLink] + value,
-      icon: icons[key as PersonLink],
     }
   })
 }

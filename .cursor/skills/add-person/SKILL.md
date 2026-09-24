@@ -1,13 +1,13 @@
 ---
 name: add-person
-description: Creates or updates a person profile in src/content/persons/ from a name the user provides. Looks up existing entries, researches public profiles via web search, and fills Keystatic person fields. Use when the user wants to add, create, or populate a person, speaker, or profile.
+description: Creates or updates a person profile in src/content/persons/ from a name the user provides. Looks up existing entries, researches public profiles via web search, and fills the Astro content collection fields. Use when the user wants to add, create, or populate a person, speaker, or profile.
 ---
 
 # Add a Person Profile
 
 Creates or enriches a person `.yaml` file in `src/content/persons/`.
 
-Schema source: `src/app/keystatic/schema/collections/persons.ts`
+Schema source: `src/content.config.ts` (`persons` collection)
 
 ## Input
 
@@ -30,17 +30,17 @@ Search for the person using their name plus any context the user gave. Prefer pr
 
 ### Field mapping (schema → YAML)
 
-| Schema field      | YAML key          | Format |
-| ----------------- | ----------------- | ------ |
-| `name`            | `name`            | Display name as the user gave it (title case unless they used a specific stylization) |
-| `avatar`          | `avatar`          | `/images/avatars/{slug}/avatar.{jpeg\|jpg\|png\|webp}` — see Avatar below |
-| `twitterHandle`   | `twitterHandle`   | Handle only, **no** `@` |
-| `bluesky`         | `bluesky`         | Handle only, **no** `@` (e.g. `user.bsky.social`) |
-| `github`          | `github`          | Username only |
-| `linkedin`        | `linkedin`        | Username or slug from profile URL, not full URL |
-| `mastodon`        | `mastodon`        | **Full** profile URL (e.g. `https://mastodon.social/@handle`) |
-| `website`         | `website`         | Full URL with scheme |
-| `socialLinks`     | `socialLinks`     | Only for other networks; each item needs `label` + `link` (full URL) |
+| Schema field    | YAML key        | Format                                                                                |
+| --------------- | --------------- | ------------------------------------------------------------------------------------- |
+| `name`          | `name`          | Display name as the user gave it (title case unless they used a specific stylization) |
+| `avatar`        | `avatar`        | `/images/avatars/{slug}/avatar.{jpeg\|jpg\|png\|webp}` — see Avatar below             |
+| `twitterHandle` | `twitterHandle` | Handle only, **no** `@`                                                               |
+| `bluesky`       | `bluesky`       | Handle only, **no** `@` (e.g. `user.bsky.social`)                                     |
+| `github`        | `github`        | Username only                                                                         |
+| `linkedin`      | `linkedin`      | Username or slug from profile URL, not full URL                                       |
+| `mastodon`      | `mastodon`      | **Full** profile URL (e.g. `https://mastodon.social/@handle`)                         |
+| `website`       | `website`       | Full URL with scheme                                                                  |
+| `socialLinks`   | `socialLinks`   | Only for other networks; each item needs `label` + `link` (full URL)                  |
 
 Omit YAML keys entirely when unknown — do not use empty strings for optional text fields.
 

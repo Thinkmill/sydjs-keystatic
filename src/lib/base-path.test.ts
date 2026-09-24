@@ -37,8 +37,8 @@ describe('withBasePath', () => {
     expect(
       withBasePath('/pr-preview/pr-12/images/speaker.png', '/pr-preview/pr-12'),
     ).toBe('/pr-preview/pr-12/images/speaker.png')
-    expect(withBasePath('https://sydjs.com/images/speaker.png', '/pr-preview/pr-12')).toBe(
-      'https://sydjs.com/images/speaker.png',
-    )
+    expect(
+      withBasePath('https://sydjs.com/images/speaker.png', '/pr-preview/pr-12'),
+    ).toBe('https://sydjs.com/images/speaker.png')
   })
 })

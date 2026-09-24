@@ -1,0 +1,56 @@
+---
+import OpenOutlineIcon from './svg-icons/open-outline.astro'
+
+interface Props {
+  href?: string
+  size?: 'default' | 'large'
+  tone?: 'highlight' | 'accent'
+  emphasis?: 'high' | 'default' | 'low'
+  openInNewTab?: boolean
+  class?: string
+}
+
+const {
+  href,
+  size = 'default',
+  tone = 'highlight',
+  emphasis = 'default',
+  openInNewTab = false,
+  class: className = '',
+} = Astro.props
+
+const classes = [
+  'inline-block border-2 font-semibold text-base/none sm:text-lg/none',
+  size === 'large' ? 'rounded-2xl px-6 py-4 sm:py-5' : 'rounded-xl px-4 py-2',
+  tone === 'accent'
+    ? emphasis === 'high'
+      ? 'border-transparent bg-black text-accent hover:bg-gray-900'
+      : emphasis === 'low'
+        ? 'border-transparent text-black hover:bg-black/[8%]'
+        : 'border-black text-black hover:bg-black/[8%]'
+    : emphasis === 'high'
+      ? 'border-transparent bg-black text-highlight hover:bg-gray-800'
+      : emphasis === 'low'
+        ? 'border-transparent text-black hover:bg-black/[8%]'
+        : 'border-black text-black hover:bg-black/[8%]',
+  className,
+]
+---
+
+{href ? (
+  <a
+    class={classes.join(' ')}
+    href={href}
+    target={openInNewTab ? '_blank' : undefined}
+    rel={openInNewTab ? 'noopener' : undefined}
+  >
+    <span class="flex items-center gap-2">
+      <slot />
+      {openInNewTab && <OpenOutlineIcon class="-my-1 h-6 w-6" />}
+    </span>
+  </a>
+) : (
+  <button class={classes.join(' ')} type="button">
+    <slot />
+  </button>
+)}

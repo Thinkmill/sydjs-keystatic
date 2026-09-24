@@ -1,12 +1,13 @@
-import { Config } from 'tailwindcss'
+import type { Config } from 'tailwindcss'
 import { fontFamily } from 'tailwindcss/defaultTheme'
 import containerQueriesPlugin from '@tailwindcss/container-queries'
+import typographyPlugin from '@tailwindcss/typography'
 import plugin from 'tailwindcss/plugin'
 
 const safariVariant = plugin(function ({ addVariant }) {
   addVariant(
     'safari',
-    '@media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) { & }}'
+    '@media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) { & }}',
   )
 })
 
@@ -14,7 +15,9 @@ const config = {
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
-    './src/app/**/*.{js,ts,jsx,tsx}',
+    './src/pages/**/*.{astro,js,ts,jsx,tsx}',
+    './src/components/**/*.{astro,js,ts,jsx,tsx}',
+    './src/layouts/**/*.{astro,js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
@@ -31,7 +34,7 @@ const config = {
         18: '4.5rem',
       },
       fontFamily: {
-        sans: ['var(--font-poppins)', ...fontFamily.sans],
+        sans: ['Poppins', ...fontFamily.sans],
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
@@ -40,11 +43,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    containerQueriesPlugin,
-    require('@tailwindcss/typography'),
-    safariVariant,
-  ],
+  plugins: [containerQueriesPlugin, typographyPlugin, safariVariant],
 } satisfies Config
 
 export default config

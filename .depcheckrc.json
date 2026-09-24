@@ -1,0 +1,12 @@
+{
+  "ignores": [
+    "@fontsource/poppins",
+    "autoprefixer",
+    "classnames",
+    "postcss",
+    "prettier",
+    "prettier-plugin-astro",
+    "prettier-plugin-tailwindcss",
+    "astro:content"
+  ]
+}

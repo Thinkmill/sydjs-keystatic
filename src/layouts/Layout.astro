@@ -1,0 +1,66 @@
+---
+import '@fontsource/poppins/400.css'
+import '@fontsource/poppins/500.css'
+import '@fontsource/poppins/600.css'
+import '@fontsource/poppins/700.css'
+import '@/styles/globals.css'
+import { getEntry } from 'astro:content'
+import { sitePath } from '@/lib/paths'
+import PreviewBanner from '@/components/PreviewBanner.astro'
+import SiteNavigation from '@/components/SiteNavigation.astro'
+import SiteFooter from '@/components/SiteFooter.astro'
+
+interface Props {
+  title?: string
+  description?: string
+}
+
+const { title, description } = Astro.props
+const admin = await getEntry('admin', 'index')
+const siteTitle = admin?.data.siteTitle ?? 'SydJS'
+const siteDescription = admin?.data.siteDescription ?? ''
+const siteOrigin = 'https://sydjs.com'
+const canonical = new URL(Astro.url.pathname, siteOrigin).href
+const socialImage = new URL(sitePath('/images/seo-image.png'), siteOrigin).href
+const isPreview = Boolean(import.meta.env.PUBLIC_PR_NUMBER)
+const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle
+---
+
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href={sitePath('/favicon.ico')} sizes="any" />
+    <link rel="icon" type="image/svg+xml" href={sitePath('/icon.svg')} />
+    <link rel="manifest" href={sitePath('/manifest.webmanifest')} />
+    <link rel="canonical" href={canonical} />
+    <meta name="theme-color" content="#FFE221" />
+    <meta name="description" content={description ?? siteDescription} />
+    {isPreview && <meta name="robots" content="noindex, nofollow" />}
+    <meta property="og:locale" content="en_AU" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description ?? siteDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={socialImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SydJS" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@sydjs" />
+    <meta name="twitter:creator" content="@sydjs" />
+    <meta name="twitter:image" content={socialImage} />
+    <meta name="twitter:image:alt" content="SydJS" />
+    <title>{pageTitle}</title>
+  </head>
+  <body class="grid min-h-screen grid-rows-[auto,1fr,auto] bg-white font-sans antialiased">
+    <div>
+      <PreviewBanner />
+      <SiteNavigation />
+    </div>
+    <main>
+      <slot />
+    </main>
+    <SiteFooter />
+  </body>
+</html>
