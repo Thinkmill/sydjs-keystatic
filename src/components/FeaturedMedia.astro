@@ -1,0 +1,71 @@
+---
+import type { FeaturedMedia as FeaturedMediaData } from '@/content.config'
+import { getYouTubeEmbedUrl } from '@/lib/get-youtube-embed-url'
+import { assetPath } from '@/lib/paths'
+import { PlayOutlineIcon } from './svg-icons'
+
+interface Props {
+  media: FeaturedMediaData
+  kind?: 'event' | 'talk'
+}
+
+const { media, kind = 'event' } = Astro.props
+const isEvent = kind === 'event'
+---
+
+<div class="relative">
+  {media.discriminant === 'image' && (
+    <img
+      class="relative mx-auto aspect-video w-full max-w-6xl rounded-2xl object-cover ring-1 ring-black/10"
+      src={assetPath(media.value.asset)}
+      alt={media.value.alt ?? ''}
+      width="1200"
+      height="675"
+      loading={isEvent ? 'eager' : 'lazy'}
+    />
+  )}
+
+  {media.discriminant === 'video' && (
+    <div class="relative mx-auto max-w-6xl overflow-hidden rounded-2xl">
+      <iframe
+        class="aspect-video w-full"
+        src={getYouTubeEmbedUrl(media.value.url)}
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      />
+      {media.value.image?.asset && (
+        <div
+          class="absolute inset-0 grid place-items-center bg-black/40 transition-opacity duration-300"
+          data-video-thumbnail
+        >
+          <img
+            class="absolute inset-0 h-full w-full object-cover"
+            src={assetPath(media.value.image.asset)}
+            alt={media.value.image.alt ?? ''}
+            loading={isEvent ? 'eager' : 'lazy'}
+          />
+          <button
+            class:list={[
+              'relative z-10 rounded-2xl border-2 border-transparent bg-black text-highlight hover:bg-gray-800',
+              isEvent ? 'px-6 py-4 sm:py-5' : 'px-4 py-2',
+            ]}
+            type="button"
+            data-video-play
+            aria-label="Play video"
+          >
+            <PlayOutlineIcon className={`${isEvent ? 'h-8 w-8' : 'h-6 w-6'} -mx-1`} />
+          </button>
+        </div>
+      )}
+    </div>
+  )}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-video-play]').forEach((button) => {
+    button.addEventListener('click', () => {
+      button.closest<HTMLElement>('[data-video-thumbnail]')?.remove()
+    })
+  })
+</script>

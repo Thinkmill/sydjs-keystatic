@@ -1,9 +1,11 @@
 ---
 name: add-event
-description: Scaffolds a new SydJS event file in src/content/events/. Use when the user wants to add, create, or scaffold a new meetup event.
+description: Scaffolds a new SydJS event file in src/content/events/ for the Astro content collection. Use when the user wants to add, create, or scaffold a new meetup event.
 ---
 
 # Add a New SydJS Event
+
+Schema source: `src/content.config.ts` (`events` collection)
 
 Creates a single event `.mdoc` file in `src/content/events/`.
 

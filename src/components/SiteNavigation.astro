@@ -1,0 +1,46 @@
+---
+import Logo from './logo'
+import {
+  LinkedInIcon,
+  MeetupIcon,
+  XIcon,
+  YouTubeIcon,
+} from './svg-icons'
+import { sitePath } from '@/lib/paths'
+
+const links = [
+  ['Meetup', 'https://www.meetup.com/en-AU/sydjs-classic/', MeetupIcon],
+  ['LinkedIn', 'https://www.linkedin.com/company/sydjs', LinkedInIcon],
+  ['X', 'https://x.com/sydjs', XIcon],
+  ['YouTube', 'https://www.youtube.com/@SydJSMeetup', YouTubeIcon],
+] as const
+---
+
+<nav class="relative z-20 mx-auto flex w-full max-w-6xl items-center justify-between overflow-x-auto px-6 py-4 lg:px-8">
+  <a aria-label="SydJS" class="pr-8" href={sitePath('/')}>
+    <Logo />
+  </a>
+  <ul class="flex items-center gap-8">
+    <li class="text-lg/none font-semibold">
+      <a class="underline decoration-transparent transition hover:decoration-current" href={sitePath('/events/')}>Events</a>
+    </li>
+    <li class="text-lg/none font-semibold">
+      <a class="underline decoration-transparent transition hover:decoration-current" href={sitePath('/about/')}>About</a>
+    </li>
+    {
+      links.map(([label, href, Icon]) => (
+        <li class="-ml-4 hidden md:block first:block">
+          <a
+            aria-label={`SydJS on ${label}`}
+            class="block rounded-xl p-2 hover:bg-black/10"
+            href={href}
+            target="_blank"
+            rel="noopener"
+          >
+            <Icon className="h-6 w-6" />
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

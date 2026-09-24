@@ -36,15 +36,13 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Remove server-only Keystatic routes
-        run: |
-          rm -rf 'src/app/keystatic/[[...params]]'
-          rm -rf 'src/app/api/keystatic/[...params]'
-
       - name: Build static site
         run: pnpm build
         env:
           STATIC_EXPORT: 'true'
+
+      - name: Add .nojekyll
+        run: touch out/.nojekyll
 
       # Only when a PR preview workflow asks us to republish. A push to main
       # deploys production alone and drops any previously composed previews.

@@ -1,0 +1,76 @@
+---
+import { getCollection, getEntry, render } from 'astro:content'
+import Layout from '@/layouts/Layout.astro'
+import EventDetails from '@/components/EventDetails.astro'
+import FeaturedMedia from '@/components/FeaturedMedia.astro'
+import getPersonLinks from '@/lib/get-person-links'
+import { assetPath } from '@/lib/paths'
+
+export async function getStaticPaths() {
+  const events = await getCollection('events')
+  return events.map((event) => ({
+    params: { slug: event.id },
+    props: { event },
+  }))
+}
+
+const { event } = Astro.props
+const { slug = '' } = Astro.params
+const title = event.data.name
+const talkItems = (
+  await Promise.all(
+    event.data.talks.map(async (talkSlug) => {
+      const talk = await getEntry('talks', talkSlug)
+      if (!talk) return null
+      const { Content } = await render(talk)
+      const speakers = await Promise.all(
+        talk.data.speakers.slice(0, 2).map(async (speakerSlug) => {
+          const speaker = await getEntry('persons', speakerSlug)
+          if (!speaker) return null
+          return { speaker, primaryLink: getPersonLinks(speaker.data)[0] }
+        })
+      )
+      return { talk, Content, speakers: speakers.filter(Boolean) }
+    })
+  )
+).filter(Boolean)
+---
+
+<Layout title={title} description={event.data.seoDescription}>
+  <div class="mx-auto mt-8 max-w-[96rem] space-y-6 px-6"><EventDetails heading="h1" slug={slug} /></div>
+  <div class="mx-auto mt-8 max-w-5xl px-6">
+    <h2 class="mt-20 text-4xl font-bold">Talks</h2>
+    {event.data.talks.length > 0 ? (
+      <ul class="mt-12 grid gap-18">
+        {talkItems.map((item) => {
+          if (!item) return null
+          const { talk, Content, speakers } = item
+          return (
+            <li class="grid gap-8 lg:grid-cols-3">
+              <div class="lg:col-span-2">
+                <h3 class="text-3xl font-bold">{talk.data.name}</h3>
+                <ul class="mt-3 flex flex-wrap gap-x-10 gap-y-4">
+                  {speakers.map(({ speaker, primaryLink }) => {
+                    return (
+                      <li class="flex items-center gap-3">
+                        {speaker.data.avatar && <img src={assetPath(speaker.data.avatar)} alt={`Avatar for ${speaker.data.name}`} width="40" height="40" class="h-10 w-10 rounded-xl object-cover" />}
+                        <div>
+                          <p class="text-sm/none font-medium">by {speaker.data.name}</p>
+                          {primaryLink && <a class="text-sm/none font-semibold underline" href={primaryLink.url} target="_blank" rel="noopener">{primaryLink.label}</a>}
+                        </div>
+                      </li>
+                    )
+                  })}
+                </ul>
+                <div class="prose mt-6"><Content /></div>
+              </div>
+              {talk.data.featuredMedia.discriminant !== 'none' && <div><FeaturedMedia media={talk.data.featuredMedia} kind="talk" /></div>}
+            </li>
+          )
+        })}
+      </ul>
+    ) : (
+      <p class="mt-4 text-lg">No information about talks available for this event.</p>
+    )}
+  </div>
+</Layout>

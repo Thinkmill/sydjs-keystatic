@@ -1,0 +1,116 @@
+---
+import { render, getEntry } from 'astro:content'
+import { format } from 'date-fns'
+import classnames from 'classnames'
+import { getStatus } from '@/lib/get-status'
+import { sitePath } from '@/lib/paths'
+import Button from './Button.astro'
+import {
+  CalendarClearOutlineIcon,
+  ClockIcon,
+  LocationOutlineIcon,
+  DesktopIcon,
+} from './svg-icons'
+
+interface Props {
+  slug: string
+  heading?: 'h1' | 'h2' | 'h3'
+}
+
+const { slug, heading = 'h2' } = Astro.props
+const event = await getEntry('events', slug)
+if (!event) throw new Error(`Event not found: ${slug}`)
+const { Content } = await render(event)
+const status = getStatus(event.data.date)
+const Heading = heading
+const eventMeta = [
+  {
+    icon: CalendarClearOutlineIcon,
+    text: format(new Date(event.data.date), 'EEEE, d MMMM yyy'),
+    details: undefined,
+  },
+  {
+    icon: ClockIcon,
+    text: `${event.data.startTime}${event.data.endTime ? ` — ${event.data.endTime}` : ''}`,
+    details: undefined,
+  },
+  {
+    icon: LocationOutlineIcon,
+    text: event.data.location ?? 'Location to be announced',
+    details: event.data.address,
+  },
+  ...(event.data.zoomLink
+    ? [{ icon: DesktopIcon, text: 'Online event', details: undefined }]
+    : []),
+]
+const eventStatusClasses = {
+  UPCOMING: 'bg-highlight',
+  TODAY: 'bg-highlight',
+  PAST: 'bg-accent',
+}
+---
+
+<div class="h-full @container">
+  <div class="hidden @4xl:block">
+    <div class={classnames('relative rounded-[40px] p-16 transition-transform hover:scale-[1.02]', eventStatusClasses[status])}>
+      <span class="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
+        {status === 'PAST' ? 'past' : 'upcoming'} event
+      </span>
+      <div class="grid gap-16 md:grid-cols-3 xl:gap-28">
+        <div class="md:col-span-2">
+          <Heading class="mt-8 text-4xl font-bold">
+            <a class="after:absolute after:inset-0 after:rounded-[40px]" href={sitePath(`/events/${slug}/`)}>{event.data.name}</a>
+          </Heading>
+          <div class="mt-4 line-clamp-[8] space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline">
+            <Content />
+          </div>
+          <div class="mt-6 flex items-center gap-4">
+            <Button href={sitePath(`/events/${slug}/`)} size="large" class="relative z-10">View event details</Button>
+            {status !== 'PAST' && event.data.rsvpLink && (
+              <Button href={event.data.rsvpLink} size="large" emphasis="low" openInNewTab class="relative z-10">
+                RSVP on Meetup.com
+              </Button>
+            )}
+          </div>
+        </div>
+        <ul class="space-y-4">
+          {eventMeta.map(({ icon: Icon, text, details }) => (
+            <li class={classnames('flex gap-3', details ? 'items-start' : 'items-center')}>
+              <div aria-label={details ? 'Location' : undefined} class="shrink-0 rounded-xl bg-black/10 p-2.5" role="text">
+                <Icon aria-hidden className="h-5 w-5 fill-black" />
+              </div>
+              <div>
+                <p class={classnames('text-lg font-medium', details && 'mt-1.5')}>{text}</p>
+                {details && <p class="text-sm">{details}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="block h-full @4xl:hidden">
+    <div class={classnames('relative h-full rounded-[40px] p-8 transition-transform hover:scale-[1.02] sm:p-10', eventStatusClasses[status])}>
+      {status !== 'PAST' && <span class="mb-4 inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">upcoming event</span>}
+      <Heading class="line-clamp-2 text-2xl font-bold safari:line-clamp-none">
+        <a class="after:absolute after:inset-0 after:rounded-[40px]" href={sitePath(`/events/${slug}/`)}>{event.data.name}</a>
+      </Heading>
+      <ul class="mt-6 space-y-4">
+        {eventMeta.slice(0, 3).map(({ icon: Icon, text, details }) => (
+          <li class="flex items-center gap-3">
+            <div class="shrink-0 rounded-xl bg-black/10 p-2.5" role="text"><Icon className="h-5 w-5 fill-black" /></div>
+            <div><span class="text-lg/6 font-medium">{text}</span>{details && <p class="text-sm">{details}</p>}</div>
+          </li>
+        ))}
+      </ul>
+      <div class="mt-8 line-clamp-[7] space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline"><Content /></div>
+      {status !== 'PAST' && (
+        <div class="relative z-10 mt-8 flex flex-wrap items-center gap-4">
+          <Button href={sitePath(`/events/${slug}/`)} size="large">View event details</Button>
+          {event.data.rsvpLink && <Button href={event.data.rsvpLink} emphasis="low" size="large" openInNewTab>RSVP on Meetup.com</Button>}
+        </div>
+      )}
+    </div>
+  </div>
+</div>

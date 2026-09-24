@@ -1,4 +1,4 @@
-import { FC, SVGProps } from 'react'
+import type { FC, SVGProps } from 'react'
 export type IconComponent = FC<SVGProps<SVGSVGElement>>
 
 export * from './alert-circle-outline'

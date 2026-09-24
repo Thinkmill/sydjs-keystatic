@@ -1,0 +1,14 @@
+---
+import Layout from '@/layouts/Layout.astro'
+import Button from '@/components/Button.astro'
+import { sitePath } from '@/lib/paths'
+---
+
+<Layout title="Page not found">
+  <div class="mx-auto flex min-h-[55vh] max-w-3xl flex-col items-center justify-center px-6 text-center">
+    <p class="text-8xl font-bold text-highlight">404</p>
+    <h1 class="mt-8 text-4xl font-bold sm:text-5xl">That page has wandered off.</h1>
+    <p class="mt-6 text-xl">The page you’re looking for doesn’t exist, but SydJS is still here.</p>
+    <div class="mt-8"><Button href={sitePath('/') } emphasis="high">Back to SydJS</Button></div>
+  </div>
+</Layout>

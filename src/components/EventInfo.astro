@@ -1,0 +1,22 @@
+---
+import { format } from 'date-fns'
+import { getEntry } from 'astro:content'
+import {
+  CalendarClearOutlineIcon,
+  ClockIcon,
+  LocationOutlineIcon,
+  DesktopIcon,
+  ExitOutlineIcon,
+} from './svg-icons'
+
+const { slug } = Astro.props
+const event = await getEntry('events', slug)
+if (!event) throw new Error(`Event not found: ${slug}`)
+---
+
+<ul class="space-y-4">
+  <li class="flex items-center gap-3"><div class="shrink-0 rounded-xl bg-black/10 p-2.5"><CalendarClearOutlineIcon className="h-5 w-5 fill-black" /></div><p class="text-lg font-medium">{format(new Date(event.data.date), 'EEEE, d MMMM yyy')}</p></li>
+  <li class="flex items-center gap-3"><div class="shrink-0 rounded-xl bg-black/10 p-2.5"><ClockIcon className="h-5 w-5 fill-black" /></div><p class="text-lg font-medium">{event.data.startTime}{event.data.endTime && ` — ${event.data.endTime}`}</p></li>
+  <li class="flex gap-3" class:list={{ 'items-start': event.data.address, 'items-center': !event.data.address }}><div class="shrink-0 rounded-xl bg-black/10 p-2.5"><LocationOutlineIcon className="h-5 w-5 fill-black" /></div><div><p class="text-lg font-medium">{event.data.location ?? 'Location to be announced'}</p>{event.data.address && <p class="text-sm/none">{event.data.address}</p>}</div></li>
+  {event.data.zoomLink && <li class="flex items-start gap-3"><div class="shrink-0 rounded-xl bg-black/10 p-2.5"><DesktopIcon className="h-5 w-5 fill-black" /></div><div><p class="text-lg font-medium">Online event</p><a class="flex items-center gap-2 text-sm/none" href={event.data.zoomLink}><span class="border-b border-black/40 font-semibold">Join Zoom</span><ExitOutlineIcon className="h-5 w-5" /></a></div></li>}
+</ul>

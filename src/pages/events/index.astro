@@ -1,0 +1,21 @@
+---
+import { isFuture } from 'date-fns'
+import Layout from '@/layouts/Layout.astro'
+import EventCard from '@/components/EventCard.astro'
+import { getEvents } from '@/lib/get-data'
+
+const { futureEvents, pastEvents } = await getEvents()
+const isLastEventInTheFuture =
+  futureEvents.length > 0 && isFuture(new Date(futureEvents[futureEvents.length - 1].date))
+---
+
+<Layout title="Events" description="A list of upcoming and past SydJS events.">
+  <div class="mx-auto mt-24 max-w-6xl px-6">
+    <h1 class="text-5xl font-bold sm:text-6xl">SydJS events</h1>
+    <p class="mt-8 text-2xl font-medium">Here’s the <del>full</del> partial (for the moment) list of SydJS events over the years.</p>
+    <h2 class="mt-20 text-4xl font-bold">{isLastEventInTheFuture ? 'Upcoming' : 'Most recent event'}</h2>
+  </div>
+  {futureEvents.length > 0 && <div class="mx-auto mt-8 max-w-7xl space-y-6 px-6">{futureEvents.map((event) => <EventCard heading="h3" slug={event.slug} />)}</div>}
+  <div class="mx-auto mt-8 max-w-6xl px-6"><h2 class="mt-20 text-4xl font-bold">Past</h2></div>
+  <div class="mx-auto mt-8 max-w-6xl px-6"><div class="grid gap-x-6 gap-y-12 md:grid-cols-2 lg:grid-cols-3">{pastEvents.map((event) => <EventCard heading="h3" slug={event.slug} />)}</div></div>
+</Layout>

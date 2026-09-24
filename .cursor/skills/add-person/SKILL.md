@@ -1,13 +1,13 @@
 ---
 name: add-person
-description: Creates or updates a person profile in src/content/persons/ from a name the user provides. Looks up existing entries, researches public profiles via web search, and fills Keystatic person fields. Use when the user wants to add, create, or populate a person, speaker, or profile.
+description: Creates or updates a person profile in src/content/persons/ from a name the user provides. Looks up existing entries, researches public profiles via web search, and fills the Astro content collection fields. Use when the user wants to add, create, or populate a person, speaker, or profile.
 ---
 
 # Add a Person Profile
 
 Creates or enriches a person `.yaml` file in `src/content/persons/`.
 
-Schema source: `src/app/keystatic/schema/collections/persons.ts`
+Schema source: `src/content.config.ts` (`persons` collection)
 
 ## Input
 

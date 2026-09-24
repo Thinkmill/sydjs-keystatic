@@ -1,0 +1,18 @@
+---
+import { getCollection, render } from 'astro:content'
+import Layout from '@/layouts/Layout.astro'
+
+const [about] = await getCollection('about')
+if (!about) throw new Error('About content not found')
+const { Content } = await render(about)
+---
+
+<Layout
+  title="About"
+  description="We are a community of JavaScript enthusiasts based in Sydney, Australia. Our mission is to bring together developers of all skill levels to share knowledge, discuss interesting topics, and foster a vibrant community."
+>
+  <div class="prose mx-auto mt-20 max-w-4xl px-6 lg:prose-lg">
+    <h1 class="text-5xl font-bold sm:text-6xl">About SydJS</h1>
+    <Content />
+  </div>
+</Layout>

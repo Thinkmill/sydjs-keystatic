@@ -11,7 +11,7 @@ export function usePrefersReducedMotion() {
     // Set the true initial value, now that we're on the client:
     setPrefersReducedMotion(!window.matchMedia(QUERY).matches)
     // Register our event listener
-    const listener = (event: any) => {
+    const listener = (event: MediaQueryListEvent) => {
       setPrefersReducedMotion(!event.matches)
     }
     mediaQueryList.addEventListener('change', listener)

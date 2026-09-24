@@ -3,7 +3,6 @@
 import { useMouse } from 'ahooks'
 import { useRef } from 'react'
 
-import { withBasePath } from '@/lib/base-path'
 import { usePrefersReducedMotion } from '@/lib/prefers-reduced-motion'
 
 export function SkewImage({
@@ -41,7 +40,7 @@ export function SkewImage({
             fill="white"
           />
         </mask>
-        <image href={withBasePath(src)} className="w-full" mask={`url(#${maskId})`} />
+        <image href={src} className="w-full" mask={`url(#${maskId})`} />
       </svg>
     </>
   )

@@ -1,4 +1,4 @@
-import type { Person } from '@/app/keystatic/schema/collections/persons'
+import type { Person } from '@/content.config'
 import {
   GitHubIcon,
   LinkIcon,
