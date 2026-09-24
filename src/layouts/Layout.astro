@@ -58,7 +58,9 @@ const pageTitle = title ? `${title} | ${siteTitle}` : siteTitle
       <PreviewBanner />
       <SiteNavigation />
     </div>
-    <main><slot /></main>
+    <main>
+      <slot />
+    </main>
     <SiteFooter />
   </body>
 </html>

@@ -23,34 +23,100 @@ const statusClass = status === 'PAST' ? 'bg-accent' : 'bg-highlight'
 
 <div class="h-full @container">
   <div class="hidden @4xl:block">
-    <div class={classnames('rounded-t-[40px] p-16', event.data.featuredMedia.discriminant === 'none' && 'rounded-b-[40px]', statusClass)}>
+    <div
+      class={classnames(
+        'rounded-t-[40px] p-16',
+        event.data.featuredMedia.discriminant === 'none' && 'rounded-b-[40px]',
+        statusClass,
+      )}
+    >
       <div class="mx-auto max-w-6xl px-6 lg:px-8">
-        <span class="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">{status === 'PAST' ? 'past' : 'upcoming'} event</span>
+        <span class="inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
+          {status === 'PAST' ? 'past' : 'upcoming'} event
+        </span>
         <div class="grid gap-16 md:grid-cols-3 xl:gap-28">
           <div class="md:col-span-2">
             <Heading class="mt-8 text-4xl font-bold">{event.data.name}</Heading>
-            <div class="mt-4 space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline"><Content /></div>
-            {status !== 'PAST' && event.data.rsvpLink && <div class="mt-8"><Button href={event.data.rsvpLink} size="large" emphasis="high" openInNewTab>RSVP on Meetup.com</Button></div>}
+            <div class="mt-4 space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline">
+              <Content />
+            </div>
+            {status !== 'PAST' && event.data.rsvpLink && (
+              <div class="mt-8">
+                <Button
+                  href={event.data.rsvpLink}
+                  size="large"
+                  emphasis="high"
+                  openInNewTab
+                >
+                  RSVP on Meetup.com
+                </Button>
+              </div>
+            )}
           </div>
           <EventInfo slug={slug} />
         </div>
       </div>
     </div>
     {event.data.featuredMedia.discriminant !== 'none' && (
-      <div class={classnames('relative before:absolute before:h-1/2 before:w-full before:content-[\'\']', statusClass)}>
-        <div class="px-2 sm:px-4 lg:px-8"><FeaturedMedia media={event.data.featuredMedia} /></div>
+      <div
+        class={classnames(
+          "relative before:absolute before:h-1/2 before:w-full before:content-['']",
+          statusClass,
+        )}
+      >
+        <div class="px-2 sm:px-4 lg:px-8">
+          <FeaturedMedia media={event.data.featuredMedia} />
+        </div>
       </div>
     )}
   </div>
 
   <div class="block h-full @4xl:hidden">
-    <div class={classnames('rounded-t-[40px] p-8 sm:p-10', event.data.featuredMedia.discriminant === 'none' && 'rounded-b-[40px]', statusClass)}>
-      {status !== 'PAST' && <span class="mb-4 inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">upcoming event</span>}
-      <a href={sitePath(`/events/${slug}/`)}><Heading class="text-2xl font-bold">{event.data.name}</Heading></a>
-      <div class="mt-6"><EventInfo slug={slug} /></div>
-      <div class="mt-8 space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline"><Content /></div>
-      {status !== 'PAST' && event.data.rsvpLink && <div class="mt-8"><Button href={event.data.rsvpLink} emphasis="high" size="large" openInNewTab>RSVP on Meetup.com</Button></div>}
+    <div
+      class={classnames(
+        'rounded-t-[40px] p-8 sm:p-10',
+        event.data.featuredMedia.discriminant === 'none' && 'rounded-b-[40px]',
+        statusClass,
+      )}
+    >
+      {status !== 'PAST' && (
+        <span class="mb-4 inline-block rounded-full border-2 border-black px-4 py-1.5 text-sm font-bold leading-none">
+          upcoming event
+        </span>
+      )}
+      <a href={sitePath(`/events/${slug}/`)}>
+        <Heading class="text-2xl font-bold">{event.data.name}</Heading>
+      </a>
+      <div class="mt-6">
+        <EventInfo slug={slug} />
+      </div>
+      <div class="mt-8 space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline">
+        <Content />
+      </div>
+      {status !== 'PAST' && event.data.rsvpLink && (
+        <div class="mt-8">
+          <Button
+            href={event.data.rsvpLink}
+            emphasis="high"
+            size="large"
+            openInNewTab
+          >
+            RSVP on Meetup.com
+          </Button>
+        </div>
+      )}
     </div>
-    {event.data.featuredMedia.discriminant !== 'none' && <div class={classnames('relative before:absolute before:h-1/2 before:w-full before:content-[\'\']', statusClass)}><div class="px-2 sm:px-4"><FeaturedMedia media={event.data.featuredMedia} /></div></div>}
+    {event.data.featuredMedia.discriminant !== 'none' && (
+      <div
+        class={classnames(
+          "relative before:absolute before:h-1/2 before:w-full before:content-['']",
+          statusClass,
+        )}
+      >
+        <div class="px-2 sm:px-4">
+          <FeaturedMedia media={event.data.featuredMedia} />
+        </div>
+      </div>
+    )}
   </div>
 </div>

@@ -1,11 +1,9 @@
 ---
-import Logo from './logo'
-import {
-  LinkedInIcon,
-  MeetupIcon,
-  XIcon,
-  YouTubeIcon,
-} from './svg-icons'
+import Logo from './logo.astro'
+import LinkedInIcon from './svg-icons/linkedin.astro'
+import MeetupIcon from './svg-icons/meetup.astro'
+import XIcon from './svg-icons/x.astro'
+import YouTubeIcon from './svg-icons/youtube.astro'
 import { sitePath } from '@/lib/paths'
 
 const links = [
@@ -19,29 +17,35 @@ const links = [
 <footer class="mt-20 bg-gray-100">
   <div class="mx-auto max-w-6xl px-6 py-8 pt-16 lg:px-8">
     <div class="flex items-center justify-between">
-      <a aria-label="SydJS" href={sitePath('/')}><Logo /></a>
+      <a aria-label="SydJS" href={sitePath('/')}>
+        <Logo />
+      </a>
       <div class="flex items-center gap-4">
-        {
-          links.map(([label, href, Icon]) => (
-            <a
-              aria-label={`SydJS on ${label}`}
-              class="rounded-xl p-2 hover:bg-black/10"
-              href={href}
-              target="_blank"
-              rel="noopener"
-            >
-              <Icon className="h-6 w-6" />
-            </a>
-          ))
-        }
+        {links.map(([label, href, Icon]) => (
+          <a
+            aria-label={`SydJS on ${label}`}
+            class="rounded-xl p-2 hover:bg-black/10"
+            href={href}
+            target="_blank"
+            rel="noopener"
+          >
+            <Icon class="h-6 w-6" />
+          </a>
+        ))}
       </div>
     </div>
     <div class="mt-12 items-end md:flex">
       <p class="text-sm">
-        <a class="underline" href="https://github.com/Thinkmill/sydjs-keystatic">View source on GitHub</a>
+        <a
+          class="underline"
+          href="https://github.com/Thinkmill/sydjs-keystatic"
+        >
+          View source on GitHub
+        </a>
       </p>
       <p class="mt-8 flex-1 text-sm md:mt-0 md:text-right">
-        &copy; {new Date().getFullYear()} Thinkmill &amp; Contributors. All rights reserved.
+        &copy; {new Date().getFullYear()} Thinkmill &amp; Contributors. All
+        rights reserved.
       </p>
     </div>
   </div>

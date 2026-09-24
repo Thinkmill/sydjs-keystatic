@@ -1,6 +1,7 @@
 import { defineCollection } from 'astro:content'
 import { glob } from 'astro/loaders'
 import { z } from 'astro/zod'
+import { eventMonthSlug } from './lib/event-slug'
 
 const mediaImage = z.object({
   asset: z.string().optional(),
@@ -28,14 +29,18 @@ const featuredMedia = z.discriminatedUnion('discriminant', [
 ])
 
 const events = defineCollection({
-  loader: glob({ pattern: '**/*.mdoc', base: './src/content/events' }),
+  loader: glob({
+    pattern: '**/*.mdoc',
+    base: './src/content/events',
+    generateId: ({ data }) => eventMonthSlug(data.date),
+  }),
   schema: z.object({
     name: z.string(),
     seoDescription: z.string().optional(),
     date: z
       .union([z.string(), z.date()])
       .transform((value) =>
-        value instanceof Date ? value.toISOString().slice(0, 10) : value
+        value instanceof Date ? value.toISOString().slice(0, 10) : value,
       ),
     location: z.string().optional(),
     address: z.string().optional(),
@@ -73,7 +78,7 @@ const persons = defineCollection({
         z.object({
           label: z.string(),
           link: z.string().url(),
-        })
+        }),
       )
       .default([]),
   }),
@@ -96,7 +101,8 @@ const about = defineCollection({
 
 export const collections = { events, talks, persons, admin, about }
 
-export type EventData = import('astro:content').CollectionEntry<'events'>['data']
+export type EventData =
+  import('astro:content').CollectionEntry<'events'>['data']
 export type TalkData = import('astro:content').CollectionEntry<'talks'>['data']
 export type Person = import('astro:content').CollectionEntry<'persons'>['data']
 export type FeaturedMedia = EventData['featuredMedia']

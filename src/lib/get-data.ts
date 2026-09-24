@@ -13,15 +13,17 @@ export type Event = CollectionEntry<'events'>['data'] & {
 export async function getEvents() {
   const allEvents: CollectionEntry<'events'>[] = await getCollection('events')
   const formattedEvents = allEvents
-    .map((event): Event => ({
-      slug: event.id,
-      ...event.data,
-      status: getStatus(event.data.date),
-    }))
+    .map(
+      (event): Event => ({
+        slug: event.id,
+        ...event.data,
+        status: getStatus(event.data.date),
+      }),
+    )
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
 
   const futureEvents = formattedEvents.filter(
-    (event) => event.status === 'UPCOMING' || event.status === 'TODAY'
+    (event) => event.status === 'UPCOMING' || event.status === 'TODAY',
   )
   const pastEvents = formattedEvents
     .filter((event) => event.status === 'PAST')

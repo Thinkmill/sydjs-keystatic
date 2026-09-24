@@ -1,11 +1,9 @@
 ---
-import Logo from './logo'
-import {
-  LinkedInIcon,
-  MeetupIcon,
-  XIcon,
-  YouTubeIcon,
-} from './svg-icons'
+import Logo from './logo.astro'
+import LinkedInIcon from './svg-icons/linkedin.astro'
+import MeetupIcon from './svg-icons/meetup.astro'
+import XIcon from './svg-icons/x.astro'
+import YouTubeIcon from './svg-icons/youtube.astro'
 import { sitePath } from '@/lib/paths'
 
 const links = [
@@ -22,25 +20,33 @@ const links = [
   </a>
   <ul class="flex items-center gap-8">
     <li class="text-lg/none font-semibold">
-      <a class="underline decoration-transparent transition hover:decoration-current" href={sitePath('/events/')}>Events</a>
+      <a
+        class="underline decoration-transparent transition hover:decoration-current"
+        href={sitePath('/events/')}
+      >
+        Events
+      </a>
     </li>
     <li class="text-lg/none font-semibold">
-      <a class="underline decoration-transparent transition hover:decoration-current" href={sitePath('/about/')}>About</a>
+      <a
+        class="underline decoration-transparent transition hover:decoration-current"
+        href={sitePath('/about/')}
+      >
+        About
+      </a>
     </li>
-    {
-      links.map(([label, href, Icon]) => (
-        <li class="-ml-4 hidden md:block first:block">
-          <a
-            aria-label={`SydJS on ${label}`}
-            class="block rounded-xl p-2 hover:bg-black/10"
-            href={href}
-            target="_blank"
-            rel="noopener"
-          >
-            <Icon className="h-6 w-6" />
-          </a>
-        </li>
-      ))
-    }
+    {links.map(([label, href, Icon]) => (
+      <li class="-ml-4 hidden md:block first:block">
+        <a
+          aria-label={`SydJS on ${label}`}
+          class="block rounded-xl p-2 hover:bg-black/10"
+          href={href}
+          target="_blank"
+          rel="noopener"
+        >
+          <Icon class="h-6 w-6" />
+        </a>
+      </li>
+    ))}
   </ul>
 </nav>

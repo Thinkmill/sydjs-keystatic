@@ -7,7 +7,7 @@ import plugin from 'tailwindcss/plugin'
 const safariVariant = plugin(function ({ addVariant }) {
   addVariant(
     'safari',
-    '@media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) { & }}'
+    '@media not all and (min-resolution:.001dpcm) { @supports (-webkit-appearance:none) { & }}',
   )
 })
 
@@ -43,11 +43,7 @@ const config = {
       },
     },
   },
-  plugins: [
-    containerQueriesPlugin,
-    typographyPlugin,
-    safariVariant,
-  ],
+  plugins: [containerQueriesPlugin, typographyPlugin, safariVariant],
 } satisfies Config
 
 export default config

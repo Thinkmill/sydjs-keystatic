@@ -1,0 +1,54 @@
+---
+interface Props {
+  src: string
+  alt: string
+  maskId: string
+  path: string
+  viewBox: string
+}
+
+const { src, alt, maskId, path, viewBox } = Astro.props
+---
+
+<svg aria-label={alt} role="img" viewBox={viewBox} data-skew-image>
+  <mask id={maskId}>
+    <path
+      d={path}
+      data-skew-path
+      fill="white"
+      style="transform: scale(0.9); transform-origin: center"
+    />
+  </mask>
+  <image href={src} class="w-full" mask={`url(#${maskId})`} />
+</svg>
+
+<script>
+  const media = window.matchMedia('(prefers-reduced-motion: no-preference)')
+
+  function skew(path: SVGPathElement, svg: SVGSVGElement, event?: MouseEvent) {
+    if (!media.matches || !event) {
+      path.style.transform = 'scale(0.9)'
+      return
+    }
+    const rect = svg.getBoundingClientRect()
+    const x = event.clientX - rect.left
+    const y = event.clientY - rect.top
+    path.style.transform = `skew(${x / 180}deg, ${y / 180}deg) scale(0.9)`
+  }
+
+  function bind(svg: SVGSVGElement) {
+    const path = svg.querySelector<SVGPathElement>('[data-skew-path]')
+    if (!path) return
+    const onMove = (event: MouseEvent) => skew(path, svg, event)
+    if (media.matches) document.addEventListener('mousemove', onMove)
+    media.addEventListener('change', () => {
+      if (media.matches) document.addEventListener('mousemove', onMove)
+      else {
+        document.removeEventListener('mousemove', onMove)
+        skew(path, svg)
+      }
+    })
+  }
+
+  document.querySelectorAll<SVGSVGElement>('[data-skew-image]').forEach(bind)
+</script>

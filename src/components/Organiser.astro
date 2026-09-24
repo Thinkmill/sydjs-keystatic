@@ -2,14 +2,12 @@
 import { getEntry } from 'astro:content'
 import getPersonLinks from '@/lib/get-person-links'
 import { assetPath } from '@/lib/paths'
-import {
-  BlueskyIcon,
-  GitHubIcon,
-  LinkedInIcon,
-  LinkIcon,
-  MastodonIcon,
-  XIcon,
-} from './svg-icons'
+import BlueskyIcon from './svg-icons/bluesky.astro'
+import GitHubIcon from './svg-icons/github.astro'
+import LinkedInIcon from './svg-icons/linkedin.astro'
+import LinkIcon from './svg-icons/link.astro'
+import MastodonIcon from './svg-icons/mastodon.astro'
+import XIcon from './svg-icons/x.astro'
 
 const { slug } = Astro.props
 const person = await getEntry('persons', slug)
@@ -18,14 +16,34 @@ const [primaryLink] = getPersonLinks(person.data)
 ---
 
 <li class="not-prose flex flex-col md:flex-1">
-  {person.data.avatar && <img width="160" height="160" src={assetPath(person.data.avatar)} alt="" class="aspect-square w-32 rounded-2xl object-cover" />}
-  <p class="not-prose mt-4 text-2xl font-medium text-black">{person.data.name}</p>
+  {person.data.avatar && (
+    <img
+      width="160"
+      height="160"
+      src={assetPath(person.data.avatar)}
+      alt=""
+      class="aspect-square w-32 rounded-2xl object-cover"
+    />
+  )}
+  <p class="not-prose mt-4 text-2xl font-medium text-black">
+    {person.data.name}
+  </p>
   {primaryLink && (
-    <a aria-label={`${primaryLink.label} (Opens in new tab)`} href={primaryLink.url} class="not-prose flex items-center gap-1 font-semibold text-black underline hover:no-underline" target="_blank" rel="noopener">
+    <a
+      aria-label={`${primaryLink.label} (Opens in new tab)`}
+      href={primaryLink.url}
+      class="not-prose flex items-center gap-1 font-semibold text-black underline hover:no-underline"
+      target="_blank"
+      rel="noopener"
+    >
       {primaryLink.key === 'bluesky' && <BlueskyIcon width={20} height={20} />}
       {primaryLink.key === 'github' && <GitHubIcon width={20} height={20} />}
-      {primaryLink.key === 'linkedin' && <LinkedInIcon width={20} height={20} />}
-      {primaryLink.key === 'mastodon' && <MastodonIcon width={20} height={20} />}
+      {primaryLink.key === 'linkedin' && (
+        <LinkedInIcon width={20} height={20} />
+      )}
+      {primaryLink.key === 'mastodon' && (
+        <MastodonIcon width={20} height={20} />
+      )}
       {primaryLink.key === 'twitterHandle' && <XIcon width={20} height={20} />}
       {primaryLink.key === 'website' && <LinkIcon width={20} height={20} />}
       <span>{primaryLink.label}</span>

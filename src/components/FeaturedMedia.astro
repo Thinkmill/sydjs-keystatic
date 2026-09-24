@@ -2,7 +2,7 @@
 import type { FeaturedMedia as FeaturedMediaData } from '@/content.config'
 import { getYouTubeEmbedUrl } from '@/lib/get-youtube-embed-url'
 import { assetPath } from '@/lib/paths'
-import { PlayOutlineIcon } from './svg-icons'
+import PlayOutlineIcon from './svg-icons/play-outline.astro'
 
 interface Props {
   media: FeaturedMediaData
@@ -33,7 +33,7 @@ const isEvent = kind === 'event'
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowfullscreen
-      />
+      ></iframe>
       {media.value.image?.asset && (
         <div
           class="absolute inset-0 grid place-items-center bg-black/40 transition-opacity duration-300"
@@ -54,7 +54,9 @@ const isEvent = kind === 'event'
             data-video-play
             aria-label="Play video"
           >
-            <PlayOutlineIcon className={`${isEvent ? 'h-8 w-8' : 'h-6 w-6'} -mx-1`} />
+            <PlayOutlineIcon
+              class={`${isEvent ? 'h-8 w-8' : 'h-6 w-6'} -mx-1`}
+            />
           </button>
         </div>
       )}
@@ -63,9 +65,11 @@ const isEvent = kind === 'event'
 </div>
 
 <script>
-  document.querySelectorAll<HTMLElement>('[data-video-play]').forEach((button) => {
-    button.addEventListener('click', () => {
-      button.closest<HTMLElement>('[data-video-thumbnail]')?.remove()
+  document
+    .querySelectorAll<HTMLElement>('[data-video-play]')
+    .forEach((button) => {
+      button.addEventListener('click', () => {
+        button.closest<HTMLElement>('[data-video-thumbnail]')?.remove()
+      })
     })
-  })
 </script>

@@ -5,5 +5,7 @@ const { content = [] } = Astro.props
 ---
 
 <ul class="justfiy-between flex w-full flex-col flex-wrap gap-x-8 gap-y-8 sm:flex-row sm:gap-y-12">
-  {content.map((item: { organiser: string }) => <Organiser slug={item.organiser} />)}
+  {content.map((item: { organiser: string }) => (
+    <Organiser slug={item.organiser} />
+  ))}
 </ul>
