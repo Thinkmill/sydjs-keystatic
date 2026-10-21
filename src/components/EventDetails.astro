@@ -37,7 +37,7 @@ const statusClass = status === 'PAST' ? 'bg-accent' : 'bg-highlight'
         <div class="grid gap-16 md:grid-cols-3 xl:gap-28">
           <div class="md:col-span-2">
             <Heading class="mt-8 text-4xl font-bold">{event.data.name}</Heading>
-            <div class="mt-4 space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline">
+            <div class="mt-4 [&_article]:space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline">
               <Content />
             </div>
             {status !== 'PAST' && event.data.rsvpLink && (
@@ -90,7 +90,7 @@ const statusClass = status === 'PAST' ? 'bg-accent' : 'bg-highlight'
       <div class="mt-6">
         <EventInfo slug={slug} />
       </div>
-      <div class="mt-8 space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline">
+      <div class="mt-8 [&_article]:space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline">
         <Content />
       </div>
       {status !== 'PAST' && event.data.rsvpLink && (

@@ -69,7 +69,7 @@ const eventStatusClasses = {
               {event.data.name}
             </a>
           </Heading>
-          <div class="mt-4 line-clamp-[8] space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline">
+          <div class="mt-4 line-clamp-[8] [&_article]:space-y-4 text-lg [&_a]:underline hover:[&_a]:no-underline">
             <Content />
           </div>
           <div class="mt-6 flex items-center gap-4">
@@ -156,7 +156,7 @@ const eventStatusClasses = {
           </li>
         ))}
       </ul>
-      <div class="mt-8 line-clamp-[7] space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline">
+      <div class="mt-8 line-clamp-[7] [&_article]:space-y-4 text-lg/6 [&_a]:underline hover:[&_a]:no-underline">
         <Content />
       </div>
       {status !== 'PAST' && (
