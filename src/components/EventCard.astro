@@ -4,6 +4,7 @@ import { format } from 'date-fns'
 import classnames from 'classnames'
 import { getStatus } from '@/lib/get-status'
 import { sitePath } from '@/lib/paths'
+import { rsvpButtonLabel } from '@/lib/rsvp-label'
 import Button from './Button.astro'
 import CalendarClearOutlineIcon from './svg-icons/calendar-clear-outline.astro'
 import ClockIcon from './svg-icons/clock.astro'
@@ -88,7 +89,7 @@ const eventStatusClasses = {
                 openInNewTab
                 class="relative z-10"
               >
-                RSVP on Meetup.com
+                {rsvpButtonLabel(event.data.rsvpLink)}
               </Button>
             )}
           </div>
@@ -171,7 +172,7 @@ const eventStatusClasses = {
               size="large"
               openInNewTab
             >
-              RSVP on Meetup.com
+              {rsvpButtonLabel(event.data.rsvpLink)}
             </Button>
           )}
         </div>
