@@ -9,7 +9,10 @@
 }
 
 @layer utilities {
-  .selection-default ::selection {
-    background-color: highlight;
+  /* Native selection on yellow surfaces so text stays visible. */
+  .bg-highlight::selection,
+  .bg-highlight ::selection {
+    background-color: Highlight;
+    color: HighlightText;
   }
 }
